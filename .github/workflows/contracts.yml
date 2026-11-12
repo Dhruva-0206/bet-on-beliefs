@@ -1,0 +1,15 @@
+name: Contract unit tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Rust
+        run: rustup show
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Unit tests (not sandbox or deployment validation)
+        run: cargo test --workspace --locked

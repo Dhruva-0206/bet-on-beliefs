@@ -2,7 +2,7 @@
 
 A memecoin treasury governed by markets: trade the “do it” and “don't do it” worlds, then let the NEAR contract execute the result.
 
-**Status: design and development scaffold. Contracts, wallet UI and testnet deployment are not implemented yet. No live tokens or financial product.**
+**Status: token contracts and checked market arithmetic implemented with local unit tests. Treasury/market contract, wallet UI, integration tests and testnet deployment are not implemented yet. No live tokens or financial product.**
 
 ## Intended experience
 
@@ -22,7 +22,7 @@ Planned layout: `contracts/belief-ft`, `contracts/tusd-ft`, `contracts/futarchy`
 
 ## Evidence
 
-No contract tests or deployed addresses are available yet. Working test output, exact reproduction commands, transaction links and code hashes will replace this section as milestones pass. A scaffold check is not a contract correctness check.
+Token and arithmetic tests run with `cargo test --workspace --locked`; see [development notes](docs/DEVELOPMENT.md) and the explicit [oracle policy and limitations](docs/ORACLE.md). This is local unit evidence, not sandbox integration or deployed-product validation. No deployed addresses or transactions exist yet. A scaffold check is not a contract correctness check.
 
 ## Hackathon
 
@@ -32,4 +32,4 @@ Also by this team: [Builders First](https://github.com/Dhruva-0206/builders-firs
 
 ## Credits and license
 
-Built with AI coding assistance. Planned dependencies include NEAR SDK and NEAR contract standards; exact versions and other libraries will be documented when installed. MIT license.
+Built with AI coding assistance. Uses NEAR SDK and NEAR contract standards 5.30.1, uint 0.10.0, and Rust 1.95.0; resolved Rust dependencies are pinned in Cargo.lock. MIT license.
