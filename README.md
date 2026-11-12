@@ -2,7 +2,7 @@
 
 A memecoin treasury governed by markets: trade the “do it” and “don't do it” worlds, then let the NEAR contract execute the result.
 
-**Status: token and market contracts implemented with 35 passing local unit tests. Sandbox integration target compiles; its execution and testnet deployment remain pending. Wallet frontend is in development. No live tokens or financial product.**
+**Status: token and market contracts implemented with 35 passing local unit tests. Sandbox integration target compiles; its execution and testnet deployment remain pending. Wallet frontend builds and has eight passing desktop/mobile browser checks; live signing remains pending. No live tokens or financial product.**
 
 ## Intended experience
 
@@ -18,7 +18,7 @@ This is a testnet experiment in futarchy, inspired by [MetaDAO](https://metadao.
 
 Open this repository in a Linux GitHub Codespace. The devcontainer configures Git hooks and forwards the future frontend port. See [build plan](docs/BUILD_PLAN.md) and [mechanism design](DESIGN.md).
 
-Planned layout: `contracts/belief-ft`, `contracts/tusd-ft`, `contracts/futarchy`, `web`, `tests`, and `scripts`. Implementation directories are added when their first working code is ready.
+Planned layout: `contracts/belief-ft`, `contracts/tusd-ft`, `contracts/futarchy`, `web`, `tests`, and `scripts`. See [frontend instructions](docs/FRONTEND.md) for local wallet UI setup. No hosting is configured.
 
 ## Evidence
 

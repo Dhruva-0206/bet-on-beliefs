@@ -10,3 +10,6 @@ agents/logs/
 *.pem
 *.key
 *.log
+artifacts/
+web/test-results/
+web/playwright-report/
