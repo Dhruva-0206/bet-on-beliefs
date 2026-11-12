@@ -1,0 +1,21 @@
+name: Scaffold checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shell syntax
+        run: |
+          bash -n scripts/setup-dev.sh
+          sh -n .githooks/commit-msg
+      - name: Check devcontainer JSON
+        run: python3 -m json.tool .devcontainer/devcontainer.json > /dev/null
+      - name: Reject tracked private agent instructions
+        run: |
+          if git ls-files --error-unmatch AGENTS.md >/dev/null 2>&1; then
+            echo 'AGENTS.md must remain untracked'
+            exit 1
+          fi

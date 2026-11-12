@@ -1,0 +1,12 @@
+AGENTS.md
+.env
+.env.*
+!.env.example
+target/
+node_modules/
+web/dist/
+agents/logs/
+.near-credentials/
+*.pem
+*.key
+*.log

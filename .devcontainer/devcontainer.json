@@ -1,0 +1,9 @@
+{
+  "name": "Bet on Beliefs",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": { "label": "Bet on Beliefs frontend", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "bash scripts/setup-dev.sh"
+}
