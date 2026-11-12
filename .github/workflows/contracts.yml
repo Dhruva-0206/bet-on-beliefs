@@ -12,4 +12,4 @@ jobs:
       - name: Format
         run: cargo fmt --all -- --check
       - name: Unit tests (not sandbox or deployment validation)
-        run: cargo test --workspace --locked
+        run: cargo test --workspace --exclude integration-tests --locked

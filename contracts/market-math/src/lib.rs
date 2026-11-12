@@ -41,6 +41,7 @@ pub fn swap(input: u128, output: u128, amount: u128, minimum: u128) -> Result<u1
     Ok(result)
 }
 
+#[derive(Clone, borsh::BorshSerialize, borsh::BorshDeserialize)]
 pub struct Oracle {
     start: u64,
     end: u64,
@@ -200,7 +201,7 @@ mod tests {
 }
 
 /// Separate buckets for one underlying asset, including in-flight obligations.
-#[derive(Clone, Debug, Default, PartialEq, Eq)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, borsh::BorshSerialize, borsh::BorshDeserialize)]
 pub struct Ledger {
     pub treasury: u128,
     pub reserved: u128,
@@ -296,5 +297,18 @@ mod accounting_tests {
         let before = l.clone();
         assert_eq!(l.split(1), Err(Error::Overflow));
         assert_eq!(l, before);
+    }
+}
+
+impl borsh::BorshSerialize for U256 {
+    fn serialize<W: borsh::io::Write>(&self, writer: &mut W) -> borsh::io::Result<()> {
+        borsh::BorshSerialize::serialize(&self.0, writer)
+    }
+}
+impl borsh::BorshDeserialize for U256 {
+    fn deserialize_reader<R: borsh::io::Read>(reader: &mut R) -> borsh::io::Result<Self> {
+        Ok(Self(
+            <[u64; 4] as borsh::BorshDeserialize>::deserialize_reader(reader)?,
+        ))
     }
 }
