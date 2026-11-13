@@ -16,11 +16,13 @@
     "@near-wallet-selector/meteor-wallet": "10.1.4",
     "@near-wallet-selector/modal-ui": "10.1.4",
     "buffer": "6.0.3",
+    "process": "0.11.10",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@playwright/test": "1.65.0",
+    "@types/node": "24.19.2",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "prettier": "3.6.2",

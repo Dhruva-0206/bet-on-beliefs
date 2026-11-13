@@ -28,7 +28,7 @@ Verified locally on Linux, 2026-11-12:
 - Three optimized on-chain Wasm builds: `bash scripts/build-contracts.sh`; [local artifact hashes](docs/BUILD_HASHES.json).
 - One near-workspaces integration test covering four proposals: `cargo test -p integration-tests --test lifecycle --locked -- --nocapture`. It checks physical FT backing, failed payment/merge/redemption recovery, successful payment and burn, private callbacks, self-only initialization, repeated calls, slippage and no-trade rejection.
 - Frontend type check/production build and precision tests: `npm run build --prefix web` and `npm run test --prefix web`.
-- Eight desktop/mobile Chromium checks: `npm run test:browser --prefix web`. Wallet initialization is verified on testnet; actual wallet signing remains untested.
+- Ten desktop/mobile Chromium checks (also run against the dev server in CI): `npm run test:browser --prefix web`. Wallet initialization is verified on testnet; actual wallet signing remains untested.
 
 See [development notes](docs/DEVELOPMENT.md), the [accounting argument](docs/ACCOUNTING.md), [oracle policy and attack limitations](docs/ORACLE.md), and [recording/handoff checklist](docs/DELIVERY.md). CI now defines real contract builds, unit/sandbox tests and frontend/browser checks; all three checkpoint workflows passed for `69ddccd243191336c76714cc7988dec584b7a7e3`. Later changes have separate CI runs. A scaffold check is not product validation. Scripted faucet trades demonstrate mechanics, not reliable price discovery.
 

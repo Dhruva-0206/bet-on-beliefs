@@ -8,6 +8,7 @@ npm run test --prefix web
 cd web
 npx playwright install --with-deps chromium
 npm run test:browser
+BOB_DEV_BROWSER=1 npm run test:browser
 ```
 
 Node is pinned in `.nvmrc`; direct npm dependencies have exact versions and the
@@ -88,8 +89,25 @@ adapter downgrade; it was not applied. A same-major `nanoid` override to 5.1.16
 removed its high finding. This is a known remaining dependency limitation, not
 production security validation. Reassess before public hosting.
 
-Meteor's stack requires a browser Buffer implementation and `globalThis` alias;
-Vite config supplies them. SDK 1.0.24 contains `console.log(accessKey)` during
+The faucet failure was reproduced with a browser debugger:
+`transact → @near-js/transactions functionCall → stringifyJsonOrBytes → Buffer.from`.
+A buffer import alias handles imported modules but cannot initialize a free
+`Buffer` global. Meteor SDK `requestSignTransactions` also uses free Buffer for
+base64 transaction encoding. `src/bootstrap.ts` installs browser `buffer` and
+`process` implementations, then dynamically imports the app, guaranteeing those
+globals exist before wallet/transaction dependencies evaluate. A static main
+import would execute dependencies before the assignments. Vite retains its
+`globalThis` alias. The key-log mitigation also runs during dev dependency
+optimization, preserving CommonJS interop instead of excluding the SDK.
+
+The faucet browser regression uses a fake Meteor extension and intercepted RPC;
+it clicks both real faucet buttons, decodes the unsigned transactions delivered
+to Meteor, verifies receivers/arguments/deposits/gas/testnet, then cancels at the
+signing boundary. It rejects broadcasting and checks for key logging/runtime
+errors. Both dev and production run it on desktop/mobile in CI. It does not
+validate real human signing.
+
+SDK 1.0.24 contains `console.log(accessKey)` during
 sign-in: a narrowly scoped build transform removes that exact statement and
 fails if the expected source changes. No generated app key should be logged.
 Vite still reports dependency eval/util and large-chunk warnings.

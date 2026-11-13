@@ -13,6 +13,37 @@ reserved funds and outgoing obligations are cleared. No contract source changed
 during this resumed session. Interactive human wallet signing and public hosting
 remain pending; neither is claimed complete.
 
+## Faucet Buffer repair (2026-11-13)
+
+The human reached the connected wallet but faucet construction threw
+`ReferenceError: Buffer is not defined`. A Chromium debugger reproduced the
+old production failure. The throwing frame is `stringifyJsonOrBytes` in
+`@near-js/transactions/lib/esm/action_creators.js:47`, called by functionCall
+from the app's transact action construction. Meteor SDK base64 encoding has a
+second free Buffer use. The prior alias fixed module imports, not the global.
+
+New `web/src/bootstrap.ts` installs browser Buffer/process before a dynamic main
+import. A process shim also fixes a dev-only missing-global failure. The SDK
+key-log guard now runs during Vite dependency optimization as well as production;
+SDK CommonJS dependencies remain optimized. No contracts, deployment credentials
+or human wallet keys were touched. No real transactions were signed/submitted.
+
+Validation: production type check/build passed; 10 development browser checks
+passed (15.7s), then 10 production browser checks passed (18.3s). The new test
+clicks BELIEF and tUSD faucets after a synthetic Meteor login, carries the real
+adapter through transaction serialization to an intercepted extension signing
+request, asserts its decoded payload, and cancels. All RPC is intercepted and
+broadcasting is forbidden. Before the fix it failed before reaching signing.
+CI now covers both modes. This closes the construction regression, not the
+remaining human-signing acceptance gate. Prior contract tests were not repeated.
+
+Preview restarted: single listener PID 33360, strict 0.0.0.0:5173; local and
+authenticated forwarded HTTPS both returned 200 with app HTML. Visibility remains
+private. Log: /tmp/bob-preview-5173.log. Hard-refresh and retry the faucets with
+Meteor's `dhruva.testnet`. Verify human-provided hashes and refreshed balances
+before marking real signing complete. Four high dependency findings remain as
+previously documented. No public hosting approval has been given.
+
 ## Human wallet funding (2026-11-13 09:54 UTC)
 
 The human created `dhruva.testnet` in Meteor. RPC verified it exists on testnet
