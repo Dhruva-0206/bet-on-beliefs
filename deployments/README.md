@@ -68,5 +68,5 @@ Setup was rerun after completion: no accounts were recreated, no code was
 replaced and no transactions were sent. The demo's local wait process was
 interrupted; its saved proposal ID allowed it to resume the same proposal
 without duplicating a split or trade. Final execution and redemption succeeded.
-Human MyNearWallet signing still requires an interactive human check. Burn and
+Human Meteor signing for both faucets passed; see `human-wallet-validation.json` for FINAL receipts, events and final-block balances matching the reported UI. Burn and
 failure scenarios are covered by the sandbox suite, not claimed as testnet runs.

@@ -10,8 +10,39 @@ All three contracts are now deployed on testnet with the same tested Wasm hashes
 Proposal `0` completed its real ten-minute interval, selected PASS, executed a
 one-BELIEF payment and completed both trader redemptions. The active lock,
 reserved funds and outgoing obligations are cleared. No contract source changed
-during this resumed session. Interactive human wallet signing and public hosting
-remain pending; neither is claimed complete.
+during this resumed session. Human Meteor signing is now verified for both faucets; public hosting remains
+pending. Historical pending statements below describe earlier checkpoints.
+
+## Human wallet validation and audit review — latest
+
+`dhruva.testnet` successfully connected and signed both storage/faucet calls in
+Meteor. The human reports 100 BELIEF, 100 tUSD and both vaults zero. Independently
+queried both hashes with `wait_until: FINAL`: both successful, four receipts each,
+zero failed receipts. Each has expected `storage_deposit`/`faucet` actions and a
+NEP-141 transfer event for 100 tokens to the human. Public evidence:
+`deployments/human-wallet-validation.json`. tUSD hash:
+`91R8LZJUJ5oWVECiwMCyeaZW4c1Gg5dTFqhq4YJKUVqT`; BELIEF hash:
+`DdhHSPEXCuSLVzAJQtke2WMvANBn7QbnGzaQHKQayQhU`.
+
+At final block 277495974 (`2rZsLdSVA16nj17bUNTtvoDzf4SQJe8co6KfZYbphCRS`),
+both token balances equal 100 * 10^18 and vaults are [0,0], matching the human UI.
+The market account is not registered yet, as expected for token faucets alone.
+This completes real human connection/faucet signing validation, not all market
+wallet flows. No human keys were accessed, and no transactions were signed or
+submitted by the agent in this verification turn.
+
+`npm audit` still reports 13 low/4 high (exit 1). All four high package findings
+propagate through decoder 0.2.2/query-string 7.1.3/Meteor SDK/adapter. Reviewed
+both maintainer advisories, actual installed source and production bundle.
+SDK's inspected popup path uses stringify rather than parsing; vulnerable code
+is nevertheless bundled, and complete unreachability is not proven. Patched
+0.5.1 is ESM versus the old CJS loader; npm's suggested adapter 6.0.1 rollback is
+not a safe automatic fix. See `docs/DEPENDENCY_REVIEW.md` and public audit JSON.
+Recommendation: retain private preview until a compatible remediation is tested.
+No dependency changes were made. Runtime checks were not repeated for these
+record-only changes. All three CI workflows for the preceding Buffer repair
+`275b3280d38351e2885ac7b7fe1f0984688a026e` now passed (frontend, scaffold,
+contract unit/sandbox).
 
 ## Faucet Buffer repair (2026-11-13)
 
@@ -188,10 +219,8 @@ Setup resumed with existing keys; no code was overwritten.
 
 ## Remaining issues and human boundaries
 
-- Interactive human Meteor signing validation remains unverified.
-  An async request asked the human to load the private preview, connect their
-  own testnet wallet and approve a faucet/storage-registration transaction.
-  Verify any supplied public transaction hash; never request keys/seed phrases.
+- Human Meteor connection and both faucet signatures passed with verified receipts.
+  Other market operations have scripted/sandbox evidence, not human signing QA.
 - Public Sites hosting was offered as an explicit approval choice. No approval
   has been received and no hosting changes or publishing were performed.
 - No repository visibility/settings change, social post, submission or key
@@ -227,9 +256,9 @@ Manifests and lockfiles are source and remain tracked.
 2. Check UTC. Contract freeze is **2026-11-13 18:00 UTC**. Ask for a concrete
    exception before contract changes after that time. Deadline remains
    **2026-11-14 23:59 UTC**. Existing tested deployment needs no code change.
-3. Complete human-wallet signing validation if the human is available. Check
-   the public receipt and resulting actual chain/UI state; do not substitute a
-   mocked wallet for this acceptance gate.
+3. Human faucet signing gate is complete; preserve its public receipt evidence.
+   Address the decoder chain with compatible changes and affected regression
+   checks before recommending public hosting; see docs/DEPENDENCY_REVIEW.md.
 4. Act on public hosting only after explicit approval. The built app and live
    testnet evidence are reviewable already. Preserve all key/privacy boundaries.
 5. If new implementation changes are necessary, rerun only affected checks,

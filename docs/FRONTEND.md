@@ -28,7 +28,7 @@ The pinned Meteor SDK 1.0.24 supports both injected extension communication and
 Browser QA exercises the production Connect button and verifies the testnet
 popup URL, without claiming a real signed transaction. The upstream open report
 https://github.com/Meteor-Wallet/meteor-public/issues/40 means actual human
-connection/signing remains a necessary gate. Meteor's web UI returns a Cloudflare
+connection/signing required a human gate, now passed for both faucets by `dhruva.testnet` (see `deployments/human-wallet-validation.json`). Meteor's web UI returns a Cloudflare
 403 from this Codespace, so its current account-creation labels could not be
 verified here; do not mistake that for a successful live wallet session.
 
@@ -123,4 +123,6 @@ node scripts/verify-live.mjs bob-dhruva-market.testnet
 This checks the actual deployed market on desktop/mobile, without fixtures or
 wallet signing. It writes local screenshots and a report under ignored
 `web/test-results/`. The Codespace port remains private; this is not a hosted
-public application. Human wallet signing is a separate acceptance gate.
+public application. Human Meteor faucet signing has separately passed; this read-only script itself never signs.
+
+Completed human check: both Meteor transactions are FINAL with four successful receipts each, including faucet transfer events for 100 tokens. The on-chain wallet balances and zero vaults match the human-reported UI. Market registration/trading were not part of this human check. See [dependency review](DEPENDENCY_REVIEW.md) before considering public hosting.
