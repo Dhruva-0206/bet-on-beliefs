@@ -16,4 +16,6 @@ Cut AI traders, cron automation, NEP-245 compatibility views and advanced charti
 
 ## Handoff status
 
-Completed here: repository hygiene, Linux devcontainer, development setup script, revised design and milestone plan. No contract or frontend code built. No testnet accounts created. No keys removed. No hosted app. Current CI verifies scaffold syntax only.
+Updated 2026-11-12: all three contracts are implemented, with 35 passing unit tests and one passing near-workspaces sandbox scenario spanning four proposal lifecycles. All three optimized Wasm builds pass. The wallet frontend builds, passes precision tests and eight desktop/mobile browser checks. Deployment/demo tooling compiles; its help and local plan mode have been checked. Real deployment/setup and signed-wallet execution have not run.
+
+Gitignored AGENTS.md contains the working rules and is not committed. No testnet accounts exist: the human's account prefix has been requested and remains required before creation. No keys removed, hosted app, visibility/settings change, social post or submission. CI now defines actual unit/integration/frontend checks, but local results are the evidence reported here; remote CI success is not asserted.

@@ -110,6 +110,7 @@ fn fee() {
 #[near]
 impl Contract {
     #[init]
+    #[private]
     pub fn new(belief: AccountId, tusd: AccountId, max_payment: [U128; 2]) -> Self {
         assert!(
             belief != tusd

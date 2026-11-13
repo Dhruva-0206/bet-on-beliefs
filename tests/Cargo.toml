@@ -5,6 +5,8 @@ edition = "2024"
 publish = false
 [dependencies]
 near-workspaces = { version = "=0.24.0", default-features = false, features = ["install"] }
-tokio = { version = "=1.52.3", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "=1.52.3", features = ["macros", "rt-multi-thread", "time"] }
 serde_json = "=1.0.154"
 anyhow = "=1.0.104"
+sha2 = "=0.10.9"
+reqwest = { version = "=0.12.28", features = ["json"] }

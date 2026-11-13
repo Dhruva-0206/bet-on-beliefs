@@ -21,6 +21,7 @@ pub struct Contract {
 #[near]
 impl Contract {
     #[init]
+    #[private]
     pub fn new(treasury: AccountId, proposer: AccountId) -> Self {
         let faucet = env::current_account_id();
         assert!(

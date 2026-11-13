@@ -21,6 +21,7 @@ pub struct Contract {
 #[near]
 impl Contract {
     #[init]
+    #[private]
     pub fn new() -> Self {
         let mut token = FungibleToken::new(b"t".to_vec());
         let faucet = env::current_account_id();

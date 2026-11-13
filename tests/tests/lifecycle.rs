@@ -81,6 +81,28 @@ async fn assert_backing(market: &Contract, tokens: &[Contract; 2]) -> Result<()>
     }
     Ok(())
 }
+async fn advance_to_end(
+    worker: &near_workspaces::Worker<near_workspaces::network::Sandbox>,
+    market: &Contract,
+    id: u64,
+) -> Result<()> {
+    let end = view(market, "proposal", json!({"proposal_id":id})).await?["end_ns"]
+        .as_str()
+        .unwrap()
+        .parse::<u64>()?;
+    for _ in 0..10 {
+        let now = worker.view_block().await?.timestamp();
+        if now >= end {
+            return Ok(());
+        }
+        println!(
+            "Proposal #{id}: {} seconds remain on the sandbox clock",
+            (end - now).div_ceil(1_000_000_000)
+        );
+        worker.fast_forward(1000).await?;
+    }
+    anyhow::bail!("sandbox timestamp did not reach proposal end");
+}
 #[tokio::test]
 async fn real_receipts_lifecycle_and_failures() -> Result<()> {
     let worker = near_workspaces::sandbox().await?;
@@ -96,6 +118,28 @@ async fn real_receipts_lifecycle_and_failures() -> Result<()> {
     let proposer = worker.dev_create_account().await?;
     let trader = worker.dev_create_account().await?;
     let recipient = worker.dev_create_account().await?;
+    // An attacker must not initialize newly deployed code before its owner.
+    for (c, args) in [
+        (
+            &belief,
+            json!({"treasury":trader.id(),"proposer":recipient.id()}),
+        ),
+        (&tusd, json!({})),
+        (
+            &market,
+            json!({"belief":belief.id(),"tusd":tusd.id(),"max_payment":["1","1"]}),
+        ),
+    ] {
+        ensure!(
+            trader
+                .call(c.id(), "new")
+                .args_json(args)
+                .max_gas()
+                .transact()
+                .await?
+                .is_failure()
+        );
+    }
     call(
         belief.as_account(),
         &belief,
@@ -129,6 +173,23 @@ async fn real_receipts_lifecycle_and_failures() -> Result<()> {
     )
     .await?;
     ensure!(view(&market, "config", json!({})).await?["treasury"][0] == amount(600_000_000));
+    ensure!(
+        trader
+            .call(market.id(), "new")
+            .args_json(json!({"belief":belief.id(),"tusd":tusd.id(),"max_payment":["1","1"]}))
+            .max_gas()
+            .transact()
+            .await?
+            .is_failure()
+    );
+    ensure!(
+        trader
+            .call(market.id(), "bootstrap_complete")
+            .args_json(json!({}))
+            .transact()
+            .await?
+            .is_failure()
+    );
     register(market.as_account(), &tusd).await?;
     for u in [&proposer, &trader] {
         call(
@@ -223,7 +284,44 @@ async fn real_receipts_lifecycle_and_failures() -> Result<()> {
     )
     .await?;
     assert_backing(&market, &tokens).await?;
-    worker.fast_forward(1000).await?;
+    // A merge to an unregistered FT account fails and restores both claims and backing.
+    call(
+        &trader,
+        &tokens[1],
+        "storage_unregister",
+        json!({"force":true}),
+        NearToken::from_yoctonear(1),
+    )
+    .await?;
+    let claims_before = view(
+        &market,
+        "account",
+        json!({"account_id":trader.id(),"proposal_id":0}),
+    )
+    .await?;
+    call(
+        &trader,
+        &market,
+        "merge",
+        json!({"proposal_id":0,"asset_id":1,"amount":amount(10)}),
+        NearToken::from_millinear(10),
+    )
+    .await?;
+    ensure!(
+        view(
+            &market,
+            "account",
+            json!({"account_id":trader.id(),"proposal_id":0})
+        )
+        .await?
+            == claims_before
+    );
+    assert_backing(&market, &tokens).await?;
+    register(&trader, &tokens[1]).await?;
+    let pools_before = view(&market, "proposal", json!({"proposal_id":0})).await?;
+    ensure!(trader.call(market.id(),"trade").args_json(json!({"proposal_id":0,"side":0,"input_asset":1,"amount":amount(1),"min_output":amount(1000)})).max_gas().transact().await?.is_failure());
+    ensure!(view(&market, "proposal", json!({"proposal_id":0})).await? == pools_before);
+    advance_to_end(&worker, &market, 0).await?;
     // Recipient exists but is unregistered in BELIEF: execution must fail and restore treasury.
     call(
         &trader,
@@ -336,7 +434,7 @@ async fn real_receipts_lifecycle_and_failures() -> Result<()> {
         NearToken::from_yoctonear(0),
     )
     .await?;
-    worker.fast_forward(1000).await?;
+    advance_to_end(&worker, &market, 1).await?;
     call(
         &trader,
         &market,
@@ -358,8 +456,96 @@ async fn real_receipts_lifecycle_and_failures() -> Result<()> {
             .await?
             .is_failure()
     );
+    // Actual burn receipts reduce token supply by exactly the reserved ritual amount.
+    stake(&proposer, &tokens[0], &market, 100, "stake").await?;
+    stake(&proposer, &tokens[1], &market, 100, "stake").await?;
+    let treasury = view(&market, "config", json!({})).await?["treasury"][0]
+        .as_str()
+        .unwrap()
+        .parse::<u128>()?;
+    let supply_before = view(&tokens[0], "ft_total_supply", json!({}))
+        .await?
+        .as_str()
+        .unwrap()
+        .parse::<u128>()?;
+    call(
+        &proposer,
+        &market,
+        "propose_ritual",
+        json!({"belief_stake":amount(100),"tusd_stake":amount(100)}),
+        NearToken::from_millinear(100),
+    )
+    .await?;
+    call(
+        &trader,
+        &tokens[1],
+        "faucet",
+        json!({}),
+        NearToken::from_yoctonear(0),
+    )
+    .await?;
+    stake(&trader, &tokens[1], &market, 100, "stake").await?;
+    call(
+        &trader,
+        &market,
+        "register_claims",
+        json!({"proposal_id":2}),
+        NearToken::from_millinear(10),
+    )
+    .await?;
+    call(
+        &trader,
+        &market,
+        "split",
+        json!({"proposal_id":2,"asset_id":1,"amount":amount(100)}),
+        NearToken::from_yoctonear(0),
+    )
+    .await?;
+    call(
+        &trader,
+        &market,
+        "trade",
+        json!({"proposal_id":2,"side":0,"input_asset":1,"amount":amount(50),"min_output":"1"}),
+        NearToken::from_yoctonear(0),
+    )
+    .await?;
+    advance_to_end(&worker, &market, 2).await?;
+    call(
+        &trader,
+        &market,
+        "finalize",
+        json!({"proposal_id":2}),
+        NearToken::from_millinear(10),
+    )
+    .await?;
+    ensure!(view(&market, "proposal", json!({"proposal_id":2})).await?["execution"] == "executed");
+    ensure!(
+        view(&tokens[0], "ft_total_supply", json!({}))
+            .await?
+            .as_str()
+            .unwrap()
+            .parse::<u128>()?
+            == supply_before - treasury / 100
+    );
+    assert_backing(&market, &tokens).await?;
+    // Equal, untraded pools reject even with a late first observation/finalization.
+    stake(&proposer, &tokens[0], &market, 100, "stake").await?;
+    stake(&proposer, &tokens[1], &market, 100, "stake").await?;
+    call(&proposer,&market,"create_proposal",json!({"title":"No trades","description":"Equal worlds must reject","action":{"Transfer":{"asset":0,"receiver":recipient.id(),"amount":amount(10)}},"belief_stake":amount(100),"tusd_stake":amount(100)}),NearToken::from_millinear(100)).await?;
+    advance_to_end(&worker, &market, 3).await?;
+    call(
+        &trader,
+        &market,
+        "finalize",
+        json!({"proposal_id":3}),
+        NearToken::from_millinear(10),
+    )
+    .await?;
+    ensure!(view(&market, "proposal", json!({"proposal_id":3})).await?["execution"] == "rejected");
+    ensure!(ft_balance(&tokens[0], recipient.id().as_str()).await? == 10 * UNIT);
+    assert_backing(&market, &tokens).await?;
     println!(
-        "Sandbox: physical backing, failure restoration, private callbacks, two proposals, split/merge/trade/redeem passed"
+        "Sandbox: physical backing, failure restoration, private callbacks, four proposals, split/merge/trade/redeem passed"
     );
     Ok(())
 }

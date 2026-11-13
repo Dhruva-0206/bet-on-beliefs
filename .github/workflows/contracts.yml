@@ -1,15 +1,28 @@
-name: Contract unit tests
+name: Contract unit and sandbox tests
 on: [push, pull_request]
 permissions:
   contents: read
 jobs:
-  unit:
+  contracts:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - name: Install pinned Rust
         run: rustup show
       - name: Format
         run: cargo fmt --all -- --check
-      - name: Unit tests (not sandbox or deployment validation)
-        run: cargo test --workspace --exclude integration-tests --locked
+      - name: Native build dependencies
+        run: sudo apt-get update && sudo apt-get install -y libudev-dev libusb-1.0-0-dev libssl-dev pkg-config clang cmake
+      - uses: actions/cache@v4
+        id: cargo-near
+        with:
+          path: ~/.cargo/bin/cargo-near
+          key: cargo-near-0.21.0-linux-rust-1.95.0
+      - name: Install pinned NEAR build tool
+        if: steps.cargo-near.outputs.cache-hit != 'true'
+        run: cargo install cargo-near --version 0.21.0 --locked
+      - name: Build actual Wasm contracts
+        run: bash scripts/build-contracts.sh
+      - name: Unit and real-receipt sandbox tests
+        run: cargo test --workspace --locked
