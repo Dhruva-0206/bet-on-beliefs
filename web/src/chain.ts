@@ -5,9 +5,9 @@ let selector: Promise<WalletSelector> | undefined;
 export function walletSelector() {
   return (selector ??= Promise.all([
     import("@near-wallet-selector/core"),
-    import("@near-wallet-selector/my-near-wallet"),
-  ]).then(([{ setupWalletSelector }, { setupMyNearWallet }]) =>
-    setupWalletSelector({ network: "testnet", modules: [setupMyNearWallet()] }),
+    import("@near-wallet-selector/meteor-wallet"),
+  ]).then(([{ setupWalletSelector }, { setupMeteorWallet }]) =>
+    setupWalletSelector({ network: "testnet", modules: [setupMeteorWallet()] }),
   ));
 }
 export function validContract(id: string) {

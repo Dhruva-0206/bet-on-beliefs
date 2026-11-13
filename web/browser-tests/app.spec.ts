@@ -69,34 +69,80 @@ test("testnet RPC failure is visible and wallet modules load without runtime err
   ).toBeDisabled();
   expect(errors).toEqual([]);
 });
-test("production wallet adapter initializes explicitly on testnet", async ({
+test("Meteor connection opens testnet login from the production UI", async ({
   page,
 }) => {
-  const { readdirSync } = await import("node:fs");
-  const files = readdirSync("dist/assets");
-  const core = files.find((f) => f.startsWith("core-") && f.endsWith(".js"))!;
-  const mynear = files.find(
-    (f) => f.startsWith("my-near-wallet-") && f.endsWith(".js"),
-  )!;
-  await page.goto("/");
-  const result = await page.evaluate(
-    async (paths) => {
-      const { setupWalletSelector } = await import(paths[0]);
-      const { setupMyNearWallet } = await import(paths[1]);
-      const selector = await setupWalletSelector({
-        network: "testnet",
-        modules: [setupMyNearWallet()],
-      });
-      const wallet = await selector.wallet("my-near-wallet");
-      return {
-        network: selector.options.network.networkId,
-        id: wallet.id,
-        url: wallet.metadata.walletUrl ?? wallet.metadata.downloadUrl,
-      };
-    },
-    [`/assets/${core}`, `/assets/${mynear}`],
+  const errors: string[] = [];
+  let keyWasLogged = false;
+  page.on("console", (message) => {
+    if (
+      /KeyPairEd25519|secretKey|ed25519:[1-9A-HJ-NP-Za-km-z]{80,}/.test(
+        message.text(),
+      )
+    )
+      keyWasLogged = true;
+  });
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.route("https://test.rpc.fastnear.com/", (route) =>
+    route.fulfill({
+      json: {
+        result: {
+          result: Array.from(
+            new TextEncoder().encode(
+              JSON.stringify({
+                ready: true,
+                active: null,
+                proposal_count: 0,
+                tokens: [
+                  "bob-dhruva-belief.testnet",
+                  "bob-dhruva-tusd.testnet",
+                ],
+                treasury: ["100000000000000000000", "0"],
+                reserved: ["0", "0"],
+                stakes: ["0", "0"],
+                outgoing: ["0", "0"],
+                next_ritual_ns: "0",
+                max_payment: ["1000000000000000000", "0"],
+              }),
+            ),
+          ),
+        },
+      },
+    }),
   );
-  expect(result.network).toBe("testnet");
-  expect(result.id).toBe("my-near-wallet");
-  expect(result.url).toContain("testnet.mynearwallet.com");
+  await page.goto("/");
+  await page.evaluate(() => {
+    window.open = ((url: string | URL | undefined) => {
+      (window as unknown as Record<string, unknown>).meteorTestPopup =
+        String(url);
+      return {
+        closed: false,
+        postMessage() {},
+        focus() {},
+      } as unknown as Window;
+    }) as typeof window.open;
+  });
+  await page
+    .getByRole("textbox", { name: "Market contract" })
+    .fill("bob-dhruva-market.testnet");
+  await page.getByRole("button", { name: "Load on-chain data" }).click();
+  await page.getByRole("button", { name: "Connect wallet" }).click();
+  await expect(page.getByText("MyNearWallet", { exact: true })).toHaveCount(0);
+  await page.getByText("Meteor Wallet", { exact: true }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => (window as unknown as Record<string, unknown>).meteorTestPopup,
+      ),
+    )
+    .toContain("/connect/testnet/login?");
+  const url = await page.evaluate(() =>
+    String((window as unknown as Record<string, unknown>).meteorTestPopup),
+  );
+  const popup = new URL(url);
+  expect(popup.origin).toBe("https://wallet.meteorwallet.app");
+  expect(popup.pathname).toBe("/connect/testnet/login");
+  expect(popup.searchParams.get("source")).toBe("wpm");
+  expect(errors).toEqual([]);
+  expect(keyWasLogged).toBe(false);
 });

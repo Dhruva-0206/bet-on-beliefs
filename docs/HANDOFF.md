@@ -13,6 +13,39 @@ reserved funds and outgoing obligations are cleared. No contract source changed
 during this resumed session. Interactive human wallet signing and public hosting
 remain pending; neither is claimed complete.
 
+## Latest wallet repair (2026-11-13)
+
+All three CI workflows for `2672138fbe2e8b17a542cc3f1d1915a5c01f1d0c`
+passed. The human reported MyNearWallet no longer accepts app connections.
+The connector is replaced by pinned Meteor Wallet 10.1.4 (SDK 1.0.24), whose
+current official documentation and SDK explicitly support testnet. The user
+already has Meteor on mainnet and must create a separate testnet account inside
+the wallet. No accounts were migrated or created by the agent, and no contract,
+deployment or deployment credential changed. See docs/FRONTEND.md for exact steps,
+upstream issue #40 and the Codespace Cloudflare limitation.
+
+Browser compatibility fixes supply Buffer/globalThis. A guarded build transform
+removes the SDK's generated-access-key debug statement; nanoid is pinned to a
+patched same-major version. Four high dependency findings remain in the decoder
+chain; do not describe this as a clean dependency audit. Real human signing is
+still pending, followed by the explicit hosting-approval boundary.
+
+Affected verification passed: production type check/build; 2 precision/quote
+unit tests; all 8 desktop/mobile browser checks (11.7s); then 2 targeted Meteor
+checks (6.4s) after adding the key-log regression assertion. The production UI
+opens Meteor's testnet login route without a real signature. Live read-only QA
+passed again on desktop/mobile against the existing deployment. No contract
+tests were repeated because no contract/deployment files changed.
+
+The stopped preview caused the earlier 502. It was restarted with strict port
+selection; current listener PID 16522 binds 0.0.0.0:5173. Local HTTP and an
+authenticated request to the forwarded HTTPS URL both returned 200 with app HTML.
+Port visibility remains private. Runtime log: /tmp/bob-preview-5173.log. No
+visibility or hosting changes were made. Read process state again after any
+execution-server restart. The wallet website itself was Cloudflare-blocked from
+this Codespace; human signing/account-creation UI remains unverified.
+
+
 ## Completed implementation
 
 - BELIEF and tUSD use NEAR standards 5.30.1, 18 decimals, finite prefunded
@@ -31,7 +64,7 @@ remain pending; neither is claimed complete.
   failure restores treasury without changing the selected outcome.
 - Explicit storage/user/proposal/pending-operation bounds and retained native
   fees; bootstrap accounts for the initial BELIEF treasury balance.
-- Vite/React/TypeScript wallet UI reads actual testnet RPC, supports MyNearWallet,
+- Vite/React/TypeScript wallet UI reads actual testnet RPC, supports Meteor Wallet,
   faucets, vault funding/withdrawals, four claim balances, minimum-output trades,
   proposal/ritual creation, finalization/redemption and explorer links. Empty
   configuration has no fixture chain data. No hosting is configured.
@@ -110,7 +143,7 @@ Setup resumed with existing keys; no code was overwritten.
 
 ## Remaining issues and human boundaries
 
-- Interactive human MyNearWallet signing/redirect validation remains unverified.
+- Interactive human Meteor signing validation remains unverified.
   An async request asked the human to load the private preview, connect their
   own testnet wallet and approve a faucet/storage-registration transaction.
   Verify any supplied public transaction hash; never request keys/seed phrases.
@@ -121,7 +154,7 @@ Setup resumed with existing keys; no code was overwritten.
 - Demo creation-to-progress-file crash window remains documented. Inspect an
   existing active proposal and recover its ID rather than create another.
   The tool now skips split/trade after the window closes when resuming.
-- npm audit: 11 low-severity wallet crypto findings, no moderate/high/critical;
+- npm audit: 13 low and 4 high dependency findings after Meteor integration;
   Vite dependency eval/util warnings remain. See docs/FRONTEND.md.
 - Faucet/scripted markets demonstrate mechanics, not economic reliability.
   Burn and failure paths are sandbox evidence, not claimed as testnet runs.
@@ -132,7 +165,7 @@ A production preview serves port 5173 in this Codespace (private visibility was
 read back with `gh codespace ports`). No public-hosting configuration changed.
 Use the Codespace Ports tab; load `bob-dhruva-market.testnet` in the app.
 The preview may need restarting if the execution server stops its processes:
-`npm run preview --prefix web -- --host 0.0.0.0 --port 5173`.
+`npm run preview --prefix web` (strict 0.0.0.0:5173).
 The demo finished; there are no pending testnet outgoing operations or CLI
 transactions. No Cargo build/test needs resuming. Inspect process state before
 starting another preview; avoid duplicate listeners.

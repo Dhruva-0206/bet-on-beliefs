@@ -18,7 +18,7 @@ This is a testnet experiment in futarchy, inspired by [MetaDAO](https://metadao.
 
 Open this repository in a Linux GitHub Codespace. The devcontainer configures Git hooks and forwards the frontend port. See [build plan](docs/BUILD_PLAN.md) and [mechanism design](DESIGN.md).
 
-Layout: `contracts/belief-ft`, `contracts/tusd-ft`, `contracts/futarchy`, `web`, `tests`, and `scripts`. See [frontend instructions](docs/FRONTEND.md) for local wallet UI setup. Open the local app and load `bob-dhruva-market.testnet`; browsing needs no wallet. Public hosting is not configured.
+Layout: `contracts/belief-ft`, `contracts/tusd-ft`, `contracts/futarchy`, `web`, `tests`, and `scripts`. See [frontend instructions](docs/FRONTEND.md) for local wallet UI setup. Open the local app and load `bob-dhruva-market.testnet`; browsing needs no wallet. Wallet connections now use Meteor on testnet; the retired MyNearWallet connector has been removed. Public hosting is not configured.
 
 ## Evidence
 
