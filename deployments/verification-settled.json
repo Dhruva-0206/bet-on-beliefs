@@ -1,0 +1,174 @@
+{
+  "verified_at_utc": "2026-11-13T07:28:02.570473+00:00",
+  "network": "testnet",
+  "block_hash": "ATYgXbChkWHKbnezNYx8bt1HrjqGrDCBFr98Qm4qs3ji",
+  "block_height": 277479415,
+  "protocol_version": 88,
+  "accounts": {
+    "belief": "bob-dhruva-belief.testnet",
+    "market": "bob-dhruva-market.testnet",
+    "proposer": "bob-dhruva-proposer.testnet",
+    "recipient": "bob-dhruva-recipient.testnet",
+    "trader": "bob-dhruva-trader.testnet",
+    "tusd": "bob-dhruva-tusd.testnet"
+  },
+  "contract_accounts": {
+    "market": {
+      "amount": "10156693493487873099999997",
+      "block_hash": "ATYgXbChkWHKbnezNYx8bt1HrjqGrDCBFr98Qm4qs3ji",
+      "block_height": 277479415,
+      "code_hash": "5NC6ownWaPZKmmiPqwNW6SSKfehWVZDw4AoXYLLsUYKT",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 225917,
+      "access_key_count": 1,
+      "full_access_key_count": 1
+    },
+    "belief": {
+      "amount": "10001101297503667100000003",
+      "block_hash": "ATYgXbChkWHKbnezNYx8bt1HrjqGrDCBFr98Qm4qs3ji",
+      "block_height": 277479415,
+      "code_hash": "8Mj1Dnsmpx9f5uyTHWbwMfYpEo2iJUg5mLsirGvt4rM4",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 149371,
+      "access_key_count": 1,
+      "full_access_key_count": 1
+    },
+    "tusd": {
+      "amount": "10003687979303381900000003",
+      "block_hash": "ATYgXbChkWHKbnezNYx8bt1HrjqGrDCBFr98Qm4qs3ji",
+      "block_height": 277479415,
+      "code_hash": "Dx74RiBe4embgaSujgdj7DmWDKrG2wrj7W9f3i8hA2mV",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 147174,
+      "access_key_count": 1,
+      "full_access_key_count": 1
+    }
+  },
+  "config": {
+    "network": "testnet",
+    "tokens": [
+      "bob-dhruva-belief.testnet",
+      "bob-dhruva-tusd.testnet"
+    ],
+    "ready": true,
+    "active": null,
+    "next_ritual_ns": "0",
+    "window_ns": "600000000000",
+    "max_payment": [
+      "1000000000000000000000",
+      "1000000000000000000000"
+    ],
+    "proposal_count": 1,
+    "treasury": [
+      "599999999000000000000000000",
+      "0"
+    ],
+    "reserved": [
+      "0",
+      "0"
+    ],
+    "stakes": [
+      "0",
+      "0"
+    ],
+    "outgoing": [
+      "0",
+      "0"
+    ],
+    "pending_count": 0
+  },
+  "proposals": [
+    {
+      "id": 0,
+      "title": "A small payment for builders",
+      "description": "Scripted testnet liquidity demonstrates mechanics, not independent price discovery.",
+      "proposer": "bob-dhruva-proposer.testnet",
+      "action": {
+        "Transfer": {
+          "asset": 0,
+          "receiver": "bob-dhruva-recipient.testnet",
+          "amount": "1000000000000000000"
+        }
+      },
+      "start_ns": "1794554239462925704",
+      "end_ns": "1794554839462925704",
+      "pools": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "collateral": [
+        "50075112669003505258",
+        "200000000000000000000"
+      ],
+      "supply": [
+        [
+          "50075112669003505258",
+          "200000000000000000000"
+        ],
+        [
+          "100000000000000000000",
+          "300000000000000000000"
+        ]
+      ],
+      "outcome": true,
+      "execution": "executed"
+    }
+  ],
+  "tokens": {
+    "belief": {
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "BELIEF testnet",
+        "symbol": "BELIEF",
+        "icon": null,
+        "reference": null,
+        "reference_hash": null,
+        "decimals": 18
+      },
+      "physical_market_balance": "600000049075112669003505258",
+      "accounted_market_balance": "600000049075112669003505258",
+      "total_supply": "1000000000000000000000000000",
+      "wallet_balances": {
+        "proposer": "199999900000000000000000000",
+        "trader": "49924887330996494742",
+        "recipient": "1000000000000000000"
+      }
+    },
+    "tusd": {
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "tUSD testnet",
+        "symbol": "tUSD",
+        "icon": null,
+        "reference": null,
+        "reference_hash": null,
+        "decimals": 18
+      },
+      "physical_market_balance": "200000000000000000000",
+      "accounted_market_balance": "200000000000000000000",
+      "total_supply": "1000000000000000000000000000",
+      "wallet_balances": {
+        "proposer": "0",
+        "trader": "100000000000000000000",
+        "recipient": "0"
+      }
+    }
+  },
+  "checks": [
+    "tested code hashes",
+    "token metadata",
+    "single active proposal",
+    "claim supply backing",
+    "resolved reserve release",
+    "physical FT balances equal separate ledgers at one final block"
+  ]
+}

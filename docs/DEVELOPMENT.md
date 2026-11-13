@@ -34,7 +34,7 @@ the deployment account; later registrations are user-funded.
 
 Read docs/ORACLE.md before changing market logic. Math tests do not prove the
 future cross-contract lifecycle: sandbox integration and failed receipt testing
-remain separate acceptance gates. No deployments exist yet.
+remain separate acceptance gates. Current testnet deployment evidence is under `deployments/`.
 
 ## Market contract
 
@@ -109,4 +109,17 @@ ID. If interrupted between on-chain creation and recording that ID, it refuses
 to create another proposal; inspect the active proposal and recover the progress
 file explicitly. An unexpected outcome or failed execution stops the demo.
 Public address/hash manifests and progress live in `deployments/`; they never
-contain private keys. No testnet deployment or signed-wallet test has run yet.
+contain private keys. Testnet deployment/setup has now run; human wallet signing
+remains unverified.
+
+
+2026-11-13 deployment note: the human selected prefix `bob-dhruva`, with
+`bob-dhruva-26` authorized only if it was taken. The first prefix and all six
+planned names were available. near-workspaces must enable its `rustls` feature
+alongside `install`: disabling defaults without a TLS feature makes the helper
+client reject HTTPS. This was fixed in the tooling manifest, not contract code.
+The default public RPC then rate-limited storage setup. Tooling and frontend
+reads now use the officially listed FASTNEAR testnet RPC; its live status was
+verified as chain `testnet`, protocol 88. Setup resumed with existing keys and
+matching code, then an additional setup run completed without transactions.
+See `deployments/` for public manifests and fixed-block verification snapshots.

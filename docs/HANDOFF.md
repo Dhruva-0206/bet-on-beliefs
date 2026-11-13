@@ -1,11 +1,17 @@
-# Bet on Beliefs checkpoint
+# Bet on Beliefs handoff — 2026-11-13
 
-Implementation paused at the human's request on 2026-11-12 UTC. Do not resume
-implementation, builds, tests, account creation or deployment until asked.
-Repository: Dhruva-0206/bet-on-beliefs. Existing branch: `main`.
-The checkpoint is the commit containing this file; obtain its hash with
-`git log -1 --format=%H`. Previous pushed milestones: `44abbcf` (tokens/math),
-`f175119` (markets/settlement), `5a5c52d` (wallet frontend).
+The human resumed work and approved testnet prefix `bob-dhruva`, with
+`bob-dhruva-26` only if taken. The first choice was available. The interrupted
+checkpoint was committed and pushed with hooks as
+`69ddccd243191336c76714cc7988dec584b7a7e3`, then verified on origin/main.
+No work was discarded. Earlier milestones: `44abbcf`, `f175119`, `5a5c52d`.
+
+All three contracts are now deployed on testnet with the same tested Wasm hashes.
+Proposal `0` completed its real ten-minute interval, selected PASS, executed a
+one-BELIEF payment and completed both trader redemptions. The active lock,
+reserved funds and outgoing obligations are cleared. No contract source changed
+during this resumed session. Interactive human wallet signing and public hosting
+remain pending; neither is claimed complete.
 
 ## Completed implementation
 
@@ -33,94 +39,123 @@ The checkpoint is the commit containing this file; obtain its hash with
   near-workspaces integration suite; testnet deployment/demo CLI; CI definitions;
   accounting argument, artifact hashes and recording/handoff documentation.
 
-## Exact validation already completed (not rerun during checkpoint)
+## Validation and evidence
 
-| Command / gate | Observed result |
+Prior passed gates were retained rather than repeated without cause:
+
+- `cargo test --workspace --exclude integration-tests --locked`: 35 passed,
+  zero failed (BELIEF 5, futarchy 14, math/oracle 11, tUSD 5).
+- `bash scripts/build-contracts.sh`: three optimized Wasm builds passed.
+  Deployed hashes match `docs/BUILD_HASHES.json`; no contract rebuild was needed.
+- `cargo test -p integration-tests --test lifecycle --locked -- --nocapture`:
+  one scenario, four proposals, passed in 138.12 seconds. Covers failed execution,
+  merge/redemption, successful payment/burn, authorization and physical backing.
+- Previous precision/quote test file passed; unchanged and not rerun.
+- The checkpoint's three GitHub workflows all passed. See
+  `deployments/checkpoint-ci.json`; later commits have their own CI runs.
+
+New verification after deployment/tooling changes:
+
+- Deployment CLI rebuilt successfully with `--locked`, including HTTPS/TLS.
+- Full testnet setup succeeded, then reran without accounts/code replacement or
+  transactions, proving the setup path's idempotence on this deployment.
+- Actual scripted lifecycle: proposal/create, split, trade, 600-second wait,
+  finalization/payment and two winning redemptions succeeded. The local wait
+  process exited with SIGTERM, but its saved proposal ID resumed without
+  duplicating split/trade. No submitted transaction was abandoned.
+- Finalization and both redemptions independently queried by RPC: `FINAL`,
+  successful values, six receipts each, zero failed receipts.
+- `python3 scripts/verify-testnet.py deployments/testnet-bob-dhruva.json` passed
+  for pre-demo, trading and settled states. It pins all queries to one final
+  block, verifies code/metadata, backing, single active locking and reserve
+  release. Settled report also records one full-access key on each contract.
+- Frontend type check/production build passed after RPC/display changes.
+- Eight browser regression checks passed after changing the read RPC (20.3s).
+  Later signed-out balance display correction was checked in the live UI.
+- `node scripts/verify-live.mjs bob-dhruva-market.testnet` passed desktop/mobile
+  actual-chain reads in both trading and executed states: no runtime errors or
+  horizontal overflow; unknown signed-out wallet balances show dashes.
+  Wallet signing is explicitly false in these reports.
+- Rust formatting, shell syntax (previous checkpoint), CLI help and diff checks
+  passed. No unrelated contract checks were rerun.
+
+Public evidence and exact transaction links: `deployments/README.md`.
+Final snapshot: `deployments/verification-settled.json`, block 277479415,
+2026-11-13 07:28 UTC. Public state may change after that snapshot.
+
+## Deployment and keys
+
+| Role | Testnet account |
 | --- | --- |
-| `bash scripts/setup-dev.sh` | Passed after initial Git configuration permission boundary was approved; hooks configured |
-| `cargo test --workspace --exclude integration-tests --locked` | 35 passed, 0 failed: BELIEF 5, futarchy 14, market-math 11, tUSD 5; final run includes self-only constructors |
-| `bash scripts/build-contracts.sh` | All 3 optimized Wasm builds passed with cargo-near 0.21.0 and Rust 1.95.0; final hashes in `docs/BUILD_HASHES.json` |
-| `cargo test -p integration-tests --test lifecycle --locked -- --nocapture` | Final run: 1 passed, 0 failed, 138.12 seconds; one scenario covering 4 proposal lifecycles against final rebuilt binaries |
-| Sandbox coverage | Actual FT backing, failed execution/merge/redemption restoration, successful payment/burn, no-trade rejection, slippage, forged inflows, private callbacks, unauthorized first initialization, repeated calls |
-| `npm run build --prefix web` | Type check and production build passed |
-| `npm run test --prefix web` | Precision/quote test file passed; Node reporter: 1 test file passed, 0 failed |
-| `npm run test:browser --prefix web` | Final run: 8 passed, 0 failed, 15.3 seconds; desktop/mobile empty/error states and production testnet wallet-adapter initialization |
-| `cargo build -p integration-tests --bin testnet --locked` | Passed after changing demo wait to actual chain timestamps |
-| CLI inspection | Cargo build/test, cargo-near Wasm build, Vite, Playwright and `testnet --help` checked; local-only `testnet plan local-check` passed, creating no accounts or keys |
-| Formatting / shell syntax | `cargo fmt --all -- --check`, shell syntax checks for setup/install/build scripts, and `git diff --check` passed before pause |
+| Market | bob-dhruva-market.testnet |
+| BELIEF | bob-dhruva-belief.testnet |
+| tUSD | bob-dhruva-tusd.testnet |
+| Proposer | bob-dhruva-proposer.testnet |
+| Scripted trader | bob-dhruva-trader.testnet |
+| Recipient | bob-dhruva-recipient.testnet |
 
-The first sandbox attempt failed because the harness assumed 1,000 blocks meant
-sufficient elapsed time. The harness now checks actual block timestamps. A
-corrected run passed in 243.30 seconds; the final run with constructor-hardening
-checks passed in 138.12 seconds. Initial CLI/browser installations also needed
-Linux libraries; those environment issues were resolved. Do not confuse these
-historical failures with unreported successful gates.
+Do not treat these now-existing owned accounts as a prefix collision and create
+fallback duplicates. Reuse the ownership credentials and verify state/hashes.
+Six OS-random deployment credentials are in ignored `.near-credentials/testnet`,
+files mode 0600 and directory mode 0700. Never print, commit or upload keys.
+All keys remain; no immutability/keyless claim. There is no mainnet path.
 
-Tool versions: Rust/Cargo 1.95.0, SDK/standards 5.30.1, near-workspaces 0.24.0,
-near-sandbox crate 0.4.1 / binary 2.14.1, cargo-near 0.21.0, Node 24.22.2,
-npm 11.19.1. The CLI reports 0.23.0 available; 0.21.0 is intentionally the tested
-pin. These are host Wasm builds, not a Docker reproducibility claim.
+The tool initially lacked a near-workspaces TLS feature. `rustls` was enabled
+alongside `install`; that changed tooling dependencies only. The first attempt
+saved one key but made no account. Subsequent setup deployed successfully, then
+hit the original public RPC's rate limit during storage registration. Tooling
+and frontend reads now use the officially listed FASTNEAR testnet endpoint,
+`https://test.rpc.fastnear.com`, independently checked as testnet/protocol 88.
+Setup resumed with existing keys; no code was overwritten.
 
-## Deployment, accounts and remaining issues
+## Remaining issues and human boundaries
 
-- **Pending human decision: testnet account prefix.** It was requested but not
-  supplied. Ask for it before any account creation. Do not infer one from the
-  local plan's `local-check` example.
-- No testnet accounts, keys, deployments or testnet transactions were created.
-  No submitted testnet transaction awaits settlement. Submitted local sandbox
-  transactions completed as part of the passing scenario.
-- The deployment tool is compiled and its help/plan checked, but its actual
-  testnet creation, funding, setup and demo paths have not been executed.
-  It plans six accounts: market, belief, tusd, proposer, trader and recipient.
-- Live human-wallet signing, redirect evidence and the actual deployed frontend
-  lifecycle remain unverified. Browser adapter initialization is narrower proof.
-- npm audit reported 11 low-severity findings through the wallet crypto stack's
-  elliptic dependency; no moderate/high/critical findings. Vite reports wallet
-  dependency eval/util warnings. See `docs/FRONTEND.md`; no forced downgrade was
-  applied. Tests are not an audit or manipulation-resistance proof.
-- Demo recovery has a documented creation-to-progress-file crash window. If
-  interrupted there, inspect the existing proposal rather than create another.
-  If resumed after its window before trading, inspect state: the script may
-  attempt a now-closed split/trade and stop. This path is not testnet-validated.
-- Remote CI results have not been verified. The checkpoint push may trigger
-  automatic GitHub workflows; no manual CI/build/test run is requested here.
-- No settings/visibility changes, hosting, social posts, submissions or key
-  removals occurred. README retains honest AI assistance and Builders First
-  disclosures. AI traders, cron and extra tracks remain outside the MVP.
+- Interactive human MyNearWallet signing/redirect validation remains unverified.
+  An async request asked the human to load the private preview, connect their
+  own testnet wallet and approve a faucet/storage-registration transaction.
+  Verify any supplied public transaction hash; never request keys/seed phrases.
+- Public Sites hosting was offered as an explicit approval choice. No approval
+  has been received and no hosting changes or publishing were performed.
+- No repository visibility/settings change, social post, submission or key
+  deletion. README retains AI assistance and Builders First disclosures.
+- Demo creation-to-progress-file crash window remains documented. Inspect an
+  existing active proposal and recover its ID rather than create another.
+  The tool now skips split/trade after the window closes when resuming.
+- npm audit: 11 low-severity wallet crypto findings, no moderate/high/critical;
+  Vite dependency eval/util warnings remain. See docs/FRONTEND.md.
+- Faucet/scripted markets demonstrate mechanics, not economic reliability.
+  Burn and failure paths are sandbox evidence, not claimed as testnet runs.
 
-## Processes and intentionally local files
+## Processes and local-only files
 
-At pause, process inspection found no running Cargo, rustc, near-sandbox,
-Vite, Playwright, Chrome, lifecycle test or testnet CLI process. No local process
-needs resuming or terminating. No new build/test/deployment was launched to make
-this checkpoint.
+A production preview serves port 5173 in this Codespace (private visibility was
+read back with `gh codespace ports`). No public-hosting configuration changed.
+Use the Codespace Ports tab; load `bob-dhruva-market.testnet` in the app.
+The preview may need restarting if the execution server stops its processes:
+`npm run preview --prefix web -- --host 0.0.0.0 --port 5173`.
+The demo finished; there are no pending testnet outgoing operations or CLI
+transactions. No Cargo build/test needs resuming. Inspect process state before
+starting another preview; avoid duplicate listeners.
 
-Intentionally ignored and untracked: `AGENTS.md`, `artifacts/`, `target/`,
-`web/dist/`, `web/node_modules/`, `web/test-results/`. Credential directories,
-`.env` and `.env.*` (except example files) must stay ignored if later created.
-Dependency manifests and lockfiles are project source and are committed;
-installed dependencies and caches are not. Never put secret values in this file.
+Ignored/untracked: `AGENTS.md`, `.near-credentials/`, `artifacts/`, `target/`,
+`web/dist/`, `web/node_modules/`, `web/test-results/`. Any .env files must remain
+ignored. Public deployment JSON contains only addresses/hashes/chain data.
+Manifests and lockfiles are source and remain tracked.
 
-## Precise next steps after the human resumes
+## Precise next steps
 
-1. Read `README.md`, `DESIGN.md`, `docs/BUILD_PLAN.md`, this handoff and the
-   gitignored `AGENTS.md`; inspect Git status and confirm the checkpoint commit.
-2. Check UTC time. Original contract freeze is **2026-11-13 18:00 UTC**.
-   Request a concrete exception before any contract change after it. Deadline:
-   **2026-11-14 23:59 UTC**. Never silently override either boundary.
-3. Obtain the human's testnet prefix. Review `docs/DEVELOPMENT.md` and the CLI
-   source. If artifacts are unavailable or source changed, rebuild and run the
-   affected local gates only after work has explicitly resumed.
-4. Run `cargo run -p integration-tests --bin testnet --locked -- plan PREFIX`
-   with the actual chosen prefix. Inspect proposed accounts and hashes.
-5. With account creation authorized by that decision, run the same CLI with
-   `deploy PREFIX`. Verify helper funding, account ownership, state, hashes and
-   configuration. Never overwrite different existing code or remove keys.
-6. Run `demo PREFIX`, recording actual explorer links and the outcome/execution
-   distinction. Confirm physical accounting and the selected claim redemption.
-7. Point the local frontend at the verified market, exercise actual testnet
-   wallet signing and the complete lifecycle, then update honest evidence.
-8. Review staged diffs and push normal milestones with hooks enabled. Re-read
-   live official hackathon rules before preparing final submission materials.
-   Hosting, visibility changes, posting, key deletion and submission each still
-   require explicit human approval. Do not perform them automatically.
+1. Read AGENTS.md, README.md, DESIGN.md, docs/BUILD_PLAN.md and this handoff;
+   inspect status, pending human responses and the latest remote commit.
+2. Check UTC. Contract freeze is **2026-11-13 18:00 UTC**. Ask for a concrete
+   exception before contract changes after that time. Deadline remains
+   **2026-11-14 23:59 UTC**. Existing tested deployment needs no code change.
+3. Complete human-wallet signing validation if the human is available. Check
+   the public receipt and resulting actual chain/UI state; do not substitute a
+   mocked wallet for this acceptance gate.
+4. Act on public hosting only after explicit approval. The built app and live
+   testnet evidence are reviewable already. Preserve all key/privacy boundaries.
+5. If new implementation changes are necessary, rerun only affected checks,
+   inspect staged diffs and commit/push normally with hooks; never force-push.
+6. Human records the real demo. Re-read live official rules before final
+   submission materials. Posting, submission, key deletion and settings changes
+   still require explicit approval; do not perform them automatically.

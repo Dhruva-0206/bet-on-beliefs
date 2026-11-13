@@ -31,10 +31,11 @@ explorer screens. Do not substitute sandbox output or fixtures for testnet data.
 
 ## Remaining acceptance gates
 
-- Supply the human's testnet prefix before creating any accounts.
+- Prefix decision resolved: `bob-dhruva` was available and deployed on testnet.
 - Local Wasm builds, 35 unit tests, four-proposal sandbox scenario, frontend build
   and eight browser checks have passed. Repeat affected gates after any changes.
-- Verify the deployed code hashes/configuration, then run the actual testnet demo.
+- Deployed code hashes/configuration, real testnet payment/redemption demo,
+  fixed-block backing and live desktop/mobile reads are verified; see deployments/.
 - Exercise a real wallet signing path and its redirect/transaction evidence.
 - Inspect staged changes before every commit and retain the AI disclosure.
 - If contract changes are needed after 2026-11-13 18:00 UTC, request a concrete

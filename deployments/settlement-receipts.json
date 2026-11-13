@@ -1,0 +1,41 @@
+{
+  "network": "testnet",
+  "receipts": [
+    {
+      "transaction_hash": "6phUWCoGJQP7dJH78KMks5jgRXf4d41XfPHkZLcKmWJ4",
+      "signer_id": "bob-dhruva-trader.testnet",
+      "receiver_id": "bob-dhruva-market.testnet",
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "final_execution_status": "FINAL",
+      "receipt_count": 6,
+      "failed_receipts": 0,
+      "explorer_url": "https://testnet.nearblocks.io/txns/6phUWCoGJQP7dJH78KMks5jgRXf4d41XfPHkZLcKmWJ4"
+    },
+    {
+      "transaction_hash": "C631mAq4uxCkGn8cgTjGT714cyL9YCiKDx8VErEaX9NC",
+      "signer_id": "bob-dhruva-trader.testnet",
+      "receiver_id": "bob-dhruva-market.testnet",
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "final_execution_status": "FINAL",
+      "receipt_count": 6,
+      "failed_receipts": 0,
+      "explorer_url": "https://testnet.nearblocks.io/txns/C631mAq4uxCkGn8cgTjGT714cyL9YCiKDx8VErEaX9NC"
+    },
+    {
+      "transaction_hash": "6sJJ1wHjpPEUcqTUeUwdR2JotoMfcbodLjqSDwwMdS5x",
+      "signer_id": "bob-dhruva-trader.testnet",
+      "receiver_id": "bob-dhruva-market.testnet",
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "final_execution_status": "FINAL",
+      "receipt_count": 6,
+      "failed_receipts": 0,
+      "explorer_url": "https://testnet.nearblocks.io/txns/6sJJ1wHjpPEUcqTUeUwdR2JotoMfcbodLjqSDwwMdS5x"
+    }
+  ]
+}

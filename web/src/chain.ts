@@ -1,5 +1,5 @@
 import type { WalletSelector } from "@near-wallet-selector/core";
-export const RPC = "https://rpc.testnet.near.org";
+export const RPC = "https://test.rpc.fastnear.com";
 export const EXPLORER = "https://testnet.nearblocks.io";
 let selector: Promise<WalletSelector> | undefined;
 export function walletSelector() {

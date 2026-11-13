@@ -2,7 +2,7 @@
 
 A memecoin treasury governed by markets: trade the “do it” and “don't do it” worlds, then let the NEAR contract execute the result.
 
-**Status: all three contracts and the wallet frontend are implemented and locally tested. Testnet account creation/deployment and live wallet signing await the human’s account prefix. No testnet accounts or hosted app exist yet.**
+**Status: deployed on NEAR testnet. A real 10-minute proposal, payment execution and both trader redemptions succeeded. The local wallet frontend reads the deployment; interactive human-wallet signing and public hosting remain pending.**
 
 ## Intended experience
 
@@ -18,7 +18,7 @@ This is a testnet experiment in futarchy, inspired by [MetaDAO](https://metadao.
 
 Open this repository in a Linux GitHub Codespace. The devcontainer configures Git hooks and forwards the frontend port. See [build plan](docs/BUILD_PLAN.md) and [mechanism design](DESIGN.md).
 
-Layout: `contracts/belief-ft`, `contracts/tusd-ft`, `contracts/futarchy`, `web`, `tests`, and `scripts`. See [frontend instructions](docs/FRONTEND.md) for local wallet UI setup. No hosting is configured.
+Layout: `contracts/belief-ft`, `contracts/tusd-ft`, `contracts/futarchy`, `web`, `tests`, and `scripts`. See [frontend instructions](docs/FRONTEND.md) for local wallet UI setup. Open the local app and load `bob-dhruva-market.testnet`; browsing needs no wallet. Public hosting is not configured.
 
 ## Evidence
 
@@ -30,7 +30,15 @@ Verified locally on Linux, 2026-11-12:
 - Frontend type check/production build and precision tests: `npm run build --prefix web` and `npm run test --prefix web`.
 - Eight desktop/mobile Chromium checks: `npm run test:browser --prefix web`. Wallet initialization is verified on testnet; actual wallet signing remains untested.
 
-See [development notes](docs/DEVELOPMENT.md), the [accounting argument](docs/ACCOUNTING.md), [oracle policy and attack limitations](docs/ORACLE.md), and [recording/handoff checklist](docs/DELIVERY.md). CI now defines real contract builds, unit/sandbox tests and frontend/browser checks; remote CI results are not claimed here. A scaffold check is not product validation. No deployed addresses or testnet transactions are available yet. Scripted faucet trades demonstrate mechanics, not reliable price discovery.
+See [development notes](docs/DEVELOPMENT.md), the [accounting argument](docs/ACCOUNTING.md), [oracle policy and attack limitations](docs/ORACLE.md), and [recording/handoff checklist](docs/DELIVERY.md). CI now defines real contract builds, unit/sandbox tests and frontend/browser checks; all three checkpoint workflows passed for `69ddccd243191336c76714cc7988dec584b7a7e3`. Later changes have separate CI runs. A scaffold check is not product validation. Scripted faucet trades demonstrate mechanics, not reliable price discovery.
+
+## Actual testnet evidence (2026-11-13)
+
+- Market: [bob-dhruva-market.testnet](https://testnet.nearblocks.io/address/bob-dhruva-market.testnet); [all accounts and code hashes](deployments/testnet-bob-dhruva.json).
+- Proposal `0` selected PASS after its real 600-second interval. [Finalization/execution](https://testnet.nearblocks.io/txns/6phUWCoGJQP7dJH78KMks5jgRXf4d41XfPHkZLcKmWJ4) paid exactly one BELIEF to the recipient. [BELIEF redemption](https://testnet.nearblocks.io/txns/C631mAq4uxCkGn8cgTjGT714cyL9YCiKDx8VErEaX9NC) and [tUSD redemption](https://testnet.nearblocks.io/txns/6sJJ1wHjpPEUcqTUeUwdR2JotoMfcbodLjqSDwwMdS5x) succeeded. All three transactions were independently verified `FINAL`, with no failed receipts.
+- [Fixed-block accounting snapshots](deployments/README.md) verify physical balances, claim backing, reserve release and cleared outgoing operations. Setup was rerun without sending transactions or replacing code.
+- The updated frontend build and eight browser checks passed; live desktop/mobile reads passed for both trading and settled states. Human wallet signing is still not claimed.
+- [Reproduce the live verification](deployments/README.md). Full-access deployment keys remain; the contracts are upgradeable by their key holders. No keyless/immutable claim is made.
 
 ## Hackathon
 

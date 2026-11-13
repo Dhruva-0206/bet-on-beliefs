@@ -1,0 +1,16 @@
+{
+  "accounts": {
+    "belief": "bob-dhruva-belief.testnet",
+    "market": "bob-dhruva-market.testnet",
+    "proposer": "bob-dhruva-proposer.testnet",
+    "recipient": "bob-dhruva-recipient.testnet",
+    "trader": "bob-dhruva-trader.testnet",
+    "tusd": "bob-dhruva-tusd.testnet"
+  },
+  "code_hashes": {
+    "belief_ft": "8Mj1Dnsmpx9f5uyTHWbwMfYpEo2iJUg5mLsirGvt4rM4",
+    "futarchy": "5NC6ownWaPZKmmiPqwNW6SSKfehWVZDw4AoXYLLsUYKT",
+    "tusd_ft": "Dx74RiBe4embgaSujgdj7DmWDKrG2wrj7W9f3i8hA2mV"
+  },
+  "network": "testnet"
+}

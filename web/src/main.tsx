@@ -665,8 +665,8 @@ function App() {
                   <h3>
                     {name}{" "}
                     <small>
-                      Wallet {format(fts[a])} · Vault{" "}
-                      {format(balances?.vault[a])}
+                      Wallet {account ? format(fts[a]) : "—"} · Vault{" "}
+                      {account ? format(balances?.vault[a]) : "—"}
                     </small>
                   </h3>
                   <div className="buttons">

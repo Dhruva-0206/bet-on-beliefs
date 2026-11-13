@@ -16,6 +16,8 @@ Cut AI traders, cron automation, NEP-245 compatibility views and advanced charti
 
 ## Handoff status
 
-Updated 2026-11-12: all three contracts are implemented, with 35 passing unit tests and one passing near-workspaces sandbox scenario spanning four proposal lifecycles. All three optimized Wasm builds pass. The wallet frontend builds, passes precision tests and eight desktop/mobile browser checks. Deployment/demo tooling compiles; its help and local plan mode have been checked. Real deployment/setup and signed-wallet execution have not run.
+Updated 2026-11-13: the interrupted checkpoint was completed and remotely verified as `69ddccd243191336c76714cc7988dec584b7a7e3`. All three checkpoint CI workflows passed. Prior local evidence remains: 35 unit tests, one four-proposal sandbox scenario, three optimized Wasm builds, frontend precision/build checks and eight browser checks.
 
-Gitignored AGENTS.md contains the working rules and is not committed. No testnet accounts exist: the human's account prefix has been requested and remains required before creation. No keys removed, hosted app, visibility/settings change, social post or submission. CI now defines actual unit/integration/frontend checks, but local results are the evidence reported here; remote CI success is not asserted.
+The human approved `bob-dhruva` (fallback `bob-dhruva-26` only if taken). All six first-choice accounts were available and created on testnet; all three tested contract hashes are deployed. A real ten-minute proposal selected PASS, executed a one-BELIEF payment, and completed both trader redemptions. Fixed-block ledger verification and live desktop/mobile frontend reads passed before and after settlement. Tooling TLS and RPC connectivity issues were resolved without contract changes. Setup idempotence was verified on testnet. See `deployments/README.md` and `docs/HANDOFF.md`.
+
+Interactive human MyNearWallet signing and public hosting remain pending. Private Codespace preview only; no settings/visibility changes, social posts, submission or key deletion. AGENTS.md and credentials remain ignored. Original contract freeze and deadline above still apply.

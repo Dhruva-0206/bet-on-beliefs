@@ -1,0 +1,126 @@
+{
+  "verified_at_utc": "2026-11-13T07:15:50.877570+00:00",
+  "network": "testnet",
+  "block_hash": "FvaS6PFtKqeynsrxU6z9Yyk1B2qs8vjXreGMtvkrcJAp",
+  "block_height": 277478164,
+  "protocol_version": 88,
+  "accounts": {
+    "belief": "bob-dhruva-belief.testnet",
+    "market": "bob-dhruva-market.testnet",
+    "proposer": "bob-dhruva-proposer.testnet",
+    "recipient": "bob-dhruva-recipient.testnet",
+    "trader": "bob-dhruva-trader.testnet",
+    "tusd": "bob-dhruva-tusd.testnet"
+  },
+  "contract_accounts": {
+    "market": {
+      "amount": "9996693493487873100000000",
+      "block_hash": "FvaS6PFtKqeynsrxU6z9Yyk1B2qs8vjXreGMtvkrcJAp",
+      "block_height": 277478164,
+      "code_hash": "5NC6ownWaPZKmmiPqwNW6SSKfehWVZDw4AoXYLLsUYKT",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 224877
+    },
+    "belief": {
+      "amount": "10001101297503667100000000",
+      "block_hash": "FvaS6PFtKqeynsrxU6z9Yyk1B2qs8vjXreGMtvkrcJAp",
+      "block_height": 277478164,
+      "code_hash": "8Mj1Dnsmpx9f5uyTHWbwMfYpEo2iJUg5mLsirGvt4rM4",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 149371
+    },
+    "tusd": {
+      "amount": "10003687979303381900000000",
+      "block_hash": "FvaS6PFtKqeynsrxU6z9Yyk1B2qs8vjXreGMtvkrcJAp",
+      "block_height": 277478164,
+      "code_hash": "Dx74RiBe4embgaSujgdj7DmWDKrG2wrj7W9f3i8hA2mV",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 147174
+    }
+  },
+  "config": {
+    "network": "testnet",
+    "tokens": [
+      "bob-dhruva-belief.testnet",
+      "bob-dhruva-tusd.testnet"
+    ],
+    "ready": true,
+    "active": null,
+    "next_ritual_ns": "0",
+    "window_ns": "600000000000",
+    "max_payment": [
+      "1000000000000000000000",
+      "1000000000000000000000"
+    ],
+    "proposal_count": 0,
+    "treasury": [
+      "600000000000000000000000000",
+      "0"
+    ],
+    "reserved": [
+      "0",
+      "0"
+    ],
+    "stakes": [
+      "0",
+      "0"
+    ],
+    "outgoing": [
+      "0",
+      "0"
+    ],
+    "pending_count": 0
+  },
+  "proposals": [],
+  "tokens": {
+    "belief": {
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "BELIEF testnet",
+        "symbol": "BELIEF",
+        "icon": null,
+        "reference": null,
+        "reference_hash": null,
+        "decimals": 18
+      },
+      "physical_market_balance": "600000000000000000000000000",
+      "accounted_market_balance": "600000000000000000000000000",
+      "total_supply": "1000000000000000000000000000",
+      "wallet_balances": {
+        "proposer": "200000000000000000000000000",
+        "trader": "0",
+        "recipient": "0"
+      }
+    },
+    "tusd": {
+      "metadata": {
+        "spec": "ft-1.0.0",
+        "name": "tUSD testnet",
+        "symbol": "tUSD",
+        "icon": null,
+        "reference": null,
+        "reference_hash": null,
+        "decimals": 18
+      },
+      "physical_market_balance": "0",
+      "accounted_market_balance": "0",
+      "total_supply": "1000000000000000000000000000",
+      "wallet_balances": {
+        "proposer": "0",
+        "trader": "0",
+        "recipient": "0"
+      }
+    }
+  },
+  "checks": [
+    "tested code hashes",
+    "token metadata",
+    "single active proposal",
+    "claim supply backing",
+    "resolved reserve release",
+    "physical FT balances equal separate ledgers at one final block"
+  ]
+}

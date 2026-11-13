@@ -48,7 +48,7 @@ test("testnet RPC failure is visible and wallet modules load without runtime err
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.route("https://rpc.testnet.near.org/", (route) =>
+  await page.route("https://test.rpc.fastnear.com/", (route) =>
     route.fulfill({
       json: {
         jsonrpc: "2.0",

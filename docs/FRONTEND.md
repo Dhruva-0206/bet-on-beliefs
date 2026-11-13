@@ -16,7 +16,7 @@ resolved tree is in `web/package-lock.json`. Set `VITE_MARKET_CONTRACT` in
 app. Run `npm run dev --prefix web` for the local application. No hosting is
 configured. Empty configuration shows no fixture proposals or balances.
 
-Read-only browsing calls NEAR testnet RPC. Wallet operations use Wallet Selector
+Read-only browsing calls the FASTNEAR testnet RPC endpoint (`https://test.rpc.fastnear.com`), verified against the official NEAR provider list. Wallet operations use Wallet Selector
 10.1.4 with MyNearWallet, selected from its official testnet documentation:
 https://github.com/near/wallet-selector/tree/main/packages/core
 The production adapter initializes on testnet and selects
@@ -45,3 +45,16 @@ suggested fix downgrades major wallet APIs, so it was not applied automatically.
 Vite also reports wallet dependency `eval` and browser-external `util` warnings;
 production browser initialization tests pass. Reassess dependencies before any
 production use. No production/security validation is claimed.
+
+
+Live read-only QA (with the production preview running on port 5173):
+
+```sh
+cd web
+node scripts/verify-live.mjs bob-dhruva-market.testnet
+```
+
+This checks the actual deployed market on desktop/mobile, without fixtures or
+wallet signing. It writes local screenshots and a report under ignored
+`web/test-results/`. The Codespace port remains private; this is not a hosted
+public application. Human wallet signing is a separate acceptance gate.

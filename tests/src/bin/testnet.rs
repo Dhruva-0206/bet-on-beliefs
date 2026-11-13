@@ -13,6 +13,7 @@ use std::{
     os::unix::fs::{OpenOptionsExt, PermissionsExt},
     path::Path,
 };
+const TESTNET_RPC: &str = "https://test.rpc.fastnear.com";
 const UNIT: u128 = 1_000_000_000_000_000_000;
 const ROLES: [&str; 6] = [
     "market",
@@ -56,7 +57,7 @@ fn secret(id: &str) -> Result<SecretKey> {
         .map_err(Into::into)
 }
 async fn exists(id: &str) -> Result<bool> {
-    let response:Value=reqwest::Client::new().post("https://rpc.testnet.near.org").json(&json!({"jsonrpc":"2.0","id":"preflight","method":"query","params":{"request_type":"view_account","finality":"final","account_id":id}})).send().await?.error_for_status()?.json().await?;
+    let response:Value=reqwest::Client::new().post(TESTNET_RPC).json(&json!({"jsonrpc":"2.0","id":"preflight","method":"query","params":{"request_type":"view_account","finality":"final","account_id":id}})).send().await?.error_for_status()?.json().await?;
     if response.get("result").is_some() {
         return Ok(true);
     }
@@ -200,7 +201,7 @@ async fn main() -> Result<()> {
         }
         return Ok(());
     }
-    let w = near_workspaces::testnet().await?;
+    let w = near_workspaces::testnet().rpc_addr(TESTNET_RPC).await?;
     if args[0] == "demo" {
         return demo(&w, prefix).await;
     }
@@ -407,47 +408,54 @@ async fn demo(w: &Worker<Testnet>, prefix: &str) -> Result<()> {
         "unexpected demo proposer"
     );
     if p["outcome"].is_null() {
-        let state = read(
-            &market,
-            "account",
-            json!({"account_id":trader.id(),"proposal_id":id}),
-        )
-        .await?;
-        if state["claims_registered"] != true {
-            call(
-                &trader,
+        let end_ns = p["end_ns"]
+            .as_str()
+            .context("proposal end missing")?
+            .parse::<u64>()?;
+        // A resumed demo must never attempt split/trade after trading has closed.
+        if w.view_block().await?.timestamp() < end_ns {
+            let state = read(
                 &market,
-                "register_claims",
-                json!({"proposal_id":id}),
-                NearToken::from_millinear(10),
+                "account",
+                json!({"account_id":trader.id(),"proposal_id":id}),
             )
             .await?;
-        }
-        // Resume safely: split only if neither side holds demo tUSD claims; trade only if no BELIEF was bought.
-        let state = read(
-            &market,
-            "account",
-            json!({"account_id":trader.id(),"proposal_id":id}),
-        )
-        .await?;
-        if state["claims"][0][1] == "0" && state["claims"][1][1] == "0" {
-            call(
-                &trader,
+            if state["claims_registered"] != true {
+                call(
+                    &trader,
+                    &market,
+                    "register_claims",
+                    json!({"proposal_id":id}),
+                    NearToken::from_millinear(10),
+                )
+                .await?;
+            }
+            // Resume safely: split only if neither side holds demo tUSD claims; trade only if no BELIEF was bought.
+            let state = read(
                 &market,
-                "split",
-                json!({"proposal_id":id,"asset_id":1,"amount":amount(200)}),
-                NearToken::from_yoctonear(0),
+                "account",
+                json!({"account_id":trader.id(),"proposal_id":id}),
             )
             .await?;
-        }
-        let state = read(
-            &market,
-            "account",
-            json!({"account_id":trader.id(),"proposal_id":id}),
-        )
-        .await?;
-        if state["claims"][0][0] == "0" {
-            call(&trader,&market,"trade",json!({"proposal_id":id,"side":0,"input_asset":1,"amount":amount(100),"min_output":amount(40)}),NearToken::from_yoctonear(0)).await?;
+            if state["claims"][0][1] == "0" && state["claims"][1][1] == "0" {
+                call(
+                    &trader,
+                    &market,
+                    "split",
+                    json!({"proposal_id":id,"asset_id":1,"amount":amount(200)}),
+                    NearToken::from_yoctonear(0),
+                )
+                .await?;
+            }
+            let state = read(
+                &market,
+                "account",
+                json!({"account_id":trader.id(),"proposal_id":id}),
+            )
+            .await?;
+            if state["claims"][0][0] == "0" {
+                call(&trader,&market,"trade",json!({"proposal_id":id,"side":0,"input_asset":1,"amount":amount(100),"min_output":amount(40)}),NearToken::from_yoctonear(0)).await?;
+            }
         }
         let end = p["end_ns"].as_str().unwrap().parse::<u128>()? / 1_000_000;
         loop {
