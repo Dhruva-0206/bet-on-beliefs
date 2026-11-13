@@ -1,5 +1,49 @@
 # Wallet dependency review — 2026-11-13
 
+## Remediation completed
+
+Pinned a scoped Meteor SDK override to **query-string 10.0.0**, keeping wallet
+adapter 10.1.4 and SDK 1.0.24. No forced downgrade was used. The upstream
+[10.0.0 release](https://github.com/sindresorhus/query-string/releases/tag/v10.0.0)
+removes decode-uri-component and supplies its own single-pass decoder. The
+vulnerable package is absent from the lockfile; the old decoder markers are
+absent from the rebuilt production chunks.
+
+The SDK expects a named `stringify` export, while v10 uses a default API object.
+The guarded SDK transform in `web/vite.config.ts` adapts that exact import during
+both Vite dev optimization and production builds, alongside the existing key-log
+mitigation. It fails if the expected SDK source changes. This avoids an untested
+CommonJS-to-ESM decoder override and does not modify node_modules in place.
+
+Compatibility: SDK popup parameters are all strings. Four golden cases captured
+from 7.1.3 retain byte-for-byte encoding, including Unicode, punctuation, query
+and fragment characters. The v10 breaking restriction on object-valued stringify
+inputs does not affect this inspected call. Node >=22 is required (project pins
+24.22.2). Malformed UTF-8 now uses replacement characters, intentionally matching
+URLSearchParams; SDK's inspected path does not parse arbitrary queries. Both
+advisory-shaped malformed payloads complete in a five-second-bounded subprocess
+and match native URLSearchParams decoding. This checks those cases, not every
+possible attack or browser.
+
+Validation: clean `npm ci`, 4 unit/compatibility tests, production build,
+10 production browser checks and 10 development checks passed. The existing
+faucet test carries both token transactions through the actual Meteor adapter
+and serialization into a synthetic signing boundary, then cancels without
+signing/broadcasting. Browser popup checks also verify pageUri and connectionUid.
+The earlier real human faucet receipts are preserved; a new human signature
+against this serializer update has not been claimed.
+
+Audit now reports **15 low, zero moderate/high/critical**. The two former high
+SDK/adapter package findings are now low inherited findings, explaining the
+low count change from 13. Remaining findings inherit the elliptic advisory.
+Full audit still exits 1 due to those lows; `npm audit --audit-level=moderate`
+passes and is now required in frontend CI. See
+[remediation evidence](../deployments/dependency-audit-remediated.json).
+Hosting remains private per the human's instruction; publication still requires
+explicit approval. Contracts, deployment accounts and credentials are unchanged.
+
+## Initial review before remediation
+
 `npm audit --prefix web --json` reports **13 low, 4 high**, no moderate or
 critical findings. Audit exits 1 because vulnerabilities remain. Public snapshot:
 [dependency-audit-review.json](../deployments/dependency-audit-review.json).
@@ -47,7 +91,8 @@ and repeat a human signed faucet transaction if the wallet adapter path changes.
 The same-major nanoid 5.1.16 override already remains in place; it does not fix
 this decoder chain.
 
-Recommendation: **retain the private preview while remediating this chain**.
+Initial recommendation was to retain the private preview until remediation.
+The decoder chain is now remediated as recorded above; hosting remains private.
 A future public static frontend can use the same testnet contracts, without
 uploading deployment credentials. It still needs explicit human approval before
 publishing. This review grants no hosting approval, does not waive the findings,

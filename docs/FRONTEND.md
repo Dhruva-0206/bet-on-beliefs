@@ -82,12 +82,15 @@ market world. Wallet redirect errors are surfaced. Chain read failures disable
 operations. Browser tests cover empty and error states plus testnet wallet
 initialization; they do not claim a signed-wallet end-to-end test has passed.
 
-Dependency audit after the Meteor change (2026-11-13): **13 low and 4 high**,
-zero moderate/critical. High findings propagate from `decode-uri-component`
-through `query-string` and the pinned Meteor SDK/adapter. npm proposes a major
-adapter downgrade; it was not applied. A same-major `nanoid` override to 5.1.16
-removed its high finding. This is a known remaining dependency limitation, not
-production security validation. Reassess before public hosting.
+Dependency remediation audit (2026-11-13): **15 low, zero moderate/high/critical**.
+The scoped Meteor override to query-string 10.0.0 removes decode-uri-component.
+A guarded dev/build transform adapts the SDK's named import to the new default
+API; both faucet signing boundaries and popup parameters pass dev/production QA.
+The nanoid 5.1.16 override remains. Full audit exits 1 for residual elliptic-chain
+low findings; the moderate-or-higher audit gate passes. See
+[review and remediation](DEPENDENCY_REVIEW.md). Repeat human faucet signing after
+hard-refresh to extend the preserved pre-update human evidence; synthetic tests
+do not replace that check. Hosting remains private.
 
 The faucet failure was reproduced with a browser debugger:
 `transact → @near-js/transactions functionCall → stringifyJsonOrBytes → Buffer.from`.

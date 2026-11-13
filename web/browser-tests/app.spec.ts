@@ -143,6 +143,10 @@ test("Meteor connection opens testnet login from the production UI", async ({
   expect(popup.origin).toBe("https://wallet.meteorwallet.app");
   expect(popup.pathname).toBe("/connect/testnet/login");
   expect(popup.searchParams.get("source")).toBe("wpm");
+  expect(popup.searchParams.get("connectionUid")).toMatch(/^[A-Za-z0-9_-]+$/);
+  expect(decodeURIComponent(popup.searchParams.get("pageUri")!)).toBe(
+    page.url(),
+  );
   expect(errors).toEqual([]);
   expect(keyWasLogged).toBe(false);
 });

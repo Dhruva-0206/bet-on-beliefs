@@ -35,7 +35,8 @@
   "packageManager": "npm@11.19.1",
   "overrides": {
     "@meteorwallet/sdk": {
-      "nanoid": "5.1.16"
+      "nanoid": "5.1.16",
+      "query-string": "10.0.0"
     }
   }
 }

@@ -13,6 +13,37 @@ reserved funds and outgoing obligations are cleared. No contract source changed
 during this resumed session. Human Meteor signing is now verified for both faucets; public hosting remains
 pending. Historical pending statements below describe earlier checkpoints.
 
+## Decoder remediation — latest
+
+Scoped query-string 10.0.0 override for Meteor SDK; adapter/SDK versions remain
+10.1.4/1.0.24. The guarded Vite transform adapts the named stringify import to
+the new default API in both dev optimization and production. decode-uri-component
+is absent from the lockfile; no forced downgrade or node_modules patch.
+
+Clean npm ci, 4 unit/compatibility tests (including four legacy-encoding fixtures
+and two bounded malformed-input payloads), production build, 10 production
+browser checks (12.8s), 10 dev checks (16.6s), then 2 production popup follow-up
+checks (5.7s) for the new return-URL assertions passed. Real adapter faucet
+serialization reaches a synthetic Meteor signing boundary and cancels, with no
+signatures/broadcasts. Popup query parameters are also checked. Contract source,
+deployment accounts/credentials and human wallet keys were untouched. No
+contract tests were repeated for this frontend dependency change.
+
+Audit now has 15 low/0 moderate/0 high/0 critical. Full audit exit 1 reflects
+residual low elliptic-chain findings; the moderate-or-higher gate exits 0 and is
+required by CI. Historical four-high snapshot remains preserved. Details:
+`docs/DEPENDENCY_REVIEW.md`, `deployments/dependency-audit-remediated.json`.
+The existing real human faucet test remains valid historical evidence; no new
+human signature is claimed against this transitive update. Recommend a human
+hard-refresh/faucet retry when available. Keep hosting private; no publication
+approval has been given.
+
+Preview restarted with strict 0.0.0.0:5173, single listener PID 47412, log
+/tmp/bob-preview-5173.log. Local HTTP and authenticated forwarded HTTPS returned
+200; port visibility read back private. Read-only live desktop/mobile checks
+passed again; no transactions were signed. See
+`deployments/frontend-live-decoder-remediated.json`.
+
 ## Human wallet validation and audit review — latest
 
 `dhruva.testnet` successfully connected and signed both storage/faucet calls in
@@ -228,7 +259,7 @@ Setup resumed with existing keys; no code was overwritten.
 - Demo creation-to-progress-file crash window remains documented. Inspect an
   existing active proposal and recover its ID rather than create another.
   The tool now skips split/trade after the window closes when resuming.
-- npm audit: 13 low and 4 high dependency findings after Meteor integration;
+- npm audit after remediation: 15 low and zero moderate/high/critical findings;
   Vite dependency eval/util warnings remain. See docs/FRONTEND.md.
 - Faucet/scripted markets demonstrate mechanics, not economic reliability.
   Burn and failure paths are sandbox evidence, not claimed as testnet runs.
@@ -256,9 +287,9 @@ Manifests and lockfiles are source and remain tracked.
 2. Check UTC. Contract freeze is **2026-11-13 18:00 UTC**. Ask for a concrete
    exception before contract changes after that time. Deadline remains
    **2026-11-14 23:59 UTC**. Existing tested deployment needs no code change.
-3. Human faucet signing gate is complete; preserve its public receipt evidence.
-   Address the decoder chain with compatible changes and affected regression
-   checks before recommending public hosting; see docs/DEPENDENCY_REVIEW.md.
+3. Decoder remediation and synthetic compatibility checks are complete. Preserve
+   human faucet receipts; offer a hard-refresh/human faucet retry for the updated
+   serializer. Keep remaining low findings visible in docs/DEPENDENCY_REVIEW.md.
 4. Act on public hosting only after explicit approval. The built app and live
    testnet evidence are reviewable already. Preserve all key/privacy boundaries.
 5. If new implementation changes are necessary, rerun only affected checks,

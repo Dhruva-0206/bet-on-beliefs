@@ -1,0 +1,66 @@
+{
+  "verified_at_utc": "2026-11-13T10:19:22.144369+00:00",
+  "counts": {
+    "info": 0,
+    "low": 15,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 15
+  },
+  "full_audit_exit": 1,
+  "moderate_or_higher_gate_exit": 0,
+  "installed_chain": [
+    "@near-wallet-selector/meteor-wallet@10.1.4",
+    "@meteorwallet/sdk@1.0.24",
+    "query-string@10.0.0 (scoped override)"
+  ],
+  "decode_uri_component_in_lockfile": false,
+  "remaining_direct_advisories": [
+    {
+      "source": 1112030,
+      "name": "elliptic",
+      "dependency": "elliptic",
+      "title": "Elliptic Uses a Cryptographic Primitive with a Risky Implementation",
+      "url": "https://github.com/advisories/GHSA-848j-6mx2-7j84",
+      "severity": "low",
+      "cwe": [
+        "CWE-1240"
+      ],
+      "cvss": {
+        "score": 5.6,
+        "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L"
+      },
+      "range": "<=6.6.1"
+    }
+  ],
+  "validation": {
+    "clean_npm_ci": "passed",
+    "unit_and_compatibility_tests": {
+      "passed": 4,
+      "failed": 0
+    },
+    "production_build": "passed",
+    "production_browser_tests": {
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 12.8
+    },
+    "development_browser_tests": {
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 16.6
+    },
+    "production_popup_followup": {
+      "passed": 2,
+      "failed": 0,
+      "duration_seconds": 5.7
+    },
+    "live_read_only_desktop_mobile": "passed",
+    "private_preview_http": "local 200; authenticated forwarded HTTPS 200"
+  },
+  "human_signing_after_remediation": false,
+  "hosting_visibility": "private",
+  "contracts_changed": false,
+  "transactions_signed_or_submitted": false
+}
