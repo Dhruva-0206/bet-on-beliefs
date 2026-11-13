@@ -1,0 +1,18 @@
+{
+  "verified_at_utc": "2026-11-13T09:54:27.454Z",
+  "network": "testnet",
+  "sender": "bob-dhruva-proposer.testnet",
+  "receiver": "dhruva.testnet",
+  "amount_yocto": "1000000000000000000000000",
+  "transaction_hash": "CGn618uA6Fo2ESTyAjXV7GJWu4whjyFKDGt5kvLQcgEy",
+  "explorer_url": "https://testnet.nearblocks.io/txns/CGn618uA6Fo2ESTyAjXV7GJWu4whjyFKDGt5kvLQcgEy",
+  "final_execution_status": "FINAL",
+  "status": {
+    "SuccessValue": ""
+  },
+  "failed_receipt_count": 0,
+  "before_amount": "0",
+  "after_amount": "1000000000000000000000000",
+  "after_block_height": 277494340,
+  "after_block_hash": "6GQxpHHv6sv31n6rihRim9GL696Wg2D5CgbekgCzASip"
+}

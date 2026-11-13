@@ -13,6 +13,20 @@ reserved funds and outgoing obligations are cleared. No contract source changed
 during this resumed session. Interactive human wallet signing and public hosting
 remain pending; neither is claimed complete.
 
+## Human wallet funding (2026-11-13 09:54 UTC)
+
+The human created `dhruva.testnet` in Meteor. RPC verified it exists on testnet
+with zero native balance; connection approval reported a cost of
+0.0002313048375 NEAR. With explicit human authorization, transferred exactly
+1 testnet NEAR from existing `bob-dhruva-proposer.testnet` to `dhruva.testnet`.
+Transaction `CGn618uA6Fo2ESTyAjXV7GJWu4whjyFKDGt5kvLQcgEy` is FINAL and
+successful, with zero failed receipts. Final observed balance: 1 NEAR at block
+277494340. Public evidence: `deployments/human-wallet-funding.json`.
+No human wallet keys were accessed/requested. Existing deployment credentials,
+contracts and accounts were retained. Human should retry Meteor connection,
+then claim BELIEF/tUSD faucets and supply public hashes/displayed balances for
+verification. Funding alone does not validate human wallet signing.
+
 ## Latest wallet repair (2026-11-13)
 
 All three CI workflows for `2672138fbe2e8b17a542cc3f1d1915a5c01f1d0c`
