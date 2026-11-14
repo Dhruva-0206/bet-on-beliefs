@@ -464,8 +464,9 @@ function App() {
         Skip to proposals
       </a>
       <header>
-        <a className="brand" href="#">
-          b<span>↗</span>b <small>BET ON BELIEFS</small>
+        <a className="brand" href="#" aria-label="Bet on Beliefs home">
+          b<span aria-hidden="true">↗</span>b{" "}
+          <small aria-hidden="true">BET ON BELIEFS</small>
         </a>
         <div className="header-right">
           <span className="network">● NEAR TESTNET</span>

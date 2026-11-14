@@ -104,3 +104,23 @@ captured from the real public app with no wallet connection or transaction.
 The README capture shows both executed proposals and the settled human payment.
 The social capture is 1200×630 pixels and retains the existing dark/lime appearance.
 They are illustrations of the observed app, not replacement transaction evidence.
+
+## Editorial pass checks (2026-11-14)
+
+Newly run checks for the README, header accessibility and metadata update:
+8 unit/compatibility tests, 14 production browser tests, 14 development browser
+tests and 4 Pages-path tests passed. Root and Pages builds include TypeScript
+checking. A dev-suite attempt initially stopped because the production runner
+still occupied port 4317; the sequential rerun passed without changing tests.
+
+Read-only local production checks at 1440px and 375px used actual testnet RPC,
+opened both executed proposals, checked the single home-link accessible name,
+metadata and overflow, and observed no runtime or console errors. The social PNG
+returned HTTP 200 at 1200×630. Audit remained 15 low, zero moderate/high/critical.
+Documentation paths, removed references, exact MIT terms and staged-secret checks
+passed. Contract source and historical JSON evidence were unchanged; contract
+unit/sandbox results for this pass come from required CI rather than a new local run.
+
+The initial Pages asset report above describes the earlier deployment. The
+editorial publication must be matched to its own workflow run and source commit;
+see GitHub Actions and the final release notes for that publication's live checks.
