@@ -1,6 +1,6 @@
 # Mechanism design
 
-Implemented on NEAR testnet. [Verification](docs/VERIFICATION.md) distinguishes unit, sandbox, scripted and human evidence.
+Implemented on NEAR testnet. [Verification](docs/EVIDENCE.md) distinguishes unit, sandbox, scripted and human evidence.
 
 ## Scope
 

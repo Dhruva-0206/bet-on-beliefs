@@ -40,7 +40,7 @@ low count change from 13. Remaining findings inherit the elliptic advisory.
 Full audit still exits 1 due to those lows; `npm audit --audit-level=moderate`
 passes and is now required in frontend CI. See
 [remediation evidence](../deployments/dependency-audit-remediated.json).
-Current test scope and human wallet evidence are indexed in [VERIFICATION](VERIFICATION.md).
+Current test scope and human wallet evidence are indexed in [VERIFICATION](EVIDENCE.md).
 
 ## Initial review before remediation
 

@@ -74,7 +74,7 @@ Read-only live QA: `cd web` then
 `node scripts/verify-live.mjs bob-dhruva-market.testnet`. Screenshots/reports are
 ignored under test-results. It never signs and does not replace real wallet QA.
 Human faucet receipts and the completed public-site payment lifecycle are indexed
-in [deployment evidence](../deployments/README.md). [Verification](VERIFICATION.md)
+in [deployment evidence](../deployments/README.md). [Verification](EVIDENCE.md)
 distinguishes synthetic checks, human signatures and accounting snapshots.
 
 ## Interface design
@@ -90,5 +90,5 @@ Practical guidance:
 
 - [Nielsen Norman Group](https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/): concise, scannable, factual copy.
 - [Microsoft Research](https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/overview/): clarity, limitations and recovery as general design prompts; the app has no AI interaction.
-- [WCAG 2.2](https://www.w3.org/TR/WCAG22/): keyboard access, visible focus, form labels, announcements, contrast and reflow. Controls use 44px minimum button heights, with a skip link and reduced-motion support. Scoped checks are recorded in VERIFICATION, not a full compliance claim.
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/): keyboard access, visible focus, form labels, announcements, contrast and reflow. Controls use 44px minimum button heights, with a skip link and reduced-motion support. Scoped checks are recorded in EVIDENCE, not a full compliance claim.
 - [Linear](https://linear.app/features) and [Stripe](https://stripe.com/payments): examples of information grouping and action hierarchy. Their assets, copy and identity were not reused.

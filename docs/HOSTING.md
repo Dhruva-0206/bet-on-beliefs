@@ -32,6 +32,6 @@ The deployment job uses Pages/OIDC permissions and the `github-pages` environmen
 Pushes run CI but do not automatically deploy.
 
 After an authorized publication, verify the output URL, HTTPS, asset paths,
-actual testnet reads and wallet behavior. [Verification](VERIFICATION.md) links
+actual testnet reads and wallet behavior. [Verification](EVIDENCE.md) links
 the deployed source, asset hashes, layout checks and completed public-site human
 Meteor lifecycle. Hosting does not change contract code or account keys.

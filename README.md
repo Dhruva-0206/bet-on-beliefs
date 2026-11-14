@@ -1,53 +1,108 @@
 # Bet on Beliefs
 
-Conditional markets decide whether a NEAR testnet treasury executes a payment or burns BELIEF. The contract reserves the action budget, compares ten-minute price averages, and settles the selected outcome.
+A memecoin whose treasury moves only when a market predicts the move will raise the coin's price. Futarchy, live on NEAR testnet.
 
-Created and led by **Dhruva Somen Chakrabarty**.
+The rule compares BELIEF prices in conditional PASS and FAIL markets. It is not a guarantee of future price appreciation or public benefit.
 
-## What it does and why I built it
+[Live app](https://dhruva-0206.github.io/bet-on-beliefs/) · Demo video: &lt;X link&gt; · [Design](DESIGN.md) · [Verification](docs/EVIDENCE.md)
 
-A treasury decision needs a clear rule and a verifiable result. Bet on Beliefs makes both visible: trade conditional BELIEF against conditional tUSD in PASS (execute) and FAIL (reject) markets, then let the contract apply the rule. This is a testnet experiment in futarchy, not a claim that token prices measure public welfare. It draws on [MetaDAO](https://metadao.com/docs) and the wider futarchy mechanism.
+![Executed testnet payment proposal in Bet on Beliefs](docs/img/app.png)
 
-## Try the app
+## Executive summary for judges
 
-Live app: **https://dhruva-0206.github.io/bet-on-beliefs/**. HTTPS, public assets and live testnet reads were verified on 2026-11-14. The public-site Meteor payment lifecycle is verified through both redemptions. See [verification](docs/VERIFICATION.md) for test scope and receipt evidence.
+- Problem: token voting and discretionary control can leave a gap between a treasury decision, its expected effect and who bears the risk.
+- What I built: a BELIEF treasury with conditional PASS/FAIL markets for payments and a 1% treasury burn.
+- How NEAR fits in: NEAR testnet contracts hold the treasury and execute market-approved actions, using NEP-141 tokens and Meteor wallet signing.
+- Proof: two payment proposals executed by market decision, including one I signed end to end through the public site. [Verified receipts](docs/EVIDENCE.md#receipt-links).
+- Honest limits: testnet tokens, thin markets, retained upgrade keys and no independent audit.
 
-The app defaults to `bob-dhruva-market.testnet`. Browse its real proposal and treasury without a wallet. To transact, connect **Meteor on testnet**. Use a separate testnet account with testnet NEAR for storage and gas. Never provide a recovery phrase or private key to this app or its maintainers. Advanced settings allow a different `.testnet` market.
+## The problem
 
-## A complete walkthrough
+Token voting measures voting power, but a vote does not necessarily reveal a holder's confidence in a proposal's effect. Discretionary treasury control can also leave spending decisions dependent on a small group. I wanted to test a different rule: let participants take conditional positions, then use the market comparison to decide whether a treasury action goes ahead.
 
-1. **Connect Meteor.** Confirm the account and testnet badge in the header.
-2. **Get tokens.** Follow “Get test tokens and set up.” Each faucet registers token storage (0.01 testnet NEAR attached, excess refunded) and sends 100 tokens from finite reserves.
-3. **Register the market and deposit.** Market registration is separate and retains 0.01 NEAR. Transfer wallet tokens into your own vault with a 1 yoctoNEAR transfer-call deposit. Treasury balances are separate from both.
-4. **Choose an open proposal or propose.** A payment proposal reserves treasury funds. Its proposer supplies both liquidity stakes from their vault and pays a retained 0.1 NEAR fee. Only one proposal may be active or executing.
-5. **Register proposal claims and trade.** Claim registration retains 0.01 NEAR per proposal for additional participants; proposal creation registers the proposer automatically. Splitting one deposited token creates one PASS and one FAIL claim. “Split vault & trade” spends only the chosen side; the opposite-side claim remains yours. Set the minimum output before approving.
-6. **Finalize after ten minutes.** PASS average must be **strictly greater than FAIL average × 1.03**. Equality rejects the action. Outcome and action execution are separate states.
-7. **Redeem.** After resolution, each winning claim returns one underlying token. Check final receipts and refreshed balances. Finalization, merging, redemption and withdrawals each retain a 0.01 NEAR operation fee where required by the contract.
+## How it works
 
-Two distinct payment examples are verified: scripted contract proposal 0 (UI #1), and Dhruva’s public-site Meteor walkthrough on contract proposal 1 (UI #2). The human walkthrough deposited 10 of each asset, traded 1 tUSD on PASS, finalized a 1 BELIEF payment and redeemed both assets. Final wallet: 201 BELIEF / 100 tUSD; vaults, winning claims and proposal collateral zero.
+1. Propose a payment or a burn of 1% of available treasury BELIEF, supplying liquidity from your own vault.
+2. Two conditional markets open: the world where the action passes and the world where it fails.
+3. Participants trade conditional BELIEF and tUSD in either world. Splitting creates both claims; trading one side leaves the opposite-side claim with its owner.
+4. After ten minutes, the contract compares average prices. PASS must be strictly greater than FAIL × 1.03. Equality rejects the action.
+5. The contract rejects the action or attempts execution of the selected action. Selected-outcome claims can then be redeemed one-for-one for the underlying token.
 
-## How the mechanism works
+```mermaid
+flowchart LR
+  A[Proposal and reserved budget] --> B[PASS and FAIL markets]
+  B --> C[Ten-minute average comparison]
+  C --> D[Reject or attempt execution]
+  D --> E[Redeem selected-outcome claims]
+```
 
-Both markets start with equal conditional reserves. Swaps use constant product with a 0.30% fee and checked U256 arithmetic. The oracle integrates the previous recorded reserve price before every reserve change over a fixed 600-second interval. Finalization uses those averages, not the spot prices displayed while trading. The deployed proposal view does not expose recorded averages; the UI says so rather than inferring them.
+The outcome and execution status are separate. A failed payment restores the action budget without changing the selected outcome. Holding a claim in the selected world does not mean a trader made a profit.
 
-Actions are capped payments or a burn of 1% of available treasury BELIEF, captured at proposal creation. Burn proposals have a 15-minute cooldown. Available treasury, action reservations, depositor vaults, collateral and outgoing transfers have separate ledgers. Private callbacks restore failed asynchronous transfers once. Failed action execution restores its budget without changing the selected market outcome. See [design](DESIGN.md), [accounting](docs/ACCOUNTING.md) and [oracle policy](docs/ORACLE.md).
+## Why this matters
 
-## Verified evidence and its scope
+A treasury rule should make its decision and spending traceable, while giving accurate beliefs a chance to earn trading returns. This experiment tests that connection; BELIEF price is not a measure of public benefit. [MetaDAO on Solana](https://metadao.com/docs) inspired the futarchy mechanism.
 
-| Evidence | What it establishes |
-| --- | --- |
-| 35 Rust unit tests | Token allocation, lifecycle behavior, checked arithmetic and oracle fixtures. |
-| One sandbox integration scenario, four proposals | Real Wasm receipts, payment/burn execution, failed-transfer recovery, authorization and backing checks. |
-| Scripted testnet lifecycle | A real ten-minute proposal selected PASS, paid 1 BELIEF and completed both trader redemptions. [Receipts and fixed-block snapshots](deployments/README.md). |
-| Browser regressions | Synthetic wallet boundaries, transaction construction, UI recovery and project base path. They do not constitute human signatures. See [verification](docs/VERIFICATION.md) for check scope. |
-| Public-site human lifecycle | Dhruva signed registration, vault deposits, proposal creation, a PASS split/trade, finalization and both redemptions. Every transaction was verified FINAL. [Final accounting](deployments/human-lifecycle-final-accounting.json) checks same-block backing across all proposals. One participant demonstrates mechanics, not independent price discovery. |
-| Real Meteor faucet tests | `dhruva.testnet` signed token registration/faucet calls. The [post-decoder-fix repeat](deployments/human-wallet-post-fix.json) is FINAL with four successful receipts: 200 BELIEF, 100 tUSD and zero vault balances at the recorded block. This does not prove the full user lifecycle. |
+## Try it in 5 minutes
 
-Contract artifact hashes and account addresses are in [BUILD_HASHES](docs/BUILD_HASHES.json) and the [testnet manifest](deployments/testnet-bob-dhruva.json). Historical reports are dated snapshots, not claims about every later chain state.
+Five minutes covers browsing and setup. A full proposal takes at least ten minutes after creation.
 
-## Architecture and reproduction
+1. Open the [app](https://dhruva-0206.github.io/bet-on-beliefs/) → see two executed payment proposals and the real testnet treasury. Executed proposals are available for inspection, not further trading.
+2. Connect Meteor with a separate funded testnet account → see your account and wallet balances. The app never needs your recovery phrase or private key.
+3. Select “Get test tokens and set up”, then “Get 100 BELIEF” or “Get 100 tUSD” → receive test tokens from finite reserves. Each call attaches 0.01 testnet NEAR for token registration plus gas; excess storage deposits are refunded.
+4. Register your market account (0.01 NEAR retained), then deposit an amount → see tokens move from your wallet into your vault. The treasury is a separate balance; donations cannot be withdrawn as vault funds.
+5. Inspect the completed examples or deliberately create a new proposal → proposal creation uses both vault stakes and retains 0.1 NEAR. For an open proposal, additional participants register claims (0.01 NEAR retained), then split/trade with a minimum output. The proposer is registered automatically.
 
-Three Rust contracts: `contracts/belief-ft`, `contracts/tusd-ft` and `contracts/futarchy`. The Vite/React frontend in `web/` reads actual testnet RPC and connects Meteor through NEAR Wallet Selector. There are no AI traders, cron jobs or extra tracks in the MVP.
+After the interval, finalization and redemption each retain 0.01 testnet NEAR plus gas. Inspect final receipts and refreshed balances after every action.
+
+<details>
+<summary>Registration, deposits and other fees</summary>
+
+Token storage registration follows NEP-145 and is separate from market and per-proposal claim registration. Native testnet NEAR pays storage and gas; the BELIEF/tUSD faucets do not provide it. Wallet-to-vault deposits use `ft_transfer_call` with message `stake` and 1 yoctoNEAR attached. Invalid inflows return unused tokens rather than credit the vault.
+
+Finalization, withdrawal, merge and redemption each retain 0.01 NEAR where required by the contract. Proposal creation retains 0.1 NEAR; excess market-operation deposits are also retained. Token-storage excess is refunded. Swaps charge 0.30%, which stays in pool reserves. A payment recipient must already be registered in the selected token. [Wallet instructions](docs/FRONTEND.md) cover exact controls and recovery.
+
+</details>
+
+## Proof it works
+
+| What was checked | Verified result | Evidence |
+| --- | --- | --- |
+| Contract unit tests | 35 passing tests for tokens, arithmetic, lifecycle and oracle fixtures | [Scope and commands](docs/EVIDENCE.md#automated-checks) |
+| Real-Wasm sandbox | One four-proposal scenario covers execution, failures, backing and authorization | [Accounting](docs/ACCOUNTING.md) |
+| Scripted testnet payment | Proposal 0 (UI #1) selected PASS, paid 1 BELIEF and completed trader redemptions | [Receipts](deployments/README.md#actual-lifecycle-evidence) |
+| My public-site Meteor lifecycle | Proposal 1 (UI #2), deposits, PASS trade, payment and both redemptions verified FINAL | [Receipts](docs/EVIDENCE.md#receipt-links) |
+| Final accounting | Wallet 201 BELIEF / 100 tUSD; vaults, winning claims and proposal collateral zero at block 277648609 | [Fixed-block snapshot](deployments/human-lifecycle-final-accounting.json) |
+| Frontend regression tests | 8 unit/compatibility, 14 production, 14 development and 4 Pages-path checks | [Scope](docs/EVIDENCE.md) |
+
+Browser regressions use synthetic signing boundaries. Human signatures, scripted testnet transactions and sandbox cases are separate evidence. Snapshots retain the state at their recorded blocks. [Detailed evidence](docs/EVIDENCE.md) includes dependency review, layout checks and original receipts.
+
+## Limitations
+
+- Testnet tokens have no promised value. Faucets redistribute finite reserves and can be drained by repeated calls.
+- Thin markets and sustained or sufficiently extreme short manipulation can change the outcome.
+- Token price is not public welfare. Conditional market prices do not establish causation or guarantee future appreciation.
+- Full-access keys remain on all three contracts, so code can be replaced. The contracts are not independently audited.
+- Only one proposal may be active or executing, and each proposal has a sole proposer liquidity provider.
+- The UI does not expose numerical decision averages. Accessibility checks cover specific cases, not full WCAG compliance.
+- Dependency review records remaining low elliptic-chain findings and build warnings. [Details](docs/DEPENDENCY_REVIEW.md).
+
+## How I built this
+
+- I chose the idea and scope for Bet on Beliefs.
+- I investigated the public hackathon directory as part of that choice, without treating the search as proof of uniqueness.
+- I chose testnet, one active proposal, and payments or burns.
+- I set the contract freeze and directed implementation in phases.
+- I insisted that claims stay tied to receipts, tests and stated limits.
+- I personally signed the recorded public-site Meteor lifecycle.
+- I orchestrated Codex implementation, debugging and review.
+
+## Independent project disclosure
+
+Also by me: [Builders First](https://github.com/Dhruva-0206/builders-first), an independent NEAR investment thesis.
+
+## Architecture, reproduction, credits and license
+
+Three Rust contracts implement BELIEF, tUSD and the treasury market. The Vite/React/TypeScript frontend reads testnet RPC and connects Meteor through NEAR Wallet Selector. There are no AI traders, cron jobs or cross-chain integrations.
 
 ```sh
 bash scripts/setup-dev.sh
@@ -65,20 +120,12 @@ VITE_MARKET_CONTRACT=bob-dhruva-market.testnet npm run build:pages --prefix web
 npm run test:pages --prefix web
 ```
 
-Contract checks, when affected: `cargo test --workspace --exclude integration-tests --locked`, `bash scripts/build-contracts.sh`, then `cargo test -p integration-tests --test lifecycle --locked -- --nocapture`. See [Linux development](docs/DEVELOPMENT.md), [wallet instructions](docs/FRONTEND.md) and [Pages deployment](docs/HOSTING.md).
+Contract checks: `cargo test --workspace --exclude integration-tests --locked`, `bash scripts/build-contracts.sh`, then `cargo test -p integration-tests --test lifecycle --locked -- --nocapture`.
 
-## Limitations and trust assumptions
+Pinned tools and libraries include Rust 1.95.0, Node 24.22.2, npm 11.19.1, NEAR SDK/standards 5.30.1, uint 0.10.0, near-workspaces 0.24.0 and cargo-near 0.21.0. Frontend library versions and scoped Meteor compatibility overrides are recorded in [package.json](web/package.json) and [package-lock.json](web/package-lock.json). [Linux development](docs/DEVELOPMENT.md), [mechanism design](DESIGN.md), [oracle](docs/ORACLE.md), [accounting](docs/ACCOUNTING.md), [hosting](docs/HOSTING.md) and [interface guidance](docs/FRONTEND.md#interface-design) explain reproduction and design choices. Contract accounts and current artifact hashes are in the [testnet manifest](deployments/testnet-bob-dhruva.json) and [BUILD_HASHES](docs/BUILD_HASHES.json).
 
-Thin markets, sustained manipulation and extreme short manipulation can affect the decision. Tested attacks establish their observed behavior, not general resistance. Scripted faucet trades demonstrate mechanics, not reliable price discovery. Token price is not public welfare, and conditional-market prices do not establish causation.
+Created and led by Dhruva Somen Chakrabarty. Code written with AI coding assistance (Codex) under my direction; design decisions and review are mine.
 
-Contracts are not independently audited. Full-access deployment keys remain with their owners; the contracts are upgradeable. There is one active proposal and a sole proposer liquidity provider. Faucets redistribute finite reserves and test tokens have no promised value. [Dependency review](docs/DEPENDENCY_REVIEW.md) records the decoder remediation, remaining low findings and build warnings. Automated and manual accessibility checks are scoped evidence, not a full compliance claim.
+[MIT license](LICENSE). Copyright (c) 2026 DHRUVA SOMEN CHAKRABARTY.
 
-## Creator, assistance and license
-
-**Dhruva Somen Chakrabarty** conceived and led this project, set the scope, orchestrated implementation/debugging and made product decisions. The documented Meteor signatures were performed by Dhruva. Codex assisted with code, tests and documentation.
-
-Libraries include NEAR SDK/standards 5.30.1, uint 0.10.0, near-workspaces 0.24.0, Rust 1.95.0, React, Vite, Meteor SDK and NEAR Wallet Selector. Exact versions and dependency overrides are in the manifests and lockfiles. [Interface guidance](docs/FRONTEND.md#interface-design) informed clarity, accessibility and recovery.
-
-Also by Dhruva: [Builders First](https://github.com/Dhruva-0206/builders-first), an independent NEAR investment thesis built from developer data.
-
-Built for NEAR HACKATHON, November 2026. Primary fit: Memecoins With Mechanics; secondary fit: Social Money. All contract deployments are testnet only. [MIT license](LICENSE), copyright 2026 DHRUVA SOMEN CHAKRABARTY.
+Built for NEAR HACKATHON, November 2026. Tracks: Memecoins With Mechanics; Social Money.

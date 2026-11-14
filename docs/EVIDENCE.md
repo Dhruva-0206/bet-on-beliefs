@@ -1,8 +1,9 @@
-# Verification and evidence
+# Evidence and verification
 
 The public app is https://dhruva-0206.github.io/bet-on-beliefs/. Its deployed
 frontend source is `bac97ce36bda26c9eebaf77dadc38b3f97b693c9`;
-subsequent documentation commits do not automatically republish it.
+this is the initial release snapshot from 2026-11-14. Later publications have
+separate dated reports; the original asset evidence is unchanged.
 [Pages run](https://github.com/Dhruva-0206/bet-on-beliefs/actions/runs/43585261964)
 completed build and deployment. [Asset evidence](../deployments/pages-live-release.json)
 records HTTPS responses and SHA-256 matches for all nine public files.
@@ -19,7 +20,7 @@ Type checks and root/Pages production builds pass in frontend CI.
 Contract CI runs 35 Rust unit tests and one real-Wasm sandbox scenario covering
 four proposals, payment/burn execution, failed-transfer recovery, authorization,
 backing checks and oracle attack fixtures. Test commands and tool versions are
-in [DEVELOPMENT](DEVELOPMENT.md) and [README](../README.md#architecture-and-reproduction).
+in [DEVELOPMENT](DEVELOPMENT.md) and [README](../README.md#architecture-reproduction-credits-and-license).
 The accounting argument and its assumptions are in [ACCOUNTING](ACCOUNTING.md).
 
 Required workflows run on pushes and pull requests:
@@ -61,3 +62,45 @@ errors or horizontal overflow were observed. This is not a full WCAG audit.
 [Dependency review](DEPENDENCY_REVIEW.md) records the decoder remediation and
 remaining low findings. Audit thresholds are enforced in frontend CI; successful
 wallet tests are functional evidence, not a security audit.
+
+## Receipt links
+
+| Step | Scripted proposal 0 (UI #1) | Human proposal 1 (UI #2) |
+| --- | --- | --- |
+| Creation | [Receipt](https://testnet.nearblocks.io/txns/AjTd8yQD2e1uD1JCL5C1cgTMhszoMBT8QYtuZywGioPk) | [Receipt](https://testnet.nearblocks.io/txns/Eu9ct9fyWRQSp8UQShtwohBs7eESaQHB6AJPEnsNDfMy) |
+| Trade | [Receipt](https://testnet.nearblocks.io/txns/FJBJBYoRBUeqwJYvjBau627sX9Zf66AtAq4UZ2QTLjvp) | [Split and trade](https://testnet.nearblocks.io/txns/8g9nAz7tzwa7PQGzzkLxcxMMk51y3CR2xq1hww4izyns) |
+| Finalization and payment | [Receipt](https://testnet.nearblocks.io/txns/6phUWCoGJQP7dJH78KMks5jgRXf4d41XfPHkZLcKmWJ4) | [Receipt](https://testnet.nearblocks.io/txns/AiPEh5GpbvWsWdCeUq1F5NtEGHXuv1jhG8xjkbeNzRuT) |
+| BELIEF redemption | [Receipt](https://testnet.nearblocks.io/txns/C631mAq4uxCkGn8cgTjGT714cyL9YCiKDx8VErEaX9NC) | [Receipt](https://testnet.nearblocks.io/txns/2hghAnS9jDJAk1LH8cY5Jp2J3JE9EfLu2XzSeB9ft8WC) |
+| tUSD redemption | [Receipt](https://testnet.nearblocks.io/txns/6sJJ1wHjpPEUcqTUeUwdR2JotoMfcbodLjqSDwwMdS5x) | [Receipt](https://testnet.nearblocks.io/txns/5K9Gt9RusFptBANh281dmtsAj7iSPyurTZubvzF9rJaj) |
+
+## Technical detail
+
+The AMM uses constant product with a 0.30% fee and checked U256 intermediates.
+The oracle integrates the previous recorded reserve price before every reserve
+change over a fixed 600-second interval. No-trade periods carry forward that
+known price. Finalization uses interval averages, not displayed spot prices;
+the deployed proposal view does not expose numerical averages.
+
+Payment caps, the 1% available-treasury burn and its 15-minute cooldown are
+specified in [DESIGN](../DESIGN.md). Available treasury, reservations, vaults,
+proposal collateral and outgoing transfers have separate ledgers. Private
+callbacks restore failed asynchronous transfers once. Execution failure restores
+the action budget without changing the selected outcome. See [ACCOUNTING](ACCOUNTING.md)
+and [ORACLE](ORACLE.md) for equations, assumptions and manipulation fixtures.
+
+Both faucets redistribute finite reserves; they do not mint tokens. Repeated
+calls can drain the allocations, and no per-person Sybil resistance is provided.
+The [post-decoder-fix faucet repeat](../deployments/human-wallet-post-fix.json)
+is a separate FINAL transaction with four successful receipts, not evidence for
+proposal settlement. Historical audit results and regression scope are in
+[DEPENDENCY_REVIEW](DEPENDENCY_REVIEW.md). The remediation audit found 15 low
+and zero moderate/high/critical findings; eval/util and chunk-size build warnings
+remain. Audit results describe their recorded date, not all future dependencies.
+
+## Editorial screenshots (2026-11-14)
+
+[README screenshot](img/app.png) and the frontend's `public/social.png` were
+captured from the real public app with no wallet connection or transaction.
+The README capture shows both executed proposals and the settled human payment.
+The social capture is 1200×630 pixels and retains the existing dark/lime appearance.
+They are illustrations of the observed app, not replacement transaction evidence.

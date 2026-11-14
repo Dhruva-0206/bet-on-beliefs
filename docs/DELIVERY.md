@@ -1,7 +1,7 @@
 # Walkthrough, demo and submission preparation
 
 The completed public-site lifecycle and receipt scope are documented in
-[VERIFICATION](VERIFICATION.md). Recording and submission are separate from the
+[VERIFICATION](EVIDENCE.md). Recording and submission are separate from the
 verified application. Official rules: https://nearhackathon.com/HACKATHON.md.
 
 ## Full wallet walkthrough (signatures belong to Dhruva)

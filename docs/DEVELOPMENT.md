@@ -110,7 +110,7 @@ to create another proposal; inspect the active proposal and recover the progress
 file explicitly. An unexpected outcome or failed execution stops the demo.
 Public address/hash manifests and progress live in `deployments/`; they never
 contain private keys. [Deployment evidence](../deployments/README.md) records the
-scripted and human lifecycles. [Verification](VERIFICATION.md) explains test scope.
+scripted and human lifecycles. [Verification](EVIDENCE.md) explains test scope.
 
 The deployed prefix is `bob-dhruva`. near-workspaces enables `rustls` alongside
 `install` for HTTPS helper requests. Tooling and frontend reads use the FASTNEAR
