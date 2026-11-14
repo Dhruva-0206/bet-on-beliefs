@@ -104,13 +104,18 @@ pending from this work.
    is FINAL with all six receipts successful. The transfer-call consumed all
    10 BELIEF (no token refund); final-block wallet/vault are 190/10 BELIEF and
    100/0 tUSD. Evidence: deployments/human-wallet-belief-deposit.json.
-   Next human signature: deposit 10 tUSD using ft_transfer_call, msg stake,
-   1 yoctoNEAR. Await the hash and verify receipts and credit before proceeding.
-   Set proposal liquidity fields to 10 BELIEF and 10 tUSD instead of defaults
-   100/100. Each stake is debited once to back paired conditional pools, not
-   twice. Proposal creation also retains 0.1 testnet NEAR plus gas; the action
-   payment comes from separate treasury funds. Latest read: no active proposal.
-   Do not create a proposal yet; verify the tUSD deposit first.
+   tUSD deposit Ay5TKCyv1ofiBR7h8Luhr6UrE4QpgmcJ4JsgZmERcK1Q is also
+   FINAL with all six receipts successful and all 10 tUSD accepted. Wallets are
+   190 BELIEF/90 tUSD; vaults are 10/10. Evidence and same-block proposal
+   preflight: deployments/human-wallet-tusd-deposit.json. dhruva.testnet is
+   BELIEF-storage registered; available treasury is 599999999 BELIEF, reserved
+   zero, payment cap 1000 BELIEF, no active proposal or pending operation.
+   Next human signature: create a 1 BELIEF payment to dhruva.testnet with
+   10 BELIEF and 10 tUSD liquidity stakes (replace both 100 defaults), retaining
+   0.1 testnet NEAR plus gas. Exact suggested title/description are in evidence.
+   Creation uses each vault stake once, reserves treasury funds and starts the
+   600-second window immediately. No proposal has yet been created in this
+   human walkthrough. Await its hash and verify before claim setup/trading.
 4. Full human lifecycle walkthrough and final recording remain separate gates.
    DELIVERY.md contains signature-by-signature guidance, a 60–90 second script
    around one real decision and an honest description draft. Refine further if

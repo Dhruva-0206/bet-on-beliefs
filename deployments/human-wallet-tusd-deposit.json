@@ -1,0 +1,162 @@
+{
+  "verified_at_utc": "2026-11-14T10:50:01.533976+00:00",
+  "network": "testnet",
+  "account_id": "dhruva.testnet",
+  "human_report": {
+    "wallet_balances": [
+      "190",
+      "90"
+    ],
+    "vault_balances": [
+      "10",
+      "10"
+    ]
+  },
+  "transaction": {
+    "hash": "Ay5TKCyv1ofiBR7h8Luhr6UrE4QpgmcJ4JsgZmERcK1Q",
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-tusd.testnet",
+    "method": "ft_transfer_call",
+    "args": {
+      "receiver_id": "bob-dhruva-market.testnet",
+      "amount": "10000000000000000000",
+      "msg": "stake"
+    },
+    "deposit": "1",
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAwIg=="
+    },
+    "transaction_outcome_status": {
+      "SuccessReceiptId": "6vGwc7k8WPQRoe4so7i7kZq3W27S1GfNmWfChuwXVJPa"
+    },
+    "receipt_count": 6,
+    "failed_receipt_count": 0,
+    "receipts": [
+      {
+        "id": "6vGwc7k8WPQRoe4so7i7kZq3W27S1GfNmWfChuwXVJPa",
+        "executor_id": "bob-dhruva-tusd.testnet",
+        "status": {
+          "SuccessReceiptId": "FFw1vNEEMop3Jbvsy3zMYpNv4MFoCp96D4EyHaVEybWY"
+        },
+        "logs": [
+          "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"old_owner_id\":\"dhruva.testnet\",\"new_owner_id\":\"bob-dhruva-market.testnet\",\"amount\":\"10000000000000000000\"}]}"
+        ]
+      },
+      {
+        "id": "3zVu9p73fQfyxJ6r6qZsfi2Y7ytef9Ek3Gm7vEqgzu1j",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessValue": "IjAi"
+        },
+        "logs": []
+      },
+      {
+        "id": "CqNZimTwmX9bJzRdLBmG72vmi9Jy7GJVnGyvXzt932Fp",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "FFw1vNEEMop3Jbvsy3zMYpNv4MFoCp96D4EyHaVEybWY",
+        "executor_id": "bob-dhruva-tusd.testnet",
+        "status": {
+          "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAwIg=="
+        },
+        "logs": []
+      },
+      {
+        "id": "4tEygWtsNYoiaECu434KhshW4oc68kzvM59h2g8tosyv",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "GdWEhi2hsuQFqaRwHjtr5QGkNTvq8wdDrJT35inac8Te",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      }
+    ]
+  },
+  "final_state": {
+    "block_height": 277646772,
+    "block_hash": "ArcAs6YVw69dCq1Ld6EYPv96JYMfsdgdJhAenMzt2vcV",
+    "market_account": {
+      "registered": true,
+      "vault": [
+        "10000000000000000000",
+        "10000000000000000000"
+      ],
+      "claims_registered": false,
+      "claims": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ]
+    },
+    "ft_balances_raw": {
+      "belief": "190000000000000000000",
+      "tusd": "90000000000000000000"
+    },
+    "market_config": {
+      "network": "testnet",
+      "tokens": [
+        "bob-dhruva-belief.testnet",
+        "bob-dhruva-tusd.testnet"
+      ],
+      "ready": true,
+      "active": null,
+      "next_ritual_ns": "0",
+      "window_ns": "600000000000",
+      "max_payment": [
+        "1000000000000000000000",
+        "1000000000000000000000"
+      ],
+      "proposal_count": 1,
+      "treasury": [
+        "599999999000000000000000000",
+        "0"
+      ],
+      "reserved": [
+        "0",
+        "0"
+      ],
+      "stakes": [
+        "10000000000000000000",
+        "10000000000000000000"
+      ],
+      "outgoing": [
+        "0",
+        "0"
+      ],
+      "pending_count": 0
+    },
+    "recipient_belief_storage_balance": {
+      "total": "1250000000000000000000",
+      "available": "0"
+    },
+    "native_account_amount_yocto": "984854108020820799999998"
+  },
+  "proposed_next_fields": {
+    "title": "Human wallet walkthrough: 1 BELIEF payment",
+    "description": "Testnet mechanics walkthrough. Propose a 1 BELIEF treasury payment to dhruva.testnet with 10 BELIEF and 10 tUSD liquidity stakes. Trades in this walkthrough demonstrate mechanics, not independent price discovery.",
+    "asset": "BELIEF",
+    "payment": "1",
+    "recipient": "dhruva.testnet",
+    "belief_liquidity_stake": "10",
+    "tusd_liquidity_stake": "10"
+  },
+  "scope": "tUSD deposit verified. Proposal preflight passed at the recorded block; proposal not yet created. State can change before signing."
+}
