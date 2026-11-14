@@ -116,12 +116,19 @@ pending from this work.
    were allocated, vaults zero, treasury reserved 1 BELIEF, active proposal 1.
    Proposer claims are automatically registered (confirmed true); no extra
    register_claims transaction is required. End: 2026-11-14 11:01:50.726 UTC.
-   Next human signature: deposit 1 tUSD to vault (stake transfer-call, 1 yoctoNEAR),
-   then verify before split-and-trade PASS. Planned trade: spend tUSD, amount 1,
-   minimum received 0.89 BELIEF; use Split vault & trade PASS, retaining 1 FAIL
-   tUSD claim. Initial unchanged-pool estimate is about 0.90661 PASS BELIEF.
-   Re-read time/pools before trading. If expired, finalize instead; never imply
-   a late trade occurred. No agent signs. Creation starts the ten-minute window.
+   Trade funding 5w5U237rQgbe1JujBm3znbVCN9EzMufMs29vYDU6Y71p is FINAL,
+   six successful receipts, 1 tUSD credited. PASS split/trade
+   8g9nAz7tzwa7PQGzzkLxcxMMk51y3CR2xq1hww4izyns is FINAL, both receipts
+   successful. Evidence: human-wallet-trade-funding.json and
+   human-wallet-pass-trade.json under deployments/. Claims before settlement:
+   PASS BELIEF 0.906610893880149131, PASS tUSD 0, FAIL BELIEF 0, FAIL tUSD 1.
+   Wallets 190 BELIEF/89 tUSD, both vaults zero. Contract proposal ID 1 is shown
+   as proposal #2 in the one-based UI. End: 11:01:50.726 UTC on 2026-11-14.
+   Wait for the chain to reach the end, then guide manual finalize with
+   proposal_id 1 and 0.01 testnet NEAR. Do not sign. Verify its FINAL receipts,
+   outcome and action execution separately before guiding redemption. Proposer
+   pool claims are released at finalization, so re-query exact winning balances
+   before choosing redemption amounts; do not assume only the traded amount.
 4. Full human lifecycle walkthrough and final recording remain separate gates.
    DELIVERY.md contains signature-by-signature guidance, a 60–90 second script
    around one real decision and an honest description draft. Refine further if

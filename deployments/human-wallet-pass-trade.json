@@ -1,0 +1,123 @@
+{
+  "verified_at_utc": "2026-11-14T10:58:02.358356+00:00",
+  "network": "testnet",
+  "contract_proposal_id": 1,
+  "ui_proposal_number": 2,
+  "transaction": {
+    "hash": "8g9nAz7tzwa7PQGzzkLxcxMMk51y3CR2xq1hww4izyns",
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-market.testnet",
+    "actions": [
+      {
+        "args": {
+          "proposal_id": 1,
+          "asset_id": 1,
+          "amount": "1000000000000000000"
+        },
+        "deposit": "0",
+        "gas": 100000000000000,
+        "method_name": "split"
+      },
+      {
+        "args": {
+          "proposal_id": 1,
+          "side": 0,
+          "input_asset": 1,
+          "amount": "1000000000000000000",
+          "min_output": "890000000000000000"
+        },
+        "deposit": "0",
+        "gas": 100000000000000,
+        "method_name": "trade"
+      }
+    ],
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": "IjkwNjYxMDg5Mzg4MDE0OTEzMSI="
+    },
+    "receipts": [
+      {
+        "id": "HeF61ijguXUXwdmHHsiXPvRjdGYHkrcYAQkvVmC1qDVt",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessValue": "IjkwNjYxMDg5Mzg4MDE0OTEzMSI="
+        }
+      },
+      {
+        "id": "3JE6JBZXFC4thn8oPR9A3Rx5qTXYmpkedXgQB3kXUpqT",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        }
+      }
+    ]
+  },
+  "block_height": 277647566,
+  "block_hash": "C4rHLasq8DhyjmdYc7ym8V4iRKx3NshrNHtENpCby6en",
+  "block_timestamp_ns": "1794653878606006103",
+  "proposal": {
+    "id": 1,
+    "title": "Human wallet walkthrough: 1 BELIEF payment",
+    "description": "Testnet walkthrough of a market-decided treasury payment. Trades demonstrate mechanics, not independent price discovery.",
+    "proposer": "dhruva.testnet",
+    "action": {
+      "Transfer": {
+        "asset": 0,
+        "receiver": "dhruva.testnet",
+        "amount": "1000000000000000000"
+      }
+    },
+    "start_ns": "1794653510726909430",
+    "end_ns": "1794654110726909430",
+    "pools": [
+      [
+        "9093389106119850869",
+        "11000000000000000000"
+      ],
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ]
+    ],
+    "collateral": [
+      "10000000000000000000",
+      "11000000000000000000"
+    ],
+    "supply": [
+      [
+        "10000000000000000000",
+        "11000000000000000000"
+      ],
+      [
+        "10000000000000000000",
+        "11000000000000000000"
+      ]
+    ],
+    "outcome": null,
+    "execution": "trading"
+  },
+  "account": {
+    "registered": true,
+    "vault": [
+      "0",
+      "0"
+    ],
+    "claims_registered": true,
+    "claims": [
+      [
+        "906610893880149131",
+        "0"
+      ],
+      [
+        "0",
+        "1000000000000000000"
+      ]
+    ]
+  },
+  "wallet_balances_raw": {
+    "belief": "190000000000000000000",
+    "tusd": "89000000000000000000"
+  },
+  "remaining_seconds_at_block": 232.120903327,
+  "scope": "Human PASS split/trade verified. Finalization, action execution and redemption pending."
+}

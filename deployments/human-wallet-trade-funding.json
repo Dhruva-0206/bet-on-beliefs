@@ -1,0 +1,127 @@
+{
+  "verified_at_utc": "2026-11-14T10:54:53.518677+00:00",
+  "transaction_hash": "5w5U237rQgbe1JujBm3znbVCN9EzMufMs29vYDU6Y71p",
+  "final_execution_status": "FINAL",
+  "status": {
+    "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAi"
+  },
+  "actions": [
+    {
+      "method": "ft_transfer_call",
+      "args": {
+        "receiver_id": "bob-dhruva-market.testnet",
+        "amount": "1000000000000000000",
+        "msg": "stake"
+      },
+      "deposit": "1"
+    }
+  ],
+  "receipts": [
+    {
+      "id": "FAD3g68uDk7E3fPN5sdqdaiiPF2qTtpEBDN5gnKiXXoN",
+      "executor_id": "bob-dhruva-tusd.testnet",
+      "status": {
+        "SuccessReceiptId": "FCaZur3Z39FXe5aw58vhiDjCa8W3YvdaFt3pxwAt3Y1D"
+      }
+    },
+    {
+      "id": "8QoSBAtYuorpvMiAt7RfraqxahHkvREfKEsQsLdYh87g",
+      "executor_id": "bob-dhruva-market.testnet",
+      "status": {
+        "SuccessValue": "IjAi"
+      }
+    },
+    {
+      "id": "AwXjfQZdki6GP8crxiZMsrmgeTewTNMcu8MaV7sV4mZr",
+      "executor_id": "dhruva.testnet",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "id": "FCaZur3Z39FXe5aw58vhiDjCa8W3YvdaFt3pxwAt3Y1D",
+      "executor_id": "bob-dhruva-tusd.testnet",
+      "status": {
+        "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAi"
+      }
+    },
+    {
+      "id": "8KaZt6evKmwXShHLoeWQBCdCKEFgW6sbtn7y42B2Qfpx",
+      "executor_id": "dhruva.testnet",
+      "status": {
+        "SuccessValue": ""
+      }
+    },
+    {
+      "id": "8R8iVxqLc5vL7TC1jMrz4iT6QpxqsjERNirZNgUNpCp6",
+      "executor_id": "dhruva.testnet",
+      "status": {
+        "SuccessValue": ""
+      }
+    }
+  ],
+  "block_hash": "34HeFaEiBxVsQytLaz2zq8E8aeNWYoGpt3mzhav5MnEj",
+  "block_height": 277647255,
+  "proposal": {
+    "id": 1,
+    "title": "Human wallet walkthrough: 1 BELIEF payment",
+    "description": "Testnet walkthrough of a market-decided treasury payment. Trades demonstrate mechanics, not independent price discovery.",
+    "proposer": "dhruva.testnet",
+    "action": {
+      "Transfer": {
+        "asset": 0,
+        "receiver": "dhruva.testnet",
+        "amount": "1000000000000000000"
+      }
+    },
+    "start_ns": "1794653510726909430",
+    "end_ns": "1794654110726909430",
+    "pools": [
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ],
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ]
+    ],
+    "collateral": [
+      "10000000000000000000",
+      "10000000000000000000"
+    ],
+    "supply": [
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ],
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ]
+    ],
+    "outcome": null,
+    "execution": "trading"
+  },
+  "account": {
+    "registered": true,
+    "vault": [
+      "0",
+      "1000000000000000000"
+    ],
+    "claims_registered": true,
+    "claims": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ]
+  },
+  "tusd_wallet_raw": "89000000000000000000",
+  "remaining_seconds_at_block": 420.527536684,
+  "estimated_pass_belief_output_raw": "906610893880149131"
+}
