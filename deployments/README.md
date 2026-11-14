@@ -1,9 +1,7 @@
 # Verified testnet deployment
 
-Deployed 2026-11-13 using the human-approved `bob-dhruva` prefix. All names were
-available before creation; the authorized `bob-dhruva-26` fallback was not needed.
-These are NEAR **testnet** accounts. No mainnet deployment. The approved public frontend is now live at
-https://dhruva-0206.github.io/bet-on-beliefs/.
+The six `bob-dhruva` accounts were deployed on NEAR testnet on 2026-11-13.
+Live frontend: https://dhruva-0206.github.io/bet-on-beliefs/.
 
 | Role | Account |
 | --- | --- |
@@ -65,10 +63,7 @@ chain `testnet`, checks code hashes and metadata, and rejects snapshots with
 transfers in flight. It reads no credentials and signs no transactions. Public
 chain state can change after each recorded snapshot.
 
-Setup was rerun after completion: no accounts were recreated, no code was
-replaced and no transactions were sent. The demo's local wait process was
-interrupted; its saved proposal ID allowed it to resume the same proposal
-without duplicating a split or trade. Final execution and redemption succeeded.
+Setup idempotence was verified without redeployment or duplicate transactions.
 Human Meteor signing for both faucets passed; see `human-wallet-validation.json` for FINAL receipts, events and final-block balances matching the reported UI. Burn and
 failure scenarios are covered by the sandbox suite, not claimed as testnet runs.
 
@@ -94,3 +89,21 @@ proposal-collateral ledgers; winning supply matches backing. No active proposal
 or pending transfer remains. Code hashes match tested artifacts; upgrade keys
 remain. Browser origin is human-reported. This one-person mechanics walkthrough
 is separate from scripted evidence and does not establish independent price discovery.
+
+## Evidence index
+
+| Record | Scope |
+| --- | --- |
+| `human-wallet-public-origin.json` | Public-site market registration |
+| `human-wallet-belief-deposit.json`, `human-wallet-tusd-deposit.json` | Initial vault credits and proposal preflight |
+| `human-wallet-proposal-creation.json` | Actual submitted action, stakes and proposal ID |
+| `human-wallet-trade-funding.json`, `human-wallet-pass-trade.json` | Additional vault credit, split/trade and opposite-side claim |
+| `human-wallet-finalization.json` | PASS outcome, payment event and released pool claims |
+| `human-wallet-belief-redemption.json`, `human-wallet-tusd-redemption.json` | Both final transfers and post-redemption state |
+| `human-lifecycle-final-accounting.json` | Latest lifecycle snapshot with all-proposal ledger backing |
+| `pages-live-release.json`, `pages-live-layout.json` | Deployed asset hashes and public browser checks |
+| `dependency-audit-review.json`, `dependency-audit-remediated.json` | Dated audit baseline and remediation |
+
+Individual receipt records retain historical balances at their recorded blocks.
+The final accounting snapshot supersedes intermediate balances, without replacing
+the transaction evidence. Live state can be rechecked with the read-only verifier.

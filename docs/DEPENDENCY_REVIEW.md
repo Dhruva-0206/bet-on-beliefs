@@ -1,4 +1,4 @@
-# Wallet dependency review (2026-11-13 baseline, release checks in HANDOFF)
+# Wallet dependency review
 
 ## Remediation completed
 
@@ -25,7 +25,7 @@ advisory-shaped malformed payloads complete in a five-second-bounded subprocess
 and match native URLSearchParams decoding. This checks those cases, not every
 possible attack or browser.
 
-Validation: clean `npm ci`, 4 unit/compatibility tests, production build,
+Initial remediation validation: clean `npm ci`, 4 unit/compatibility tests, production build,
 10 production browser checks and 10 development checks passed. The existing
 faucet test carries both token transactions through the actual Meteor adapter
 and serialization into a synthetic signing boundary, then cancels without
@@ -34,22 +34,19 @@ The earlier real human faucet receipts are preserved. A repeat human Meteor
 BELIEF faucet signature against this serializer update passed on 2026-11-14;
 FINAL receipt evidence is in `deployments/human-wallet-post-fix.json`.
 
-Audit now reports **15 low, zero moderate/high/critical**. The two former high
+The 2026-11-14 remediation audit reports **15 low, zero moderate/high/critical**. The two former high
 SDK/adapter package findings are now low inherited findings, explaining the
 low count change from 13. Remaining findings inherit the elliptic advisory.
 Full audit still exits 1 due to those lows; `npm audit --audit-level=moderate`
 passes and is now required in frontend CI. See
 [remediation evidence](../deployments/dependency-audit-remediated.json).
-The creator has explicitly approved the refined GitHub Pages release at the
-project URL. The Codespace preview remains private. Actual release status is
-recorded in HANDOFF; contracts, deployment accounts and credentials are unchanged.
+Current test scope and human wallet evidence are indexed in [VERIFICATION](VERIFICATION.md).
 
 ## Initial review before remediation
 
-`npm audit --prefix web --json` reports **13 low, 4 high**, no moderate or
-critical findings. Audit exits 1 because vulnerabilities remain. Public snapshot:
+The pre-remediation `npm audit --prefix web --json` reported **13 low, 4 high**, no moderate or
+critical findings. That audit exited 1. Public snapshot:
 [dependency-audit-review.json](../deployments/dependency-audit-review.json).
-No dependency changes or runtime fixes were made during this review.
 
 The four high package findings share this installed chain:
 
@@ -68,7 +65,7 @@ affects versions through 0.4.2 and was fixed in 0.5.0. The later
 affects versions through 0.5.0 and requires **0.5.1**. The reported impact is
 availability; these advisories do not establish key theft or code execution.
 
-## Exposure in this application
+## Pre-remediation exposure
 
 Source inspection: the pinned Meteor SDK imports only `stringify` from
 `query-string`, used to construct a popup URL. That function uses encoding, not
@@ -80,22 +77,15 @@ input campaign. Human faucet success is functional validation, not a security
 assessment. The advisory's server request timing is not a measured browser
 freeze time for this application.
 
-## Remediation and hosting decision
+## Compatibility constraints
 
 npm suggests downgrading the adapter to 6.0.1, a major rollback from the integrated
 10.1.4 API. Do not apply `npm audit fix --force`. Patched decoder 0.5.1 is ESM,
 while query-string 7.1.3 loads its decoder via CommonJS `require`; a blind override
 would cross that module boundary and needs explicit compatibility validation.
-Preferred next work: use an upstream-compatible patched dependency path, or a
-reviewed compatibility fix, and verify malformed-input handling plus the existing
-dev/production faucet-to-Meteor regression. Recheck the resulting lockfile/audit
-and repeat a human signed faucet transaction if the wallet adapter path changes.
-The same-major nanoid 5.1.16 override already remains in place; it does not fix
-this decoder chain.
-
-Initial recommendation was to retain the private preview until remediation.
-The decoder chain is now remediated as recorded above; hosting remains private.
-A future public static frontend can use the same testnet contracts, without
-uploading deployment credentials. It still needs explicit human approval before
-publishing. This review grants no hosting approval, does not waive the findings,
-and does not change contract/deployment/key settings.
+The query-string 10 override and guarded compatibility transform described above
+avoid that CommonJS/ESM decoder boundary. The same-major nanoid 5.1.16 override
+remains separate from the decoder fix. Changes to this wallet dependency path
+require malformed-input tests, dev/production adapter regressions and renewed
+human signing validation. Residual elliptic-chain low findings remain documented
+in the remediation audit snapshot.

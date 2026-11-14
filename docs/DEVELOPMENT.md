@@ -38,7 +38,7 @@ separate, explicitly scoped evidence. Current testnet deployment evidence is und
 
 ## Market contract
 
-The market contract now implements reservations, one active proposal, split,
+The market contract implements reservations, one active proposal, split,
 merge, swaps, resolution, capped FT transfers and the 1% ritual burn. All burns
 must use the ritual entry point; the general proposal entry point accepts only
 payments. The 15-minute ritual cooldown starts at proposal creation, including
@@ -65,7 +65,7 @@ Registration and outgoing/finalize operations retain a minimum 0.01 NEAR fee;
 proposal creation retains 0.1 NEAR for its bounded text and state. Fees and excess
 deposits are retained, not refundable storage balances. There is no admin method
 to spend FT treasury funds outside proposal settlement. Deployment keys still
-allow code replacement; no immutability claim is made.
+allow code replacement; the contracts remain upgradeable.
 
 Unit gate: `cargo test --workspace --exclude integration-tests --locked`.
 35 tests passed locally on 2026-11-12. All three optimized Wasm builds and the real-receipt sandbox test now pass.
@@ -76,8 +76,8 @@ unit callback simulations alone are not considered that proof.
 ## Wasm, sandbox and deployment tooling
 
 Build on Linux with `bash scripts/build-contracts.sh`. The verified tool is
-cargo-near 0.21.0, pinned intentionally; it reports a newer 0.23.0 release is
-available. The tested SDK/standards are 5.30.1 with Rust 1.95.0. The build keeps
+cargo-near 0.21.0, used for the existing artifacts. The tested SDK/standards are
+5.30.1 with Rust 1.95.0. The build keeps
 `--cfg near` host calls and the required Wasm optimizer step. These are host
 builds (`non-reproducible-wasm`), not Docker reproducibility claims.
 
@@ -109,18 +109,10 @@ ID. If interrupted between on-chain creation and recording that ID, it refuses
 to create another proposal; inspect the active proposal and recover the progress
 file explicitly. An unexpected outcome or failed execution stops the demo.
 Public address/hash manifests and progress live in `deployments/`; they never
-contain private keys. Testnet deployment/setup and private-origin Meteor faucet signing have run.
-Their receipt evidence is under deployments/. Public-origin acceptance is
-tracked separately in docs/HANDOFF.md.
+contain private keys. [Deployment evidence](../deployments/README.md) records the
+scripted and human lifecycles. [Verification](VERIFICATION.md) explains test scope.
 
-
-2026-11-13 deployment note: the human selected prefix `bob-dhruva`, with
-`bob-dhruva-26` authorized only if it was taken. The first prefix and all six
-planned names were available. near-workspaces must enable its `rustls` feature
-alongside `install`: disabling defaults without a TLS feature makes the helper
-client reject HTTPS. This was fixed in the tooling manifest, not contract code.
-The default public RPC then rate-limited storage setup. Tooling and frontend
-reads now use the officially listed FASTNEAR testnet RPC; its live status was
-verified as chain `testnet`, protocol 88. Setup resumed with existing keys and
-matching code, then an additional setup run completed without transactions.
-See `deployments/` for public manifests and fixed-block verification snapshots.
+The deployed prefix is `bob-dhruva`. near-workspaces enables `rustls` alongside
+`install` for HTTPS helper requests. Tooling and frontend reads use the FASTNEAR
+testnet RPC. Setup checks existing keys, code and state before resuming; matching
+code is not redeployed. Public manifests contain no private credentials.

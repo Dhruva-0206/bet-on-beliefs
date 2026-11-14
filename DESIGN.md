@@ -1,6 +1,6 @@
 # Mechanism design
 
-Status: implemented on NEAR testnet. Validation scopes and remaining limitations are recorded in README and deployments/. This is not an independent audit.
+Implemented on NEAR testnet. [Verification](docs/VERIFICATION.md) distinguishes unit, sandbox, scripted and human evidence.
 
 ## Scope
 
@@ -28,13 +28,13 @@ Use “Trade PASS” and “Trade FAIL”; explain that higher FAIL valuation me
 
 Seed both pools with identical conditional reserves from the proposer's deposited BELIEF and tUSD. Constant product, 30 basis-point swap fee, explicit minimum output and nonzero reserve checks. Fees stay in reserves. Use checked U256 intermediates for multiply/divide, cumulative prices and threshold comparisons; reject invalid denominator, overflow, zero output or invalid configuration. User amounts are decimal strings in JSON.
 
-## Oracle policy and design requirements
+## Oracle policy
 
 Use an explicit fixed averaging interval, a 3% strict pass threshold, and a documented time-based observation schedule. Demo window: 10 minutes; demo ritual period: 15 minutes. These are demonstration parameters, not validated production defaults.
 
-The earlier draft's delayed first observation divided by the full interval was incorrect. Integrate exactly from the defined averaging start to the capped end. Account for the previous observation before changing it. Define same-block swaps, late first crank, no trades, long gaps, delayed finalization and boundary equality. Never infer historical prices from a later spot price. Clamp progression must depend on elapsed protocol time, not the number of attacker calls. A skipped interval must not manufacture evidence. The implemented policy carries forward the previous recorded reserve price, integrates before every reserve change, and caps integration at the interval end. Its liveness and manipulation implications are tested and documented in docs/ORACLE.md.
+The oracle integrates from the averaging start to the capped end, accounting for the previous reserve price before recording a change. Same-timestamp operations have zero elapsed weight. No-trade intervals retain the seed price; delayed finalization does not extend the interval. Integration depends on elapsed protocol time, not observation count. [Oracle policy](docs/ORACLE.md) documents boundary cases and manipulation fixtures.
 
-Do not claim a TWAP is manipulation-proof. A final-block attack fixture proves only that fixture. Include sustained manipulation and sparse-crank tests and report their limits.
+The TWAP is vulnerable to sustained and sufficiently extreme short manipulation. Final-block and sparse-observation fixtures establish their tested behavior, not general resistance.
 
 ## Invariants and proof
 
@@ -42,7 +42,7 @@ While trading: for each asset, collateral equals total PASS supply and total FAI
 
 ## Trust and known limits
 
-No “keyless” badge until ownership is renounced and key removal is explicitly approved and verified. Audit all three contracts' upgrade/admin paths before claiming an immutable system; a keyless treasury alone does not make upgradeable token dependencies trustless. No on-chain method may silently bypass market authorization to spend treasury funds.
+All three contracts retain full-access deployment keys and remain upgradeable. The current market has no admin method for spending FT treasury funds outside proposal settlement. Key holders can replace code, so market authorization depends on that upgrade trust.
 
 Faucet tokens and scripted trades demonstrate mechanics, not economically reliable price discovery. Token price is not public welfare. Automatic execution does not solve conditional-versus-causal inference. Thin liquidity and sustained manipulation remain risks. A single active proposal and sole proposer LP are deliberate MVP constraints.
 

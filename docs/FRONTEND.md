@@ -6,8 +6,8 @@ proposal and treasury without a wallet. Advanced settings can load another
 
 ## Connect and prepare
 
-1. Open https://dhruva-0206.github.io/bet-on-beliefs/ after release verification
-   in HANDOFF. The Codespace port remains a private development preview.
+1. Open https://dhruva-0206.github.io/bet-on-beliefs/. The Codespace port remains
+   a private development preview.
 2. Connect Meteor and choose a separate testnet account. Confirm the visible
    account and testnet badge. Never import or share keys through this app.
 3. Use **Get test tokens and set up**. **Get 100 BELIEF** or **Get 100 tUSD**
@@ -16,7 +16,8 @@ proposal and treasury without a wallet. Advanced settings can load another
    testnet NEAR; these faucets do not supply native NEAR.
 4. Market registration is separate. It retains 0.01 NEAR and allows vault use.
    Deposit wallet tokens to your vault with a 1 yoctoNEAR transfer-call deposit.
-5. An open proposal requires its own claim registration, retaining 0.01 NEAR.
+5. Additional participants register proposal claims, retaining 0.01 NEAR.
+   The proposer is registered automatically when creating the proposal.
    Then split deposited tokens and trade the chosen world with a minimum output,
    or use existing conditional claims. The opposite side's claim remains yours.
 6. Creating a proposal uses both liquidity stakes from the vault and retains
@@ -72,6 +73,22 @@ when changing UI copy. [Dependency review](DEPENDENCY_REVIEW.md).
 Read-only live QA: `cd web` then
 `node scripts/verify-live.mjs bob-dhruva-market.testnet`. Screenshots/reports are
 ignored under test-results. It never signs and does not replace real wallet QA.
-Private-origin Meteor faucet receipts, including the post-dependency-fix repeat,
-are under deployments/. Public-origin signing remains a separate acceptance
-step until its own final receipt is recorded. [Release handoff](HANDOFF.md).
+Human faucet receipts and the completed public-site payment lifecycle are indexed
+in [deployment evidence](../deployments/README.md). [Verification](VERIFICATION.md)
+distinguishes synthetic checks, human signatures and accounting snapshots.
+
+## Interface design
+
+The dark/lime palette, compact hero and grouped controls are project design
+choices. Treasury, wallet and vault balances have separate labels. Setup shows
+token, market and proposal registrations separately. Wallet feedback distinguishes
+approval, submission, confirmation, cancellation and failure, with recovery actions
+beside the affected control. Settled proposals prioritize outcome, execution and
+redemption rather than inactive trading controls.
+
+Practical guidance:
+
+- [Nielsen Norman Group](https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/): concise, scannable, factual copy.
+- [Microsoft Research](https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/overview/): clarity, limitations and recovery as general design prompts; the app has no AI interaction.
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/): keyboard access, visible focus, form labels, announcements, contrast and reflow. Controls use 44px minimum button heights, with a skip link and reduced-motion support. Scoped checks are recorded in VERIFICATION, not a full compliance claim.
+- [Linear](https://linear.app/features) and [Stripe](https://stripe.com/payments): examples of information grouping and action hierarchy. Their assets, copy and identity were not reused.

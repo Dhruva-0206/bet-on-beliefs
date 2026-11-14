@@ -1,11 +1,8 @@
 # Walkthrough, demo and submission preparation
 
-Current release and acceptance status: [HANDOFF](HANDOFF.md). The creator approved
-the specific GitHub Pages release. That approval does not authorize an X post,
-hackathon submission, key deletion or changes to Builders First. The live
-[official rules](https://nearhackathon.com/HACKATHON.md) were re-read on 2026-11-14
-before this script/description. Recheck before any submission. Deadline:
-2026-11-14 23:59 UTC. Retain the independent Builders First disclosure.
+The completed public-site lifecycle and receipt scope are documented in
+[VERIFICATION](VERIFICATION.md). Recording and submission are separate from the
+verified application. Official rules: https://nearhackathon.com/HACKATHON.md.
 
 ## Full wallet walkthrough (signatures belong to Dhruva)
 
@@ -41,8 +38,7 @@ verified. The public-site human walkthrough is now complete for contract proposa
 [final accounting](../deployments/human-lifecycle-final-accounting.json). Public
 origin registration/signing is verified in
 [receipt evidence](../deployments/human-wallet-public-origin.json).
-Contract source/code/configuration is frozen; present an exception before any
-contract change. All deployment keys remain.
+
 
 ## 60–90 second demo script
 
@@ -98,8 +94,7 @@ Before submitting, update the acceptance sentence only to match newly recorded
 evidence. Obtain the actual public demo post link and all required personal
 fields, display the exact payload and receive approval. Do not invent contact,
 payout or consent data. Submit at most once. The human publishes the X post.
-Builders First is independently implemented and its demo video remains pending,
-according to the creator; do not modify that repository or claim its submission.
+Also by Dhruva: [Builders First](https://github.com/Dhruva-0206/builders-first), an independent NEAR investment thesis built from developer data.
 
 ## Final submission checklist (not authorization to submit)
 
@@ -118,6 +113,4 @@ according to the creator; do not modify that repository or claim its submission.
   wait for approval. Check that this repository has not already been submitted.
 - Submit at most once before 2026-11-14 23:59 UTC, only after approval. Retain the
   request ID for allowed retries; saved mistakes use the official change process.
-- Preserve AI/library and independent Builders First disclosures. Builders First
-  is implemented; its video remains pending according to the creator. No changes
-  to that repository, key deletion, social publishing or submission are performed here.
+- Preserve creator, AI/library and independent Builders First disclosures.

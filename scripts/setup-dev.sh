@@ -13,6 +13,6 @@ npm --version
 if command -v rustup >/dev/null 2>&1; then
   rustup show active-toolchain
 else
-  printf 'Rust is not installed yet. Follow docs/BUILD_PLAN.md.\n'
+  printf 'Rust is not installed yet. Follow docs/DEVELOPMENT.md.\n'
 fi
 printf 'Contract and integration builds must run on Linux.\n'
