@@ -1,0 +1,65 @@
+name: GitHub Pages (manual approval required)
+
+# Preparing/pushing this file never publishes. No push or workflow_run trigger.
+on:
+  workflow_dispatch:
+    inputs:
+      publish_approved:
+        description: "Explicit human approval to publish has been received"
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      VITE_MARKET_CONTRACT: bob-dhruva-market.testnet
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm audit --audit-level=moderate
+      - run: npm run test
+      - run: npm run build:pages
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:pages
+      - name: Package only public static frontend files
+        if: inputs.publish_approved
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+        with:
+          path: web/dist-pages
+
+  deploy:
+    if: inputs.publish_approved && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Read already-enabled Pages configuration
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+        with:
+          enablement: false
+      - name: Publish only after explicit approval
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5

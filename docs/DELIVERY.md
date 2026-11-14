@@ -1,7 +1,8 @@
 # Delivery and human handoff
 
 The live [official rules](https://nearhackathon.com/HACKATHON.md) were read on
-2026-11-12 before preparing this document. Re-read them before submission.
+2026-11-12 and re-read on 2026-11-14 while preserving the recording plan.
+Re-read them again before submission.
 The deadline remains 2026-11-14 23:59 UTC. Testnet-only entries are eligible.
 A local demo is eligible with a reproducible public repository and a public
 video post. Repository visibility changes, hosting, the human's social post,

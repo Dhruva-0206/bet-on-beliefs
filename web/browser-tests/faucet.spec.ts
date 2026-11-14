@@ -6,6 +6,14 @@ test("faucet actions reach Meteor's signing request without broadcasting", async
 }) => {
   // Fake extension + RPC only. No real accounts, wallet keys or signatures.
   const broadcasts: string[] = [];
+  const failedAssets: string[] = [];
+  page.on("response", (response) => {
+    if (
+      new URL(response.url()).pathname.includes("/assets/") &&
+      response.status() >= 400
+    )
+      failedAssets.push(response.url());
+  });
   const errors: string[] = [];
   let keyWasLogged = false;
   page.on("pageerror", (error) => errors.push(error.message));
@@ -121,7 +129,10 @@ test("faucet actions reach Meteor's signing request without broadcasting", async
       await route.fulfill({ json: { jsonrpc: "2.0", id: request.id, result } });
     },
   );
-  await page.goto("/");
+  await page.goto("./");
+  expect(new URL(page.url()).pathname).toBe(
+    new URL(test.info().project.use.baseURL!).pathname,
+  );
   await page
     .getByRole("textbox", { name: "Market contract" })
     .fill("bob-dhruva-market.testnet");
@@ -191,6 +202,7 @@ test("faucet actions reach Meteor's signing request without broadcasting", async
     );
   }
   expect(broadcasts).toEqual([]);
+  expect(failedAssets).toEqual([]);
   expect(errors).toEqual([]);
   expect(keyWasLogged).toBe(false);
 });

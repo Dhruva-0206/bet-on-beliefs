@@ -13,3 +13,4 @@ agents/logs/
 artifacts/
 web/test-results/
 web/playwright-report/
+web/dist-pages/

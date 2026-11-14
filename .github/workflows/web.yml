@@ -24,3 +24,7 @@ jobs:
       - run: npm run test:browser
         env:
           BOB_DEV_BROWSER: "1"
+      - run: npm run build:pages
+        env:
+          VITE_MARKET_CONTRACT: bob-dhruva-market.testnet
+      - run: npm run test:pages

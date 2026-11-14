@@ -13,6 +13,29 @@ reserved funds and outgoing obligations are cleared. No contract source changed
 during this resumed session. Human Meteor signing is now verified for both faucets; public hosting remains
 pending. Historical pending statements below describe earlier checkpoints.
 
+## GitHub Pages preparation — approval pending
+
+The post-fix human signature is verified and committed as `eb66e59`.
+Prepared `.github/workflows/pages.yml`, a manual-only workflow with
+`publish_approved=false` by default and no push trigger. Pages enablement is
+explicitly disabled in its configure action. No workflow dispatch, Pages
+settings change or publication was performed. Repository still reports
+`has_pages=false`; private Codespace port 5173 remains private.
+
+Proposed default URL: https://dhruva-0206.github.io/bet-on-beliefs/ (not live).
+Separate ignored `web/dist-pages/` build uses the project base and defaults to
+existing market bob-dhruva-market.testnet. Normal production output/private
+preview remains independent. See docs/GITHUB_PAGES_PLAN.md for reviewable
+configuration and the after-approval procedure. Pages build and 2 desktop/mobile
+path tests passed (51.0s); affected root production and dev faucet checks each
+passed (2 tests, 6.1s and 8.3s). Audit moderate-or-higher gate passed. YAML/manual
+and enablement guard assertions passed. Public artifact hashes and checks are in
+`deployments/pages-preparation.json`. Regular frontend CI now also checks this
+build path without publishing. No unchanged contract checks were rerun locally.
+Do not publish until the human
+explicitly approves. Full walkthrough and wording/design refinement remain
+planned before the final demo, independent of hosting approval.
+
 ## Post-fix human wallet validation — 2026-11-14
 
 The human repeated Meteor BELIEF faucet signing on the dependency-fixed frontend
@@ -273,8 +296,8 @@ Setup resumed with existing keys; no code was overwritten.
 
 - Human Meteor connection and both faucet signatures passed with verified receipts.
   Other market operations have scripted/sandbox evidence, not human signing QA.
-- Public Sites hosting was offered as an explicit approval choice. No approval
-  has been received and no hosting changes or publishing were performed.
+- GitHub Pages configuration is now prepared for approval. No approval has been
+  received; no hosting settings change or publication was performed.
 - No repository visibility/settings change, social post, submission or key
   deletion. README retains AI assistance and Builders First disclosures.
 - Demo creation-to-progress-file crash window remains documented. Inspect an
@@ -308,11 +331,12 @@ Manifests and lockfiles are source and remain tracked.
 2. Check UTC. Contract freeze is **2026-11-13 18:00 UTC**. Ask for a concrete
    exception before contract changes after that time. Deadline remains
    **2026-11-14 23:59 UTC**. Existing tested deployment needs no code change.
-3. Decoder remediation and synthetic compatibility checks are complete. Preserve
-   human faucet receipts; offer a hard-refresh/human faucet retry for the updated
-   serializer. Keep remaining low findings visible in docs/DEPENDENCY_REVIEW.md.
-4. Act on public hosting only after explicit approval. The built app and live
-   testnet evidence are reviewable already. Preserve all key/privacy boundaries.
+3. Decoder remediation and post-fix human faucet signing are complete. Preserve
+   the receipts; keep remaining low findings visible in docs/DEPENDENCY_REVIEW.md.
+   Validate the public-origin wallet connection only after approved publication.
+4. Review docs/GITHUB_PAGES_PLAN.md; wait for explicit approval before enabling
+   GitHub Pages or dispatching publication. Keep the preview private. Preserve
+   the full walkthrough and wording/design refinement before the final demo.
 5. If new implementation changes are necessary, rerun only affected checks,
    inspect staged diffs and commit/push normally with hooks; never force-push.
 6. Human records the real demo. Re-read live official rules before final
