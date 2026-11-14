@@ -1,0 +1,110 @@
+{
+  "verified_at_utc": "2026-11-14T09:24:38.595650+00:00",
+  "network": "testnet",
+  "frontend_commit": "879722345e0441b00c7cea83199ea82090f062f9",
+  "account_id": "dhruva.testnet",
+  "human_report": {
+    "wallet": "Meteor",
+    "post_dependency_fix": true,
+    "displayed_belief": "200",
+    "displayed_tusd": "100",
+    "displayed_vault": [
+      "0",
+      "0"
+    ]
+  },
+  "transaction": {
+    "hash": "3STrYWC6Pcc8obHHHaKM3raBGn1YqqNjEHnk455ftBSL",
+    "explorer_url": "https://testnet.nearblocks.io/txns/3STrYWC6Pcc8obHHHaKM3raBGn1YqqNjEHnk455ftBSL",
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-belief.testnet",
+    "actions": [
+      {
+        "args": {
+          "registration_only": true
+        },
+        "deposit": "10000000000000000000000",
+        "gas": 100000000000000,
+        "method_name": "storage_deposit"
+      },
+      {
+        "args": {},
+        "deposit": "0",
+        "gas": 100000000000000,
+        "method_name": "faucet"
+      }
+    ],
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAwMCI="
+    },
+    "transaction_outcome_status": {
+      "SuccessReceiptId": "8u1YTH8wcbWpzSxRZQ9xxqaB1agdQDM6y412U42vZe5z"
+    },
+    "receipt_count": 4,
+    "failed_receipt_count": 0,
+    "receipts": [
+      {
+        "id": "8u1YTH8wcbWpzSxRZQ9xxqaB1agdQDM6y412U42vZe5z",
+        "executor_id": "bob-dhruva-belief.testnet",
+        "status": {
+          "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAwMCI="
+        },
+        "logs": [
+          "The account is already registered, refunding the deposit",
+          "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"old_owner_id\":\"bob-dhruva-belief.testnet\",\"new_owner_id\":\"dhruva.testnet\",\"amount\":\"100000000000000000000\",\"memo\":\"testnet faucet\"}]}"
+        ]
+      },
+      {
+        "id": "DnGLoU9ktpu7z4igemBhbdjBEa4gcfLe9e7TCkmixr9T",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "JCypKow1kdKfPiMzpKXDq3GD1oEdYch2qFZbN2ASqGAi",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "7ybVwGD5Z9qtgUdhPEuWKVbZi3NU1vhocp3XGd9j4dVU",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      }
+    ]
+  },
+  "snapshot": {
+    "block_height": 277638099,
+    "block_hash": "4PetNq47kKjumgHQcw1yydQmpzZ841eiBaRg61JhRxcT",
+    "balances_raw": {
+      "belief": "200000000000000000000",
+      "tusd": "100000000000000000000"
+    },
+    "market_account": {
+      "registered": false,
+      "vault": [
+        "0",
+        "0"
+      ],
+      "claims_registered": false,
+      "claims": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ]
+    }
+  }
+}

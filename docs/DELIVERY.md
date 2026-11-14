@@ -36,7 +36,14 @@ explorer screens. Do not substitute sandbox output or fixtures for testnet data.
   and eight browser checks have passed. Repeat affected gates after any changes.
 - Deployed code hashes/configuration, real testnet payment/redemption demo,
   fixed-block backing and live desktop/mobile reads are verified; see deployments/.
-- Exercise a real wallet signing path and its redirect/transaction evidence.
+- Human Meteor token-faucet signing passed, including a post-dependency-fix
+  repeat; receipts/balances are in deployments/human-wallet-post-fix.json.
+- Still planned before the final demo: a full real-application walkthrough
+  (wallet, funding/vaults, proposal, trading, finalization, execution/redemption)
+  with actual receipts and clear treatment of the ten-minute wait.
+- Still planned before recording: refine wording, labels, explanations and
+  desktop/mobile design from that walkthrough. Faucet success and hosting
+  preparation do not mark these gates complete.
 - Inspect staged changes before every commit and retain the AI disclosure.
 - If contract changes are needed after 2026-11-13 18:00 UTC, request a concrete
   freeze exception before changing them.

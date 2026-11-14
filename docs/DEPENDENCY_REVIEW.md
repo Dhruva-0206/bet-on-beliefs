@@ -30,8 +30,9 @@ Validation: clean `npm ci`, 4 unit/compatibility tests, production build,
 faucet test carries both token transactions through the actual Meteor adapter
 and serialization into a synthetic signing boundary, then cancels without
 signing/broadcasting. Browser popup checks also verify pageUri and connectionUid.
-The earlier real human faucet receipts are preserved; a new human signature
-against this serializer update has not been claimed.
+The earlier real human faucet receipts are preserved. A repeat human Meteor
+BELIEF faucet signature against this serializer update passed on 2026-11-14;
+FINAL receipt evidence is in `deployments/human-wallet-post-fix.json`.
 
 Audit now reports **15 low, zero moderate/high/critical**. The two former high
 SDK/adapter package findings are now low inherited findings, explaining the

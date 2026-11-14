@@ -13,6 +13,27 @@ reserved funds and outgoing obligations are cleared. No contract source changed
 during this resumed session. Human Meteor signing is now verified for both faucets; public hosting remains
 pending. Historical pending statements below describe earlier checkpoints.
 
+## Post-fix human wallet validation — 2026-11-14
+
+The human repeated Meteor BELIEF faucet signing on the dependency-fixed frontend
+commit `879722345e0441b00c7cea83199ea82090f062f9`. Transaction
+`3STrYWC6Pcc8obHHHaKM3raBGn1YqqNjEHnk455ftBSL` is FINAL and successful:
+four receipts, all successful, no failures. Receiver is the BELIEF contract;
+expected storage/faucet actions and the 100 BELIEF transfer event were verified.
+At final block 277638099, dhruva.testnet holds 200 BELIEF and 100 tUSD,
+with both vaults zero, matching the human UI. Public evidence:
+`deployments/human-wallet-post-fix.json`. This closes the repeat human faucet
+signing gate after the decoder fix; broader human market walkthrough remains.
+All three workflows for 8797223 passed, independently confirmed in the preceding
+session. No contracts changed or redeployed; no keys were accessed/deleted.
+
+Next: prepare GitHub Pages configuration and proposed project URL for review.
+Do not enable Pages, dispatch deployment, or publish without explicit approval.
+Keep the private preview available. Preserve a full real-app walkthrough and
+wording/design refinement before recording the final demo; neither is completed
+by faucet signing alone. Contract freeze has passed; no contract change is
+needed for hosting preparation.
+
 ## Decoder remediation — latest
 
 Scoped query-string 10.0.0 override for Meteor SDK; adapter/SDK versions remain

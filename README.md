@@ -40,7 +40,7 @@ See [development notes](docs/DEVELOPMENT.md), the [accounting argument](docs/ACC
 - The updated frontend build and eight browser checks passed; live desktop/mobile reads passed for both trading and settled states. Human Meteor signing for both faucets is now verified; broader wallet flows are not claimed as human-tested.
 - [Reproduce the live verification](deployments/README.md). Full-access deployment keys remain; the contracts are upgradeable by their key holders. No keyless/immutable claim is made.
 
-Human wallet check: `dhruva.testnet` signed both token storage/faucet transactions in Meteor. Both are FINAL with zero failed receipts; final-block balances match the reported UI: 100 BELIEF, 100 tUSD, both vaults zero. See [public receipts and balances](deployments/human-wallet-validation.json). The [dependency review](docs/DEPENDENCY_REVIEW.md) records removal of the vulnerable decoder chain: zero moderate/high/critical findings, with 15 low findings remaining. Hosting stays private.
+Human wallet check: `dhruva.testnet` signed both token storage/faucet transactions in Meteor. Both are FINAL with zero failed receipts; final-block balances match the reported UI: 100 BELIEF, 100 tUSD, both vaults zero. See [public receipts and balances](deployments/human-wallet-validation.json). The [post-fix repeat Meteor transaction](deployments/human-wallet-post-fix.json) is also FINAL: 200 BELIEF, 100 tUSD, both vaults zero. The [dependency review](docs/DEPENDENCY_REVIEW.md) records removal of the vulnerable decoder chain: zero moderate/high/critical findings, with 15 low findings remaining. Hosting stays private.
 
 ## Hackathon
 
