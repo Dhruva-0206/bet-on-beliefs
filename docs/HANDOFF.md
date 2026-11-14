@@ -124,11 +124,18 @@ pending from this work.
    PASS BELIEF 0.906610893880149131, PASS tUSD 0, FAIL BELIEF 0, FAIL tUSD 1.
    Wallets 190 BELIEF/89 tUSD, both vaults zero. Contract proposal ID 1 is shown
    as proposal #2 in the one-based UI. End: 11:01:50.726 UTC on 2026-11-14.
-   Wait for the chain to reach the end, then guide manual finalize with
-   proposal_id 1 and 0.01 testnet NEAR. Do not sign. Verify its FINAL receipts,
-   outcome and action execution separately before guiding redemption. Proposer
-   pool claims are released at finalization, so re-query exact winning balances
-   before choosing redemption amounts; do not assume only the traded amount.
+   Finalization AiPEh5GpbvWsWdCeUq1F5NtEGHXuv1jhG8xjkbeNzRuT is FINAL,
+   all six receipts successful. Outcome PASS; action executed. BELIEF NEP-141
+   event proves 1 BELIEF transferred from market to dhruva.testnet; wallet now
+   191 BELIEF/89 tUSD. Active proposal null, reserved zero, pending count zero.
+   Pools emptied into proposer claims. PASS balances are exactly 10 BELIEF and
+   11 tUSD; FAIL balances also 10/11 but are losing claims, not extra redeemable
+   collateral. Evidence: deployments/human-wallet-finalization.json.
+   Next human signatures: redeem 10 BELIEF (asset_id 0) then 11 tUSD (asset_id 1),
+   each proposal_id 1 and 0.01 testnet NEAR plus gas. Verify first before second.
+   Expected final wallets 201 BELIEF/100 tUSD; vaults remain zero. Redemptions
+   remain pending. No agent signed. Proposer pool release explains why winning
+   balances exceed the pre-finalization traded balance.
 4. Full human lifecycle walkthrough and final recording remain separate gates.
    DELIVERY.md contains signature-by-signature guidance, a 60–90 second script
    around one real decision and an honest description draft. Refine further if

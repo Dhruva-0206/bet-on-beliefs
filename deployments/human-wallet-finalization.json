@@ -1,0 +1,196 @@
+{
+  "verified_at_utc": "2026-11-14T11:04:14.041666+00:00",
+  "network": "testnet",
+  "contract_proposal_id": 1,
+  "ui_proposal_number": 2,
+  "transaction": {
+    "hash": "AiPEh5GpbvWsWdCeUq1F5NtEGHXuv1jhG8xjkbeNzRuT",
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-market.testnet",
+    "method": "finalize",
+    "args": {
+      "proposal_id": 1
+    },
+    "deposit": "10000000000000000000000",
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": "dHJ1ZQ=="
+    },
+    "transaction_outcome_status": {
+      "SuccessReceiptId": "BLYL27gs14qmEhKsfzaPTTsZqeX98aWCzwwsiSn4N6mu"
+    },
+    "receipt_count": 6,
+    "failed_receipt_count": 0,
+    "receipts": [
+      {
+        "id": "BLYL27gs14qmEhKsfzaPTTsZqeX98aWCzwwsiSn4N6mu",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessReceiptId": "GK8QrguAebkxsJipFc4NiGWxg64LfFdSFpZNaqmTBEnT"
+        },
+        "logs": []
+      },
+      {
+        "id": "BEJ9GAaXubfKL8arzJtWeZsfbPXvYSv4hcvatMFFVhku",
+        "executor_id": "bob-dhruva-belief.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": [
+          "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"old_owner_id\":\"bob-dhruva-market.testnet\",\"new_owner_id\":\"dhruva.testnet\",\"amount\":\"1000000000000000000\",\"memo\":\"Bet on Beliefs settlement\"}]}"
+        ]
+      },
+      {
+        "id": "CnXsM2Tim4MfEAZgyZ7Xphxahk7MWhKUzdLf6KevwLZB",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "GK8QrguAebkxsJipFc4NiGWxg64LfFdSFpZNaqmTBEnT",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessValue": "dHJ1ZQ=="
+        },
+        "logs": []
+      },
+      {
+        "id": "Ax4SodqxivN9whdHqsPp4g8muYVFXRakZucZxxDY2ZdF",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "GMynnrubFudpAc6uc8aG8nZvXKT7JZ8r8CivdwYEEpa7",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      }
+    ]
+  },
+  "payment_events": [
+    {
+      "executor_id": "bob-dhruva-belief.testnet",
+      "event": {
+        "standard": "nep141",
+        "version": "1.0.0",
+        "event": "ft_transfer",
+        "data": [
+          {
+            "old_owner_id": "bob-dhruva-market.testnet",
+            "new_owner_id": "dhruva.testnet",
+            "amount": "1000000000000000000",
+            "memo": "Bet on Beliefs settlement"
+          }
+        ]
+      }
+    }
+  ],
+  "final_state": {
+    "block_height": 277648207,
+    "block_hash": "E9UsNhLXSBxVdSRbVg17jMdnDUZGoDBXKEVgEHQiDdrY",
+    "proposal": {
+      "id": 1,
+      "title": "Human wallet walkthrough: 1 BELIEF payment",
+      "description": "Testnet walkthrough of a market-decided treasury payment. Trades demonstrate mechanics, not independent price discovery.",
+      "proposer": "dhruva.testnet",
+      "action": {
+        "Transfer": {
+          "asset": 0,
+          "receiver": "dhruva.testnet",
+          "amount": "1000000000000000000"
+        }
+      },
+      "start_ns": "1794653510726909430",
+      "end_ns": "1794654110726909430",
+      "pools": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "collateral": [
+        "10000000000000000000",
+        "11000000000000000000"
+      ],
+      "supply": [
+        [
+          "10000000000000000000",
+          "11000000000000000000"
+        ],
+        [
+          "10000000000000000000",
+          "11000000000000000000"
+        ]
+      ],
+      "outcome": true,
+      "execution": "executed"
+    },
+    "account": {
+      "registered": true,
+      "vault": [
+        "0",
+        "0"
+      ],
+      "claims_registered": true,
+      "claims": [
+        [
+          "10000000000000000000",
+          "11000000000000000000"
+        ],
+        [
+          "10000000000000000000",
+          "11000000000000000000"
+        ]
+      ]
+    },
+    "wallet_balances_raw": {
+      "belief": "191000000000000000000",
+      "tusd": "89000000000000000000"
+    },
+    "config": {
+      "network": "testnet",
+      "tokens": [
+        "bob-dhruva-belief.testnet",
+        "bob-dhruva-tusd.testnet"
+      ],
+      "ready": true,
+      "active": null,
+      "next_ritual_ns": "0",
+      "window_ns": "600000000000",
+      "max_payment": [
+        "1000000000000000000000",
+        "1000000000000000000000"
+      ],
+      "proposal_count": 2,
+      "treasury": [
+        "599999998000000000000000000",
+        "0"
+      ],
+      "reserved": [
+        "0",
+        "0"
+      ],
+      "stakes": [
+        "0",
+        "0"
+      ],
+      "outgoing": [
+        "0",
+        "0"
+      ],
+      "pending_count": 0
+    }
+  },
+  "scope": "PASS finalization, 1 BELIEF treasury payment and proposer pool claim release verified. Manual redemptions remain pending."
+}
