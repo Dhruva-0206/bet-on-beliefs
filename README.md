@@ -10,7 +10,7 @@ A treasury decision needs a clear rule and a verifiable result. Bet on Beliefs m
 
 ## Try the app
 
-Release target: **https://dhruva-0206.github.io/bet-on-beliefs/**. Publication has been approved; release verification is tracked in [HANDOFF](docs/HANDOFF.md). Do not interpret this target URL alone as proof of a completed deployment.
+Live app: **https://dhruva-0206.github.io/bet-on-beliefs/**. HTTPS, public assets and live testnet reads were verified on 2026-11-14. Public-origin human wallet signing remains pending. See [HANDOFF](docs/HANDOFF.md) for evidence and acceptance status.
 
 The app defaults to `bob-dhruva-market.testnet`. Browse its real proposal and treasury without a wallet. To transact, connect **Meteor on testnet**. Use a separate testnet account with testnet NEAR for storage and gas. Never provide a recovery phrase or private key to this app or its maintainers. Advanced settings allow a different `.testnet` market.
 

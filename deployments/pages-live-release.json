@@ -1,0 +1,104 @@
+{
+  "verified_at_utc": "2026-11-14T10:28:51.231477+00:00",
+  "url": "https://dhruva-0206.github.io/bet-on-beliefs/",
+  "source_commit": "bac97ce36bda26c9eebaf77dadc38b3f97b693c9",
+  "workflow_run": "https://github.com/Dhruva-0206/bet-on-beliefs/actions/runs/43585261964",
+  "deployment_job": "success",
+  "public_static_files_only": true,
+  "secret_pattern_hits": [],
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "731b071fe8b96b941194ba27bd65f8ee08aef6448d10e86153eed6e11162818d",
+      "bytes": 625
+    },
+    {
+      "path": "assets/rolldown-runtime-BWaJ3C7D.js",
+      "sha256": "d0e9044430006c5bb48f477501a5af465f0a6377d2fcd7495aa215b8b75aaee3",
+      "bytes": 911
+    },
+    {
+      "path": "assets/main-ClLPKTBE.css",
+      "sha256": "d8999504923ff63b0a3c44db374a3b677550c163b23c5e5dba3f3e0ca655b000",
+      "bytes": 47452
+    },
+    {
+      "path": "assets/esm-C-ggtPxQ.js",
+      "sha256": "e9349cb184ea0bb32d8958844f94e0714abdc225ef86b16b01c59b6857c3e3c0",
+      "bytes": 3148
+    },
+    {
+      "path": "assets/index-xqLrfenC.js",
+      "sha256": "d9583a9f3213eec599dcafa191591bd580533f5f1f89e0b22df0e13b3a434056",
+      "bytes": 31132
+    },
+    {
+      "path": "assets/main-DRdpt3Lw.js",
+      "sha256": "a49c403428822be5a20aa58e57275d32b23909642345bc8d866e51943192ec71",
+      "bytes": 220793
+    },
+    {
+      "path": "assets/meteor-wallet-DFjReSJK.js",
+      "sha256": "aef42236a6d3640e5a184773027a93a6f7f03f9155bf1d4cfbbb3b59e8ebaaab",
+      "bytes": 611004
+    },
+    {
+      "path": "assets/core-BzJj_ZUb.js",
+      "sha256": "226ecff5e4725be9f5d560ad9858f8460fef391b5397def96720221f64ef27f6",
+      "bytes": 473205
+    },
+    {
+      "path": "assets/modal-ui-BcfBAoTY.js",
+      "sha256": "1779e504446dd241a7f2bf5b8eb9ded82c8737c358ea975fd9d5234fab7df214",
+      "bytes": 240527
+    }
+  ],
+  "public_responses": [
+    {
+      "path": "index.html",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/rolldown-runtime-BWaJ3C7D.js",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/main-ClLPKTBE.css",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/esm-C-ggtPxQ.js",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/index-xqLrfenC.js",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/main-DRdpt3Lw.js",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/meteor-wallet-DFjReSJK.js",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/core-BzJj_ZUb.js",
+      "http": 200,
+      "hash_matches_artifact": true
+    },
+    {
+      "path": "assets/modal-ui-BcfBAoTY.js",
+      "http": 200,
+      "hash_matches_artifact": true
+    }
+  ],
+  "wallet_signing": "pending human public-origin signature"
+}

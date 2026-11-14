@@ -8,8 +8,11 @@ the Codespace preview remains private.
 
 Approved project URL:
 **https://dhruva-0206.github.io/bet-on-beliefs/**
-This URL is not claimed live. Compare the eventual Pages output with this URL
-before announcing it; a custom domain would require a separate human decision.
+Live release verified on 2026-11-14: HTTPS 200, all nine asset hashes matching
+the Pages artifact, actual testnet reads and four viewport widths checked.
+[Deployment run](https://github.com/Dhruva-0206/bet-on-beliefs/actions/runs/43585261964)
+published source bac97ce36bda26c9eebaf77dadc38b3f97b693c9. Public-origin
+human wallet signing remains pending. A custom domain requires a separate decision.
 
 ## Concrete configuration
 
@@ -48,7 +51,7 @@ synthetic extension login, BELIEF and tUSD action construction, serialization
 into Meteor's signing boundary, cancellation without signatures/broadcasting,
 correct URL prefix and no failed asset loads. Desktop and mobile both passed.
 The same shared test is checked on the ordinary root production/dev servers.
-This does not claim human signing on the future public origin; Meteor may ask
+This does not claim human signing on the public origin; Meteor may ask
 for a fresh connection approval for that origin.
 
 ## Publication procedure for the approved release
@@ -61,7 +64,8 @@ for a fresh connection approval for that origin.
 3. After approval only, dispatch the prepared workflow on `main` with
    `publish_approved=true`. For an authorized operator, the exact CLI is:
    `gh workflow run pages.yml --ref main -f publish_approved=true`.
-   This command has not been executed.
+   The Codespace dispatch attempt returned HTTP 403. The owner instead ran it
+   through the Actions UI with the approval input checked; build and deploy passed.
 4. Verify the deployment action's reported URL, public HTTPS, asset loading,
    actual testnet reads and Meteor connection/signing on that origin. Record the
    final receipt evidence and URL. Do not announce a deployment on a failed run.

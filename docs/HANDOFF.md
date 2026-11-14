@@ -11,15 +11,20 @@ its demo video remains pending according to Dhruva. Do not modify that repo.
 The creator explicitly approved enabling GitHub Pages and publishing the refined
 static frontend at https://dhruva-0206.github.io/bet-on-beliefs/ after verification.
 No further generic hosting approval is required for that specific release.
-Refinement commit 93e73b2cf3f9a5e0fca54885b97bbce22f8dffe0 is pushed and all
-three CI workflows passed (frontend, scaffold, contract unit/sandbox). Publication
-is blocked by GitHub access: POST /repos/Dhruva-0206/bet-on-beliefs/pages with
-build_type=workflow returned HTTP 403, “Resource not accessible by integration”.
-The Codespace integration token cannot manage Pages settings; no separate gh
-login is configured. The creator has been asked to open repository Settings →
-Pages and set Source to GitHub Actions. This is an access step, not another
-hosting approval. No publishing workflow has been dispatched. The Codespace
-preview remains private. Public-origin acceptance is not yet complete.
+Refinement commit 93e73b2cf3f9a5e0fca54885b97bbce22f8dffe0 passed all three
+workflows. Checkpoint bac97ce36bda26c9eebaf77dadc38b3f97b693c9 also passed
+frontend, scaffold and contract unit/sandbox CI.
+
+The owner enabled Pages with Source=GitHub Actions and ran the approved workflow.
+Run 43585261964 completed both build and deploy successfully, publishing source
+bac97ce36bda26c9eebaf77dadc38b3f97b693c9. The approved URL returns HTTPS 200.
+All nine public files match the downloaded Pages artifact by SHA-256; no private
+files or secret-pattern hits were found. Evidence: deployments/pages-live-release.json.
+Public read-only browser checks passed at 320, 390, 768 and 1440 pixels with actual
+testnet reads, keyboard checks and text enlargement; see pages-live-layout.json.
+Public-origin human wallet signing remains pending. The preview remains private.
+Earlier Codespace dispatch returned 403; the owner used GitHub's Actions UI.
+Run 43585015306 built but skipped publication because its approval input was false.
 
 ## Completed refinement
 
@@ -85,16 +90,13 @@ pending from this work.
 
 ## Next steps and boundaries
 
-1. After the creator enables Pages source=GitHub Actions, read back the setting.
-   CI for refinement commit 93e73b2 is green; verify main still points at the
-   intended reviewed code. Dispatch pages.yml with publish_approved=true under
-   the existing explicit approval, then verify deployment/HTTPS/assets/read data.
-   If workflow dispatch also lacks permission, ask for the minimal owner-side
-   dispatch rather than requesting credentials. Do not claim a release before
-   the workflow and live URL are verified.
-2. Ask Dhruva to connect Meteor on the public origin. Read dhruva.testnet's
-   market registration before selecting a useful single signature. Register once
-   if still unregistered, rather than repeat a faucet merely for evidence.
+1. Deployment and public read-only checks are complete. The deployed source's
+   frontend, scaffold, contract and Pages workflows all passed. Future pushes do
+   not automatically publish; the Pages workflow remains manual and gated.
+2. Dhruva has been asked to connect Meteor on the public origin and register the
+   market account once (0.01 testnet NEAR plus gas). A fresh FINAL read confirmed
+   dhruva.testnet remains unregistered, vaults zero. Token baseline is 200 BELIEF
+   and 100 tUSD. Await the human signature/hash; do not repeat the faucet.
 3. Verify public FINAL receipt/all receipts and resulting market/balance state.
    Until then, public-origin signing remains pending. Never use wallet keys or
    substitute mocked signing for this acceptance step.
