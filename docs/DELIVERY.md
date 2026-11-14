@@ -23,7 +23,7 @@ transaction merely to manufacture evidence. Keep public hashes after every step.
    and cap, and an already token-registered recipient (the existing testnet
    recipient is bob-dhruva-recipient.testnet). Confirm no other proposal is active.
    Propose once and verify its reserved action budget and paired initial pools.
-4. Register claims for that proposal (0.01 NEAR). Fund only the intended additional
+4. Additional participants register claims for that proposal (0.01 NEAR); the proposer is registered automatically. Fund only the intended additional
    trading amount if needed. Split vault tUSD and trade one side with an explicit
    minimum output. Inspect all four claim balances and the retained opposite side.
    A second participant is optional for mechanics; do not imply independent
@@ -36,7 +36,9 @@ transaction merely to manufacture evidence. Keep public hashes after every step.
    only when intended. Do not donate or burn tokens just for a recording.
 
 Private-origin faucet signing and a scripted real testnet lifecycle are already
-verified. The full human walkthrough above is not yet claimed complete. Public
+verified. The public-site human walkthrough is now complete for contract proposal
+1 (UI #2), through both redemptions and fixed-block accounting. See
+[final accounting](../deployments/human-lifecycle-final-accounting.json). Public
 origin registration/signing is verified in
 [receipt evidence](../deployments/human-wallet-public-origin.json).
 Contract source/code/configuration is frozen; present an exception before any
@@ -44,35 +46,37 @@ contract change. All deployment keys remain.
 
 ## 60–90 second demo script
 
-Record the walkthrough only after it has actually run. Use the matching real
-proposal and receipt, not hardcoded results from another proposal. If using the
-existing proposal 0, label it a **scripted testnet example** and show its actual
-historical receipts. Never imply the faucet tests establish the full lifecycle.
+Record the completed contract proposal **1**, shown as **#2** in the UI. Do not
+start another proposal or repeat transactions for the video. Use existing receipts
+and saved evidence for earlier states. If no earlier footage exists, show the
+transaction details and label that segment “Verified transaction replay”. Do not
+present a replay as a new live signature. Never show wallet secrets or credentials.
 
-- **0–10 seconds:** “I'm Dhruva Somen Chakrabarty. I built Bet on Beliefs to give
-  a treasury decision a clear rule and a verifiable result. These are testnet
-  tokens.” Show the app, testnet badge and the chosen payment proposal.
-- **10–25 seconds:** Show the action amount, recipient and available/reserved
-  treasury balances. “The proposal reserves its payment budget. Its proposer
-  supplies liquidity from a separate vault.”
-- **25–40 seconds:** Show the actual recorded trade and four claim balances.
-  “A split creates both PASS and FAIL claims. Trading one side leaves the other
-  side with its owner. This is conditional exposure, not an ordinary binary bet.”
-- **40–55 seconds:** Cut the wait with the caption **600 seconds elapsed**.
-  “PASS average must be strictly greater than FAIL average times 1.03.” Show
-  outcome and action execution separately. Do not substitute spot for averages.
-- **55–75 seconds:** Open the final action receipt and redemption evidence.
-  “The NEAR contracts reserve funds, settle claims and restore failed transfers.
-  Here is the actual result and the resulting underlying token balance.”
-- **75–90 seconds:** “This demonstrates mechanics, not reliable price discovery.
-  Thin markets can be manipulated. Upgrade keys remain and the contracts are
-  not independently audited.” Show the source/evidence link and creator credits.
+- **0–10 seconds:** Show the public app, testnet badge and proposal #2.
+  “I'm Dhruva Somen Chakrabarty. I created Bet on Beliefs so a treasury decision
+  has a clear rule and a verifiable result. This is a completed testnet example.”
+- **10–25 seconds:** Show the proposal action and creation receipt.
+  “I proposed a one-BELIEF treasury payment to my testnet account and supplied
+  ten BELIEF and ten tUSD as separate liquidity stakes. The payment was reserved.”
+- **25–40 seconds:** Show the split/trade receipt and recorded claim snapshot.
+  “I split one additional tUSD and bought PASS BELIEF claims, retaining the FAIL
+  tUSD claim. This was my own mechanics test, not independent market opinion.”
+- **40–55 seconds:** Caption “600-second window completed”. Show the decision rule
+  and settled outcome. “PASS average must be strictly greater than FAIL average
+  times 1.03. The contract selected PASS. These are interval averages, not spot
+  prices.” The deployed view does not expose numerical averages; do not invent them.
+- **55–75 seconds:** Show finalization transfer and both redemption receipts, then
+  current balances. “The treasury paid one BELIEF. I redeemed ten BELIEF and
+  eleven tUSD, including released proposer liquidity. My wallet now has 201 BELIEF
+  and 100 tUSD. Winning claims and this proposal's collateral are zero.”
+- **75–90 seconds:** Show repo evidence and creator credits. “NEAR contracts keep
+  treasury funds, vaults and claim collateral separate and settle through verified
+  receipts. Thin markets can be manipulated, upgrade keys remain, and this is not
+  independently audited.” Caption: “Created and led by Dhruva Somen Chakrabarty.
+  Codex assisted with coding, tests and documentation.”
 
-Existing verified scripted case: proposal 0 selected PASS, paid 1 BELIEF and
-completed both trader redemptions. [Exact evidence](../deployments/README.md).
-Use that result only when presenting that case. Caption code assistance briefly
-and accurately: “Created and led by Dhruva Somen Chakrabarty. Codex assisted with
-coding, tests and documentation.”
+Exact public hashes are in [deployment evidence](../deployments/README.md).
+Use the actual human-case receipts, not the separate scripted proposal 0 receipts.
 
 ## Submission-ready project description (draft, not submitted)
 
@@ -84,9 +88,9 @@ collateral and redemptions are visible separately. Checked arithmetic, separate
 ledgers and private callbacks support accounting and failed-transfer recovery.
 Evidence includes 35 Rust unit tests, a four-proposal sandbox scenario, a scripted
 ten-minute testnet payment/redemption lifecycle, browser regressions, real
-Meteor faucet signatures and verified public-origin market registration. The full
-human market walkthrough remains pending and is not inferred from registration
-or faucet success. Created and led by Dhruva Somen Chakrabarty with Codex assistance.
+Meteor faucet signatures and a completed public-site human payment lifecycle,
+including a manual PASS trade, executed payment and both redemptions. Every
+transaction was verified FINAL, with fixed-block accounting checks. Created and led by Dhruva Somen Chakrabarty with Codex assistance.
 Faucet liquidity is a mechanics demonstration, not reliable price discovery;
 manipulation and upgrade-key trust remain explicit limitations.
 
@@ -96,3 +100,24 @@ fields, display the exact payload and receive approval. Do not invent contact,
 payout or consent data. Submit at most once. The human publishes the X post.
 Builders First is independently implemented and its demo video remains pending,
 according to the creator; do not modify that repository or claim its submission.
+
+## Final submission checklist (not authorization to submit)
+
+- Record and review the 60–90 second video above. Confirm readable mobile/desktop
+  captures, real proposal #2 and matching receipts. No new transaction is needed.
+- Human publishes the demo post on X, mentioning NEAR HACKATHON, @NEARProtocol
+  and #NEARHackathon, attaching the demo and linking app/repo. Obtain its public URL.
+- Confirm the repository is public and accessible, final CI is green, and the
+  app/evidence links work. Keep hosting through judging (November 18, ideally 25).
+- Collect confirmed project/lead names, email, team size, track IDs, existing
+  mainnet payout account and demo-post URL. A payout address does not authorize
+  mainnet operations. Keep personal submission payloads out of Git.
+- Obtain explicit agreement to the exact notice: “I agree that the organizers
+  may use these details to review our submission and contact us about this hackathon.”
+- Re-read the official rules, validate the full payload, show it to Dhruva and
+  wait for approval. Check that this repository has not already been submitted.
+- Submit at most once before 2026-11-14 23:59 UTC, only after approval. Retain the
+  request ID for allowed retries; saved mistakes use the official change process.
+- Preserve AI/library and independent Builders First disclosures. Builders First
+  is implemented; its video remains pending according to the creator. No changes
+  to that repository, key deletion, social publishing or submission are performed here.

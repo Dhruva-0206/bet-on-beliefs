@@ -10,7 +10,7 @@ A treasury decision needs a clear rule and a verifiable result. Bet on Beliefs m
 
 ## Try the app
 
-Live app: **https://dhruva-0206.github.io/bet-on-beliefs/**. HTTPS, public assets and live testnet reads were verified on 2026-11-14. Public-origin Meteor market registration is verified. See [HANDOFF](docs/HANDOFF.md) for evidence and acceptance status.
+Live app: **https://dhruva-0206.github.io/bet-on-beliefs/**. HTTPS, public assets and live testnet reads were verified on 2026-11-14. The public-site Meteor payment lifecycle is verified through both redemptions. See [HANDOFF](docs/HANDOFF.md) for evidence and acceptance status.
 
 The app defaults to `bob-dhruva-market.testnet`. Browse its real proposal and treasury without a wallet. To transact, connect **Meteor on testnet**. Use a separate testnet account with testnet NEAR for storage and gas. Never provide a recovery phrase or private key to this app or its maintainers. Advanced settings allow a different `.testnet` market.
 
@@ -20,11 +20,11 @@ The app defaults to `bob-dhruva-market.testnet`. Browse its real proposal and tr
 2. **Get tokens.** Follow “Get test tokens and set up.” Each faucet registers token storage (0.01 testnet NEAR attached, excess refunded) and sends 100 tokens from finite reserves.
 3. **Register the market and deposit.** Market registration is separate and retains 0.01 NEAR. Transfer wallet tokens into your own vault with a 1 yoctoNEAR transfer-call deposit. Treasury balances are separate from both.
 4. **Choose an open proposal or propose.** A payment proposal reserves treasury funds. Its proposer supplies both liquidity stakes from their vault and pays a retained 0.1 NEAR fee. Only one proposal may be active or executing.
-5. **Register proposal claims and trade.** Claim registration retains 0.01 NEAR per proposal. Splitting one deposited token creates one PASS and one FAIL claim. “Split vault & trade” spends only the chosen side; the opposite-side claim remains yours. Set the minimum output before approving.
+5. **Register proposal claims and trade.** Claim registration retains 0.01 NEAR per proposal for additional participants; proposal creation registers the proposer automatically. Splitting one deposited token creates one PASS and one FAIL claim. “Split vault & trade” spends only the chosen side; the opposite-side claim remains yours. Set the minimum output before approving.
 6. **Finalize after ten minutes.** PASS average must be **strictly greater than FAIL average × 1.03**. Equality rejects the action. Outcome and action execution are separate states.
 7. **Redeem.** After resolution, each winning claim returns one underlying token. Check final receipts and refreshed balances. Finalization, merging, redemption and withdrawals each retain a 0.01 NEAR operation fee where required by the contract.
 
-The seeded proposal already demonstrates a completed payment. Start a new proposal only intentionally. Human faucet signing and public-origin market registration are verified; a full human market walkthrough is still pending. [Recording guide](docs/DELIVERY.md).
+Two distinct payment examples are verified: scripted contract proposal 0 (UI #1), and Dhruva’s public-site Meteor walkthrough on contract proposal 1 (UI #2). The human walkthrough deposited 10 of each asset, traded 1 tUSD on PASS, finalized a 1 BELIEF payment and redeemed both assets. Final wallet: 201 BELIEF / 100 tUSD; vaults, winning claims and proposal collateral zero. No new proposal is needed for recording. [Recording guide](docs/DELIVERY.md).
 
 ## How the mechanism works
 
@@ -40,7 +40,8 @@ Actions are capped payments or a burn of 1% of available treasury BELIEF, captur
 | One sandbox integration scenario, four proposals | Real Wasm receipts, payment/burn execution, failed-transfer recovery, authorization and backing checks. |
 | Scripted testnet lifecycle | A real ten-minute proposal selected PASS, paid 1 BELIEF and completed both trader redemptions. [Receipts and fixed-block snapshots](deployments/README.md). |
 | Browser regressions | Synthetic wallet boundaries, transaction construction, UI recovery and project base path. They do not constitute human signatures. Current release checks are recorded in HANDOFF. |
-| Real Meteor wallet tests | `dhruva.testnet` signed token registration/faucet calls. The [post-decoder-fix repeat](deployments/human-wallet-post-fix.json) is FINAL with four successful receipts: 200 BELIEF, 100 tUSD and zero vault balances at the recorded block. This does not prove the full user lifecycle. |
+| Public-site human lifecycle | Dhruva signed registration, vault deposits, proposal creation, a PASS split/trade, finalization and both redemptions. Every transaction was verified FINAL. [Final accounting](deployments/human-lifecycle-final-accounting.json) checks same-block backing across all proposals. One participant demonstrates mechanics, not independent price discovery. |
+| Real Meteor faucet tests | `dhruva.testnet` signed token registration/faucet calls. The [post-decoder-fix repeat](deployments/human-wallet-post-fix.json) is FINAL with four successful receipts: 200 BELIEF, 100 tUSD and zero vault balances at the recorded block. This does not prove the full user lifecycle. |
 
 Contract artifact hashes and account addresses are in [BUILD_HASHES](docs/BUILD_HASHES.json) and the [testnet manifest](deployments/testnet-bob-dhruva.json). Historical reports are dated snapshots, not claims about every later chain state.
 

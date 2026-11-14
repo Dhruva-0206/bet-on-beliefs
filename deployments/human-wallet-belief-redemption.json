@@ -1,0 +1,162 @@
+{
+  "verified_at_utc": "2026-11-14T11:08:01.164021+00:00",
+  "network": "testnet",
+  "contract_proposal_id": 1,
+  "ui_proposal_number": 2,
+  "transaction": {
+    "hash": "2hghAnS9jDJAk1LH8cY5Jp2J3JE9EfLu2XzSeB9ft8WC",
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-market.testnet",
+    "method": "redeem",
+    "args": {
+      "proposal_id": 1,
+      "asset_id": 0,
+      "amount": "10000000000000000000"
+    },
+    "deposit": "10000000000000000000000",
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": "dHJ1ZQ=="
+    },
+    "receipt_count": 6,
+    "failed_receipt_count": 0,
+    "receipts": [
+      {
+        "id": "HFN8Jd9n5mHYujSuJpiAnNSNmoK9bZ4u6WQ4CtG3SmaP",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessReceiptId": "AWgJtovgg2pF1iYSxLJBQbGnsAqPW45mT5VYKwvjQjzR"
+        },
+        "logs": []
+      },
+      {
+        "id": "5TH4zrZVwp7vVZNCZj1MTq3iWyeQcovTtfYN6JadsSUq",
+        "executor_id": "bob-dhruva-belief.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": [
+          "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"old_owner_id\":\"bob-dhruva-market.testnet\",\"new_owner_id\":\"dhruva.testnet\",\"amount\":\"10000000000000000000\",\"memo\":\"Bet on Beliefs settlement\"}]}"
+        ]
+      },
+      {
+        "id": "J3F7TTzYiaUYUL7JY7aFE1hKK1zoeEhYG4HmZiTGZaVK",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "AWgJtovgg2pF1iYSxLJBQbGnsAqPW45mT5VYKwvjQjzR",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessValue": "dHJ1ZQ=="
+        },
+        "logs": []
+      },
+      {
+        "id": "68bs1mkwcSwfiBwbD9DncmHxtBMQvFMbQ246DELrMuJH",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "Gng7dj59yrF1QLCngjZnvar5UyvdoiGi5HftsSoaueG2",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      }
+    ]
+  },
+  "token_events": [
+    {
+      "executor": "bob-dhruva-belief.testnet",
+      "event": {
+        "standard": "nep141",
+        "version": "1.0.0",
+        "event": "ft_transfer",
+        "data": [
+          {
+            "old_owner_id": "bob-dhruva-market.testnet",
+            "new_owner_id": "dhruva.testnet",
+            "amount": "10000000000000000000",
+            "memo": "Bet on Beliefs settlement"
+          }
+        ]
+      }
+    }
+  ],
+  "final_state": {
+    "block_hash": "9gYbBFGJQTJK6qvVVeWqeU82SV3XSdUwm2gqo1CURMET",
+    "block_height": 277648609,
+    "account": {
+      "registered": true,
+      "vault": [
+        "0",
+        "0"
+      ],
+      "claims_registered": true,
+      "claims": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "10000000000000000000",
+          "11000000000000000000"
+        ]
+      ]
+    },
+    "wallet_balances_raw": {
+      "belief": "201000000000000000000",
+      "tusd": "100000000000000000000"
+    },
+    "proposal": {
+      "id": 1,
+      "title": "Human wallet walkthrough: 1 BELIEF payment",
+      "description": "Testnet walkthrough of a market-decided treasury payment. Trades demonstrate mechanics, not independent price discovery.",
+      "proposer": "dhruva.testnet",
+      "action": {
+        "Transfer": {
+          "asset": 0,
+          "receiver": "dhruva.testnet",
+          "amount": "1000000000000000000"
+        }
+      },
+      "start_ns": "1794653510726909430",
+      "end_ns": "1794654110726909430",
+      "pools": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "collateral": [
+        "0",
+        "0"
+      ],
+      "supply": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "10000000000000000000",
+          "11000000000000000000"
+        ]
+      ],
+      "outcome": true,
+      "execution": "executed"
+    }
+  },
+  "scope": "Both human redemptions have completed at this snapshot. Origin is human-reported; receipts and state independently verified."
+}

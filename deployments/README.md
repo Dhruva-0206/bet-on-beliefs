@@ -2,7 +2,8 @@
 
 Deployed 2026-11-13 using the human-approved `bob-dhruva` prefix. All names were
 available before creation; the authorized `bob-dhruva-26` fallback was not needed.
-These are NEAR **testnet** accounts. No mainnet deployment or hosted public app.
+These are NEAR **testnet** accounts. No mainnet deployment. The approved public frontend is now live at
+https://dhruva-0206.github.io/bet-on-beliefs/.
 
 | Role | Account |
 | --- | --- |
@@ -75,4 +76,21 @@ Public-origin Meteor market registration by dhruva.testnet is verified in
 `human-wallet-public-origin.json`: FINAL, two successful receipts, registered
 market account, 200 BELIEF, 100 tUSD and zero vault balances. The browser origin
 is human-reported; execution and state were independently read from testnet.
-This does not establish the full human market lifecycle.
+That registration record is distinct from the subsequently completed lifecycle below.
+
+## Completed public-site human lifecycle (2026-11-14)
+
+Dhruva used Meteor on the public origin for contract proposal 1 (UI #2): market
+registration, 10 BELIEF/10 tUSD deposits, 1 BELIEF payment proposal to himself,
+1 additional tUSD deposit, PASS split/trade, finalization and both redemptions.
+Every transaction is FINAL with all receipts successful in the human-wallet JSON
+records. Finalization paid 1 BELIEF; redemptions paid 10 BELIEF and 11 tUSD.
+Final wallet: 201 BELIEF / 100 tUSD, vaults and PASS claims zero, proposal collateral
+zero. Losing FAIL entries remain and cannot redeem additional backing.
+
+`human-lifecycle-final-accounting.json` pins verification to block 277648609:
+physical token balances match treasury, reservation, stake, outgoing and all
+proposal-collateral ledgers; winning supply matches backing. No active proposal
+or pending transfer remains. Code hashes match tested artifacts; upgrade keys
+remain. Browser origin is human-reported. This one-person mechanics walkthrough
+is separate from scripted evidence and does not establish independent price discovery.

@@ -131,15 +131,21 @@ pending from this work.
    Pools emptied into proposer claims. PASS balances are exactly 10 BELIEF and
    11 tUSD; FAIL balances also 10/11 but are losing claims, not extra redeemable
    collateral. Evidence: deployments/human-wallet-finalization.json.
-   Next human signatures: redeem 10 BELIEF (asset_id 0) then 11 tUSD (asset_id 1),
-   each proposal_id 1 and 0.01 testnet NEAR plus gas. Verify first before second.
-   Expected final wallets 201 BELIEF/100 tUSD; vaults remain zero. Redemptions
-   remain pending. No agent signed. Proposer pool release explains why winning
-   balances exceed the pre-finalization traded balance.
-4. Full human lifecycle walkthrough and final recording remain separate gates.
-   DELIVERY.md contains signature-by-signature guidance, a 60–90 second script
-   around one real decision and an honest description draft. Refine further if
-   the walkthrough exposes an issue; do not claim it already happened.
+   BELIEF redemption 2hghAnS9jDJAk1LH8cY5Jp2J3JE9EfLu2XzSeB9ft8WC and
+   tUSD redemption 5K9Gt9RusFptBANh281dmtsAj7iSPyurTZubvzF9rJaj are FINAL,
+   each with six successful receipts and verified token transfer events. Exact
+   evidence: human-wallet-belief-redemption.json and human-wallet-tusd-redemption.json.
+   Fixed final block 277648609: wallets 201 BELIEF/100 tUSD, vaults zero, PASS
+   claims zero, proposal collateral zero. FAIL entries remain losing claims.
+   human-lifecycle-final-accounting.json verifies unchanged code hashes, full-access
+   key counts, all proposal backing, physical balances equal separate ledgers,
+   no active proposal, reserved funds or pending/outgoing transfers.
+4. The public-site human lifecycle is complete for contract proposal 1 (UI #2).
+   Browser origin is human-reported; all receipts and accounting independently
+   verified. No agent signed. One participant is not independent price discovery.
+   Do not start another proposal. Next: record the completed example using
+   DELIVERY.md, review final CI, obtain human demo-post link and exact submission
+   fields/consent. Video, social publishing and submission remain incomplete.
 5. Contract freeze passed at 2026-11-13 18:00 UTC. Request a concrete exception
    before any contract source/deployed code/configuration change. Deadline:
    2026-11-14 23:59 UTC. Keep keys and no mainnet operations.
