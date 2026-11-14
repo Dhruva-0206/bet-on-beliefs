@@ -11,8 +11,15 @@ its demo video remains pending according to Dhruva. Do not modify that repo.
 The creator explicitly approved enabling GitHub Pages and publishing the refined
 static frontend at https://dhruva-0206.github.io/bet-on-beliefs/ after verification.
 No further generic hosting approval is required for that specific release.
-The refinement is ready for CI; publication and public-origin acceptance will be
-recorded below only when verified. The Codespace preview remains private.
+Refinement commit 93e73b2cf3f9a5e0fca54885b97bbce22f8dffe0 is pushed and all
+three CI workflows passed (frontend, scaffold, contract unit/sandbox). Publication
+is blocked by GitHub access: POST /repos/Dhruva-0206/bet-on-beliefs/pages with
+build_type=workflow returned HTTP 403, “Resource not accessible by integration”.
+The Codespace integration token cannot manage Pages settings; no separate gh
+login is configured. The creator has been asked to open repository Settings →
+Pages and set Source to GitHub Actions. This is an access step, not another
+hosting approval. No publishing workflow has been dispatched. The Codespace
+preview remains private. Public-origin acceptance is not yet complete.
 
 ## Completed refinement
 
@@ -78,8 +85,13 @@ pending from this work.
 
 ## Next steps and boundaries
 
-1. Inspect status and latest CI. Publish the approved frontend only after gates
-   pass, verify actual HTTPS/assets/testnet reads and desktop/mobile behavior.
+1. After the creator enables Pages source=GitHub Actions, read back the setting.
+   CI for refinement commit 93e73b2 is green; verify main still points at the
+   intended reviewed code. Dispatch pages.yml with publish_approved=true under
+   the existing explicit approval, then verify deployment/HTTPS/assets/read data.
+   If workflow dispatch also lacks permission, ask for the minimal owner-side
+   dispatch rather than requesting credentials. Do not claim a release before
+   the workflow and live URL are verified.
 2. Ask Dhruva to connect Meteor on the public origin. Read dhruva.testnet's
    market registration before selecting a useful single signature. Register once
    if still unregistered, rather than repeat a faucet merely for evidence.

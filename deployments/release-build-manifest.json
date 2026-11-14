@@ -1,0 +1,44 @@
+{
+  "source_commit": "93e73b2cf3f9a5e0fca54885b97bbce22f8dffe0",
+  "output": "web/dist-pages",
+  "base": "/bet-on-beliefs/",
+  "public_assets_only": true,
+  "files": [
+    {
+      "path": "assets/core-BzJj_ZUb.js",
+      "sha256": "226ecff5e4725be9f5d560ad9858f8460fef391b5397def96720221f64ef27f6"
+    },
+    {
+      "path": "assets/esm-C-ggtPxQ.js",
+      "sha256": "e9349cb184ea0bb32d8958844f94e0714abdc225ef86b16b01c59b6857c3e3c0"
+    },
+    {
+      "path": "assets/index-xqLrfenC.js",
+      "sha256": "d9583a9f3213eec599dcafa191591bd580533f5f1f89e0b22df0e13b3a434056"
+    },
+    {
+      "path": "assets/main-ClLPKTBE.css",
+      "sha256": "d8999504923ff63b0a3c44db374a3b677550c163b23c5e5dba3f3e0ca655b000"
+    },
+    {
+      "path": "assets/main-DRdpt3Lw.js",
+      "sha256": "a49c403428822be5a20aa58e57275d32b23909642345bc8d866e51943192ec71"
+    },
+    {
+      "path": "assets/meteor-wallet-DFjReSJK.js",
+      "sha256": "aef42236a6d3640e5a184773027a93a6f7f03f9155bf1d4cfbbb3b59e8ebaaab"
+    },
+    {
+      "path": "assets/modal-ui-BcfBAoTY.js",
+      "sha256": "1779e504446dd241a7f2bf5b8eb9ded82c8737c358ea975fd9d5234fab7df214"
+    },
+    {
+      "path": "assets/rolldown-runtime-BWaJ3C7D.js",
+      "sha256": "d0e9044430006c5bb48f477501a5af465f0a6377d2fcd7495aa215b8b75aaee3"
+    },
+    {
+      "path": "index.html",
+      "sha256": "731b071fe8b96b941194ba27bd65f8ee08aef6448d10e86153eed6e11162818d"
+    }
+  ]
+}
