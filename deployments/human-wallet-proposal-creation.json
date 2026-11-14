@@ -1,0 +1,139 @@
+{
+  "verified_at_utc": "2026-11-14T10:52:42.149566+00:00",
+  "transaction": {
+    "hash": "Eu9ct9fyWRQSp8UQShtwohBs7eESaQHB6AJPEnsNDfMy",
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": "MQ=="
+    },
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-market.testnet",
+    "method": "create_proposal",
+    "args": {
+      "belief_stake": "10000000000000000000",
+      "tusd_stake": "10000000000000000000",
+      "title": "Human wallet walkthrough: 1 BELIEF payment",
+      "description": "Testnet walkthrough of a market-decided treasury payment. Trades demonstrate mechanics, not independent price discovery.",
+      "action": {
+        "Transfer": {
+          "asset": 0,
+          "receiver": "dhruva.testnet",
+          "amount": "1000000000000000000"
+        }
+      }
+    },
+    "deposit": "100000000000000000000000",
+    "receipts": [
+      {
+        "id": "6U3vbL9UG98cNTKLibHCPfzeQm7S5aEs1LCXytj1tea4",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessValue": "MQ=="
+        }
+      },
+      {
+        "id": "CJ58sQctABSWLcFmx7UnmQWx1rhC23EBu4KsdhE3rnB",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        }
+      }
+    ]
+  },
+  "proposal_id": 1,
+  "block_height": 277647038,
+  "block_hash": "EQKgM8AdPs4U4RYJ4RpJ6oxMQVfUrEhmzzANKvrv3AN7",
+  "block_timestamp_ns": "1794653558727559504",
+  "proposal": {
+    "id": 1,
+    "title": "Human wallet walkthrough: 1 BELIEF payment",
+    "description": "Testnet walkthrough of a market-decided treasury payment. Trades demonstrate mechanics, not independent price discovery.",
+    "proposer": "dhruva.testnet",
+    "action": {
+      "Transfer": {
+        "asset": 0,
+        "receiver": "dhruva.testnet",
+        "amount": "1000000000000000000"
+      }
+    },
+    "start_ns": "1794653510726909430",
+    "end_ns": "1794654110726909430",
+    "pools": [
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ],
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ]
+    ],
+    "collateral": [
+      "10000000000000000000",
+      "10000000000000000000"
+    ],
+    "supply": [
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ],
+      [
+        "10000000000000000000",
+        "10000000000000000000"
+      ]
+    ],
+    "outcome": null,
+    "execution": "trading"
+  },
+  "account": {
+    "registered": true,
+    "vault": [
+      "0",
+      "0"
+    ],
+    "claims_registered": true,
+    "claims": [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ]
+  },
+  "config": {
+    "network": "testnet",
+    "tokens": [
+      "bob-dhruva-belief.testnet",
+      "bob-dhruva-tusd.testnet"
+    ],
+    "ready": true,
+    "active": 1,
+    "next_ritual_ns": "0",
+    "window_ns": "600000000000",
+    "max_payment": [
+      "1000000000000000000000",
+      "1000000000000000000000"
+    ],
+    "proposal_count": 2,
+    "treasury": [
+      "599999998000000000000000000",
+      "0"
+    ],
+    "reserved": [
+      "1000000000000000000",
+      "0"
+    ],
+    "stakes": [
+      "0",
+      "0"
+    ],
+    "outgoing": [
+      "0",
+      "0"
+    ],
+    "pending_count": 0
+  }
+}

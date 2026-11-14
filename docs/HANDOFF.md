@@ -110,12 +110,18 @@ pending from this work.
    preflight: deployments/human-wallet-tusd-deposit.json. dhruva.testnet is
    BELIEF-storage registered; available treasury is 599999999 BELIEF, reserved
    zero, payment cap 1000 BELIEF, no active proposal or pending operation.
-   Next human signature: create a 1 BELIEF payment to dhruva.testnet with
-   10 BELIEF and 10 tUSD liquidity stakes (replace both 100 defaults), retaining
-   0.1 testnet NEAR plus gas. Exact suggested title/description are in evidence.
-   Creation uses each vault stake once, reserves treasury funds and starts the
-   600-second window immediately. No proposal has yet been created in this
-   human walkthrough. Await its hash and verify before claim setup/trading.
+   Proposal creation Eu9ct9fyWRQSp8UQShtwohBs7eESaQHB6AJPEnsNDfMy is
+   FINAL, both receipts successful, proposal ID 1. Exact submitted description
+   is preserved in deployments/human-wallet-proposal-creation.json. Both stakes
+   were allocated, vaults zero, treasury reserved 1 BELIEF, active proposal 1.
+   Proposer claims are automatically registered (confirmed true); no extra
+   register_claims transaction is required. End: 2026-11-14 11:01:50.726 UTC.
+   Next human signature: deposit 1 tUSD to vault (stake transfer-call, 1 yoctoNEAR),
+   then verify before split-and-trade PASS. Planned trade: spend tUSD, amount 1,
+   minimum received 0.89 BELIEF; use Split vault & trade PASS, retaining 1 FAIL
+   tUSD claim. Initial unchanged-pool estimate is about 0.90661 PASS BELIEF.
+   Re-read time/pools before trading. If expired, finalize instead; never imply
+   a late trade occurred. No agent signs. Creation starts the ten-minute window.
 4. Full human lifecycle walkthrough and final recording remain separate gates.
    DELIVERY.md contains signature-by-signature guidance, a 60–90 second script
    around one real decision and an honest description draft. Refine further if
