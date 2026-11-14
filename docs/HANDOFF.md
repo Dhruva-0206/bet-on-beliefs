@@ -100,12 +100,17 @@ pending from this work.
 2. Public-origin registration acceptance is complete. Origin is human-reported;
    FINAL execution, both receipts, registration and balances were independently
    read from testnet. No agent signed a transaction.
-3. Next: guide one human signature at a time. Suggested deliberate liquidity is
-   10 BELIEF and 10 tUSD, with further tokens retained for trading. Start with
-   a 10 BELIEF vault deposit (ft_transfer_call, msg stake, 1 yoctoNEAR).
-   Await its hash and verify all receipts and vault credit before the tUSD deposit.
-   No deposit has been submitted or claimed complete. Set proposal stakes to
-   10 each later; the form defaults to 100. Do not donate or create a proposal yet.
+3. BELIEF vault deposit FeaeSEjXDK7GMpqPj2hwfme9oYE6XynPwfN3AP8JLhsX
+   is FINAL with all six receipts successful. The transfer-call consumed all
+   10 BELIEF (no token refund); final-block wallet/vault are 190/10 BELIEF and
+   100/0 tUSD. Evidence: deployments/human-wallet-belief-deposit.json.
+   Next human signature: deposit 10 tUSD using ft_transfer_call, msg stake,
+   1 yoctoNEAR. Await the hash and verify receipts and credit before proceeding.
+   Set proposal liquidity fields to 10 BELIEF and 10 tUSD instead of defaults
+   100/100. Each stake is debited once to back paired conditional pools, not
+   twice. Proposal creation also retains 0.1 testnet NEAR plus gas; the action
+   payment comes from separate treasury funds. Latest read: no active proposal.
+   Do not create a proposal yet; verify the tUSD deposit first.
 4. Full human lifecycle walkthrough and final recording remain separate gates.
    DELIVERY.md contains signature-by-signature guidance, a 60–90 second script
    around one real decision and an honest description draft. Refine further if

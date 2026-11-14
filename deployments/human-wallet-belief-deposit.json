@@ -1,0 +1,114 @@
+{
+  "verified_at_utc": "2026-11-14T10:47:08.000440+00:00",
+  "network": "testnet",
+  "account_id": "dhruva.testnet",
+  "human_report": {
+    "wallet": "Meteor",
+    "wallet_balances": [
+      "190",
+      "100"
+    ],
+    "vault_balances": [
+      "10",
+      "0"
+    ]
+  },
+  "transaction": {
+    "hash": "FeaeSEjXDK7GMpqPj2hwfme9oYE6XynPwfN3AP8JLhsX",
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-belief.testnet",
+    "method": "ft_transfer_call",
+    "args": {
+      "receiver_id": "bob-dhruva-market.testnet",
+      "amount": "10000000000000000000",
+      "msg": "stake"
+    },
+    "deposit": "1",
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAwIg=="
+    },
+    "receipt_count": 6,
+    "failed_receipt_count": 0,
+    "receipts": [
+      {
+        "id": "9SJ7XrDd4Ffy411TEU55fbTrs4RETbXAFPyo3Jn2Pgcn",
+        "executor_id": "bob-dhruva-belief.testnet",
+        "status": {
+          "SuccessReceiptId": "CHFf5R83TyQnPxa3aiPtSiA8rNZNuJNXQHhr6ZbieKVF"
+        },
+        "logs": [
+          "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"old_owner_id\":\"dhruva.testnet\",\"new_owner_id\":\"bob-dhruva-market.testnet\",\"amount\":\"10000000000000000000\"}]}"
+        ]
+      },
+      {
+        "id": "9S4yjp351ZB8gwSR41rSn1uYYUdvC4NcdMFBz8hWAYzW",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessValue": "IjAi"
+        },
+        "logs": []
+      },
+      {
+        "id": "A8VC7UyvqCPyTkadB6Aw3L8ZbVHmZmZZivSgPmMKwnTn",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "CHFf5R83TyQnPxa3aiPtSiA8rNZNuJNXQHhr6ZbieKVF",
+        "executor_id": "bob-dhruva-belief.testnet",
+        "status": {
+          "SuccessValue": "IjEwMDAwMDAwMDAwMDAwMDAwMDAwIg=="
+        },
+        "logs": []
+      },
+      {
+        "id": "FVkgZotjHUbWggf3h1k371iQ7dr6QWMX2sWvYo6F4vbu",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      },
+      {
+        "id": "C3zLZt8e1LGFeca62quHeJKQMt6Xf1jez9rEzGANVU8D",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        },
+        "logs": []
+      }
+    ]
+  },
+  "final_state": {
+    "block_height": 277646467,
+    "block_hash": "DYH6pmhX8EoBsJbXFk67w5uN6Rw1WNmy34vD42KLpnKs",
+    "market_account": {
+      "registered": true,
+      "vault": [
+        "10000000000000000000",
+        "0"
+      ],
+      "claims_registered": false,
+      "claims": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ]
+    },
+    "ft_balances_raw": {
+      "belief": "190000000000000000000",
+      "tusd": "100000000000000000000"
+    },
+    "active_proposal": null
+  },
+  "scope": "10 BELIEF deposit credited; tUSD deposit and remainder of human lifecycle pending."
+}
