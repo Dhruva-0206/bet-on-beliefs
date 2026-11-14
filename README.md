@@ -10,7 +10,7 @@ A treasury decision needs a clear rule and a verifiable result. Bet on Beliefs m
 
 ## Try the app
 
-Live app: **https://dhruva-0206.github.io/bet-on-beliefs/**. HTTPS, public assets and live testnet reads were verified on 2026-11-14. Public-origin human wallet signing remains pending. See [HANDOFF](docs/HANDOFF.md) for evidence and acceptance status.
+Live app: **https://dhruva-0206.github.io/bet-on-beliefs/**. HTTPS, public assets and live testnet reads were verified on 2026-11-14. Public-origin Meteor market registration is verified. See [HANDOFF](docs/HANDOFF.md) for evidence and acceptance status.
 
 The app defaults to `bob-dhruva-market.testnet`. Browse its real proposal and treasury without a wallet. To transact, connect **Meteor on testnet**. Use a separate testnet account with testnet NEAR for storage and gas. Never provide a recovery phrase or private key to this app or its maintainers. Advanced settings allow a different `.testnet` market.
 
@@ -24,7 +24,7 @@ The app defaults to `bob-dhruva-market.testnet`. Browse its real proposal and tr
 6. **Finalize after ten minutes.** PASS average must be **strictly greater than FAIL average × 1.03**. Equality rejects the action. Outcome and action execution are separate states.
 7. **Redeem.** After resolution, each winning claim returns one underlying token. Check final receipts and refreshed balances. Finalization, merging, redemption and withdrawals each retain a 0.01 NEAR operation fee where required by the contract.
 
-The seeded proposal already demonstrates a completed payment. Start a new proposal only intentionally. Human faucet signing is verified; a full human market walkthrough is still pending. [Recording guide](docs/DELIVERY.md).
+The seeded proposal already demonstrates a completed payment. Start a new proposal only intentionally. Human faucet signing and public-origin market registration are verified; a full human market walkthrough is still pending. [Recording guide](docs/DELIVERY.md).
 
 ## How the mechanism works
 

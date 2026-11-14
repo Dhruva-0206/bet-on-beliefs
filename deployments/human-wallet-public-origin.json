@@ -1,0 +1,117 @@
+{
+  "verified_at_utc": "2026-11-14T10:43:09.544421+00:00",
+  "network": "testnet",
+  "source_commit": "bac97ce36bda26c9eebaf77dadc38b3f97b693c9",
+  "account_id": "dhruva.testnet",
+  "human_report": {
+    "origin": "https://dhruva-0206.github.io/bet-on-beliefs/",
+    "wallet": "Meteor",
+    "displayed_status": "Confirmed",
+    "belief": "200",
+    "tusd": "100",
+    "vault": [
+      "0",
+      "0"
+    ],
+    "note": "Public-origin use reported by the human. Chain data independently verifies execution, not browser origin."
+  },
+  "transaction": {
+    "hash": "Et7qYrgZ2n1HcEYSF44iSGNDgCei8YiGAZ3751GX2B5Y",
+    "explorer_url": "https://testnet.nearblocks.io/txns/Et7qYrgZ2n1HcEYSF44iSGNDgCei8YiGAZ3751GX2B5Y",
+    "final_execution_status": "FINAL",
+    "status": {
+      "SuccessValue": ""
+    },
+    "signer_id": "dhruva.testnet",
+    "receiver_id": "bob-dhruva-market.testnet",
+    "actions": [
+      {
+        "args": {},
+        "deposit": "10000000000000000000000",
+        "gas": 100000000000000,
+        "method_name": "register"
+      }
+    ],
+    "transaction_outcome_status": {
+      "SuccessReceiptId": "3vSnTScBqeCqaVjHoDuFeUAFQ462cM62XdHjVNdNsQtf"
+    },
+    "receipt_count": 2,
+    "failed_receipt_count": 0,
+    "receipts": [
+      {
+        "id": "3vSnTScBqeCqaVjHoDuFeUAFQ462cM62XdHjVNdNsQtf",
+        "executor_id": "bob-dhruva-market.testnet",
+        "status": {
+          "SuccessValue": ""
+        }
+      },
+      {
+        "id": "JAMQtBDuxbAD5xPipUidimTLTbmj6UvHe8LAMCBZpzfD",
+        "executor_id": "dhruva.testnet",
+        "status": {
+          "SuccessValue": ""
+        }
+      }
+    ]
+  },
+  "final_state": {
+    "block_height": 277646074,
+    "block_hash": "C8werTQ5R9qTf3CxKhZC5BXGAzojuNueHNm4rtsvotku",
+    "market_account": {
+      "registered": true,
+      "vault": [
+        "0",
+        "0"
+      ],
+      "claims_registered": false,
+      "claims": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ]
+    },
+    "ft_balances_raw": {
+      "belief": "200000000000000000000",
+      "tusd": "100000000000000000000"
+    },
+    "market_config": {
+      "network": "testnet",
+      "tokens": [
+        "bob-dhruva-belief.testnet",
+        "bob-dhruva-tusd.testnet"
+      ],
+      "ready": true,
+      "active": null,
+      "next_ritual_ns": "0",
+      "window_ns": "600000000000",
+      "max_payment": [
+        "1000000000000000000000",
+        "1000000000000000000000"
+      ],
+      "proposal_count": 1,
+      "treasury": [
+        "599999999000000000000000000",
+        "0"
+      ],
+      "reserved": [
+        "0",
+        "0"
+      ],
+      "stakes": [
+        "0",
+        "0"
+      ],
+      "outgoing": [
+        "0",
+        "0"
+      ],
+      "pending_count": 0
+    }
+  },
+  "scope": "Public-origin market registration verified. Full human deposit/proposal/trade/settlement/redemption lifecycle remains pending."
+}

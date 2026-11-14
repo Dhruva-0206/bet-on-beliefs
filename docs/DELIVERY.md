@@ -37,7 +37,8 @@ transaction merely to manufacture evidence. Keep public hashes after every step.
 
 Private-origin faucet signing and a scripted real testnet lifecycle are already
 verified. The full human walkthrough above is not yet claimed complete. Public
-origin registration/signing also remains pending until its receipt is recorded.
+origin registration/signing is verified in
+[receipt evidence](../deployments/human-wallet-public-origin.json).
 Contract source/code/configuration is frozen; present an exception before any
 contract change. All deployment keys remain.
 
@@ -82,10 +83,10 @@ PASS must be strictly greater than FAIL times 1.03. Outcome, action execution,
 collateral and redemptions are visible separately. Checked arithmetic, separate
 ledgers and private callbacks support accounting and failed-transfer recovery.
 Evidence includes 35 Rust unit tests, a four-proposal sandbox scenario, a scripted
-ten-minute testnet payment/redemption lifecycle, browser regressions and real
-Meteor faucet signatures. Public-origin signing and the full human market
-walkthrough have their own acceptance records; they are not inferred from faucet
-success. Created and led by Dhruva Somen Chakrabarty with Codex assistance.
+ten-minute testnet payment/redemption lifecycle, browser regressions, real
+Meteor faucet signatures and verified public-origin market registration. The full
+human market walkthrough remains pending and is not inferred from registration
+or faucet success. Created and led by Dhruva Somen Chakrabarty with Codex assistance.
 Faucet liquidity is a mechanics demonstration, not reliable price discovery;
 manipulation and upgrade-key trust remain explicit limitations.
 

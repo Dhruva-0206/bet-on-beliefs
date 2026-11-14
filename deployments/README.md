@@ -70,3 +70,9 @@ interrupted; its saved proposal ID allowed it to resume the same proposal
 without duplicating a split or trade. Final execution and redemption succeeded.
 Human Meteor signing for both faucets passed; see `human-wallet-validation.json` for FINAL receipts, events and final-block balances matching the reported UI. Burn and
 failure scenarios are covered by the sandbox suite, not claimed as testnet runs.
+
+Public-origin Meteor market registration by dhruva.testnet is verified in
+`human-wallet-public-origin.json`: FINAL, two successful receipts, registered
+market account, 200 BELIEF, 100 tUSD and zero vault balances. The browser origin
+is human-reported; execution and state were independently read from testnet.
+This does not establish the full human market lifecycle.

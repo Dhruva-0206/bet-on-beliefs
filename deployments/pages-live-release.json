@@ -100,5 +100,5 @@
       "hash_matches_artifact": true
     }
   ],
-  "wallet_signing": "pending human public-origin signature"
+  "wallet_signing": "Verified human-reported public-origin Meteor registration; see human-wallet-public-origin.json. Full lifecycle pending."
 }

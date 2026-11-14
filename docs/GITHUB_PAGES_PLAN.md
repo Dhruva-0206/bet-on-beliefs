@@ -12,7 +12,8 @@ Live release verified on 2026-11-14: HTTPS 200, all nine asset hashes matching
 the Pages artifact, actual testnet reads and four viewport widths checked.
 [Deployment run](https://github.com/Dhruva-0206/bet-on-beliefs/actions/runs/43585261964)
 published source bac97ce36bda26c9eebaf77dadc38b3f97b693c9. Public-origin
-human wallet signing remains pending. A custom domain requires a separate decision.
+human market-registration signing is verified in
+[receipt evidence](../deployments/human-wallet-public-origin.json). A custom domain requires a separate decision.
 
 ## Concrete configuration
 
@@ -51,8 +52,8 @@ synthetic extension login, BELIEF and tUSD action construction, serialization
 into Meteor's signing boundary, cancellation without signatures/broadcasting,
 correct URL prefix and no failed asset loads. Desktop and mobile both passed.
 The same shared test is checked on the ordinary root production/dev servers.
-This does not claim human signing on the public origin; Meteor may ask
-for a fresh connection approval for that origin.
+These synthetic tests do not establish human signing. The separate public-origin
+Meteor registration test is now verified; see the receipt evidence above.
 
 ## Publication procedure for the approved release
 

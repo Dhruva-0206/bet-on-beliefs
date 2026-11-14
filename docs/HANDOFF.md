@@ -22,7 +22,11 @@ All nine public files match the downloaded Pages artifact by SHA-256; no private
 files or secret-pattern hits were found. Evidence: deployments/pages-live-release.json.
 Public read-only browser checks passed at 320, 390, 768 and 1440 pixels with actual
 testnet reads, keyboard checks and text enlargement; see pages-live-layout.json.
-Public-origin human wallet signing remains pending. The preview remains private.
+Public-origin Meteor market registration is verified in
+deployments/human-wallet-public-origin.json. Transaction
+Et7qYrgZ2n1HcEYSF44iSGNDgCei8YiGAZ3751GX2B5Y is FINAL; both receipts
+succeeded. Market registration is true, wallet balances are 200 BELIEF and
+100 tUSD, and both vaults are zero. The preview remains private.
 Earlier Codespace dispatch returned 403; the owner used GitHub's Actions UI.
 Run 43585015306 built but skipped publication because its approval input was false.
 
@@ -93,13 +97,15 @@ pending from this work.
 1. Deployment and public read-only checks are complete. The deployed source's
    frontend, scaffold, contract and Pages workflows all passed. Future pushes do
    not automatically publish; the Pages workflow remains manual and gated.
-2. Dhruva has been asked to connect Meteor on the public origin and register the
-   market account once (0.01 testnet NEAR plus gas). A fresh FINAL read confirmed
-   dhruva.testnet remains unregistered, vaults zero. Token baseline is 200 BELIEF
-   and 100 tUSD. Await the human signature/hash; do not repeat the faucet.
-3. Verify public FINAL receipt/all receipts and resulting market/balance state.
-   Until then, public-origin signing remains pending. Never use wallet keys or
-   substitute mocked signing for this acceptance step.
+2. Public-origin registration acceptance is complete. Origin is human-reported;
+   FINAL execution, both receipts, registration and balances were independently
+   read from testnet. No agent signed a transaction.
+3. Next: guide one human signature at a time. Suggested deliberate liquidity is
+   10 BELIEF and 10 tUSD, with further tokens retained for trading. Start with
+   a 10 BELIEF vault deposit (ft_transfer_call, msg stake, 1 yoctoNEAR).
+   Await its hash and verify all receipts and vault credit before the tUSD deposit.
+   No deposit has been submitted or claimed complete. Set proposal stakes to
+   10 each later; the form defaults to 100. Do not donate or create a proposal yet.
 4. Full human lifecycle walkthrough and final recording remain separate gates.
    DELIVERY.md contains signature-by-signature guidance, a 60–90 second script
    around one real decision and an honest description draft. Refine further if
