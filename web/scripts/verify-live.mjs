@@ -50,6 +50,9 @@ try {
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto("http://127.0.0.1:5173");
+    await page
+      .getByText("Advanced: change market contract", { exact: true })
+      .click();
     await page.getByRole("textbox", { name: "Market contract" }).fill(market);
     await page.getByRole("button", { name: "Load on-chain data" }).click();
     await expect(
@@ -61,7 +64,9 @@ try {
     await expect(
       page.getByRole("button", { name: "Connect wallet" }),
     ).toBeEnabled();
-    await expect(page.locator(".funding")).toContainText("Wallet —");
+    await expect(page.locator(".funding")).toContainText(
+      "Your wallet Connect to view",
+    );
     if (proposal) {
       await expect(
         page.getByRole("heading", { name: proposal.title, exact: true }),
@@ -69,7 +74,9 @@ try {
       await expect(page.locator(".market")).toContainText(
         "Collateral backing:",
       );
-      await expect(page.locator(".world")).toHaveCount(2);
+      await expect(page.locator(".world")).toHaveCount(
+        proposal.outcome === null ? 2 : 0,
+      );
     }
     expect(
       await page.evaluate(
@@ -77,6 +84,9 @@ try {
       ),
     ).toBe(true);
     expect(errors).toEqual([]);
+    await page
+      .getByText("Advanced: change market contract", { exact: true })
+      .click();
     await page.screenshot({
       path: `test-results/live-${name}.png`,
       fullPage: true,

@@ -32,9 +32,9 @@ is claimed. Registration is paid through NEP-145. No faucet mints after initiali
 The three initial BELIEF registrations and one tUSD registration are funded by
 the deployment account; later registrations are user-funded.
 
-Read docs/ORACLE.md before changing market logic. Math tests do not prove the
-future cross-contract lifecycle: sandbox integration and failed receipt testing
-remain separate acceptance gates. Current testnet deployment evidence is under `deployments/`.
+Read docs/ORACLE.md before changing market logic. Math tests do not prove cross-contract
+lifecycle correctness. Sandbox integration and failed-receipt checks provide
+separate, explicitly scoped evidence. Current testnet deployment evidence is under `deployments/`.
 
 ## Market contract
 
@@ -109,8 +109,9 @@ ID. If interrupted between on-chain creation and recording that ID, it refuses
 to create another proposal; inspect the active proposal and recover the progress
 file explicitly. An unexpected outcome or failed execution stops the demo.
 Public address/hash manifests and progress live in `deployments/`; they never
-contain private keys. Testnet deployment/setup has now run; human wallet signing
-remains unverified.
+contain private keys. Testnet deployment/setup and private-origin Meteor faucet signing have run.
+Their receipt evidence is under deployments/. Public-origin acceptance is
+tracked separately in docs/HANDOFF.md.
 
 
 2026-11-13 deployment note: the human selected prefix `bob-dhruva`, with

@@ -1,10 +1,12 @@
-# GitHub Pages configuration for approval
+# GitHub Pages release configuration
 
-**Prepared, not published.** Repository readback: public, `main`, Pages disabled,
-no homepage configured. No repository settings, visibility, environment settings
-or port visibility were changed. Existing contracts and keys are retained.
+The creator explicitly approved enabling GitHub Pages and publishing the refined
+frontend at the project URL below on 2026-11-14. No further generic hosting
+confirmation is needed for this release. Read HANDOFF for actual deployment and
+public-origin wallet acceptance status. Existing contracts and keys are retained;
+the Codespace preview remains private.
 
-Proposed default project URL:
+Approved project URL:
 **https://dhruva-0206.github.io/bet-on-beliefs/**
 This URL is not claimed live. Compare the eventual Pages output with this URL
 before announcing it; a custom domain would require a separate human decision.
@@ -49,11 +51,11 @@ The same shared test is checked on the ordinary root production/dev servers.
 This does not claim human signing on the future public origin; Meteor may ask
 for a fresh connection approval for that origin.
 
-## Approval and publication procedure — not executed
+## Publication procedure for the approved release
 
-1. Review this file and the workflow. Confirm the latest required CI workflows
-   are green and explicitly approve enabling GitHub Pages and publishing at the
-   proposed URL. The private preview stays private throughout.
+1. Complete refinement, affected verification and staged-diff review. Confirm
+   latest required CI workflows are green. Approval for this URL is already
+   recorded in the creator's release instruction.
 2. After approval only, enable Pages with **GitHub Actions** as its source in
    repository Settings → Pages. Preserve repository visibility and other settings.
 3. After approval only, dispatch the prepared workflow on `main` with
@@ -74,9 +76,10 @@ labelled ten-minute wait, finalization/action execution and redemption. Preserve
 actual receipts and accounting explanations. A scripted lifecycle already exists
 but does not replace the planned human-facing walkthrough.
 
-The planned **wording/design refinement** also remains pending: use findings from
-that walkthrough to refine labels, hierarchy, explanations and desktop/mobile
-layout before recording. Hosting approval does not mark either task complete.
+The release refinement addresses labels, hierarchy, registration guidance,
+transaction recovery and desktop/mobile layout. Additional findings from the
+full wallet walkthrough can still require refinement before recording. Hosting
+and synthetic tests do not complete the human lifecycle acceptance gate.
 Contracts are frozen; any required contract change needs a concrete exception.
 No immutability, manipulation-proof or first-on-NEAR claims are introduced.
 

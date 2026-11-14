@@ -26,6 +26,7 @@ export async function view<T>(
   const r = await fetch(RPC, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    signal: AbortSignal.timeout(20000),
     body: JSON.stringify({
       jsonrpc: "2.0",
       id: "belief",
@@ -77,7 +78,5 @@ export async function transact(
     ),
   });
   if (!result) return [];
-  if (typeof result.status === "object" && "Failure" in result.status)
-    throw new Error(JSON.stringify(result.status.Failure));
   return [result.transaction.hash];
 }

@@ -1,4 +1,4 @@
-# Wallet dependency review — 2026-11-13
+# Wallet dependency review (2026-11-13 baseline, release checks in HANDOFF)
 
 ## Remediation completed
 
@@ -40,8 +40,9 @@ low count change from 13. Remaining findings inherit the elliptic advisory.
 Full audit still exits 1 due to those lows; `npm audit --audit-level=moderate`
 passes and is now required in frontend CI. See
 [remediation evidence](../deployments/dependency-audit-remediated.json).
-Hosting remains private per the human's instruction; publication still requires
-explicit approval. Contracts, deployment accounts and credentials are unchanged.
+The creator has explicitly approved the refined GitHub Pages release at the
+project URL. The Codespace preview remains private. Actual release status is
+recorded in HANDOFF; contracts, deployment accounts and credentials are unchanged.
 
 ## Initial review before remediation
 

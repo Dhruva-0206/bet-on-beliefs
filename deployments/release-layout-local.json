@@ -1,0 +1,161 @@
+{
+  "checked_at_utc": "2026-11-14T09:56:42.867Z",
+  "url": "http://127.0.0.1:5173/",
+  "reports": [
+    {
+      "width": 320,
+      "overflow": false,
+      "smallButtons": 0,
+      "unlabelled": 0,
+      "contrasts": [
+        {
+          "selector": "body",
+          "ratio": 15.12343129041186
+        },
+        {
+          "selector": ".control-help",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".eyebrow",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": ".stats small",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".network",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": "label",
+          "ratio": 12.765811683033125
+        },
+        {
+          "selector": "footer",
+          "ratio": 7.4376238732661495
+        }
+      ],
+      "keyboard_focus_checks": 14,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "smallButtons": 0,
+      "unlabelled": 0,
+      "contrasts": [
+        {
+          "selector": "body",
+          "ratio": 15.12343129041186
+        },
+        {
+          "selector": ".control-help",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".eyebrow",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": ".stats small",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".network",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": "label",
+          "ratio": 12.765811683033125
+        },
+        {
+          "selector": "footer",
+          "ratio": 7.4376238732661495
+        }
+      ],
+      "keyboard_focus_checks": 14,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "smallButtons": 0,
+      "unlabelled": 0,
+      "contrasts": [
+        {
+          "selector": "body",
+          "ratio": 15.12343129041186
+        },
+        {
+          "selector": ".control-help",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".eyebrow",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": ".stats small",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".network",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": "label",
+          "ratio": 12.765811683033125
+        },
+        {
+          "selector": "footer",
+          "ratio": 7.4376238732661495
+        }
+      ],
+      "keyboard_focus_checks": 14,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "smallButtons": 0,
+      "unlabelled": 0,
+      "contrasts": [
+        {
+          "selector": "body",
+          "ratio": 15.12343129041186
+        },
+        {
+          "selector": ".control-help",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".eyebrow",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": ".stats small",
+          "ratio": 10.022215339977619
+        },
+        {
+          "selector": ".network",
+          "ratio": 15.561930879247848
+        },
+        {
+          "selector": "label",
+          "ratio": 12.765811683033125
+        },
+        {
+          "selector": "footer",
+          "ratio": 7.4376238732661495
+        }
+      ],
+      "keyboard_focus_checks": 14,
+      "errors": []
+    }
+  ],
+  "scope": "Read-only live data, 4 viewport widths, keyboard focus, labels, button heights, selected text contrasts, reduced motion and root-text enlargement. Not a full WCAG audit.",
+  "wallet_signed": false,
+  "phase": "pre-release local"
+}

@@ -4,15 +4,12 @@ test("production app loads without runtime errors or fabricated chain data", asy
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  await page.addInitScript(() => localStorage.setItem("belief-contract", ""));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Put your beliefs",
   );
-  await expect(
-    page.getByText(
-      "No deployment loaded. No sample balances or proposals are shown.",
-    ),
-  ).toBeVisible();
+  await expect(page.getByText("No market loaded.")).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Connect wallet" }),
   ).toBeDisabled();
@@ -33,7 +30,11 @@ test("production app loads without runtime errors or fabricated chain data", asy
 test("invalid network account cannot load or enable wallet transactions", async ({
   page,
 }) => {
+  await page.addInitScript(() => localStorage.setItem("belief-contract", ""));
   await page.goto("/");
+  await page
+    .getByText("Advanced: change market contract", { exact: true })
+    .click();
   await page
     .getByRole("textbox", { name: "Market contract" })
     .fill("mainnet.near");
@@ -123,6 +124,9 @@ test("Meteor connection opens testnet login from the production UI", async ({
     }) as typeof window.open;
   });
   await page
+    .getByText("Advanced: change market contract", { exact: true })
+    .click();
+  await page
     .getByRole("textbox", { name: "Market contract" })
     .fill("bob-dhruva-market.testnet");
   await page.getByRole("button", { name: "Load on-chain data" }).click();
@@ -149,4 +153,52 @@ test("Meteor connection opens testnet login from the production UI", async ({
   );
   expect(errors).toEqual([]);
   expect(keyWasLogged).toBe(false);
+});
+test("a saved pending transaction can be checked without signing or resending", async ({
+  page,
+}) => {
+  let receiptChecks = 0;
+  await page.addInitScript(() =>
+    sessionStorage.setItem(
+      "belief-pending",
+      JSON.stringify({ hash: "fixture-saved", sender: "fixture.testnet" }),
+    ),
+  );
+  await page.route("https://test.rpc.fastnear.com/", async (route) => {
+    const request = route.request().postDataJSON();
+    if (request.method === "tx") {
+      receiptChecks++;
+      await route.fulfill({
+        json: {
+          result: {
+            final_execution_status: "FINAL",
+            status: { SuccessValue: "" },
+            transaction_outcome: {
+              outcome: { status: { SuccessReceiptId: "fixture" } },
+            },
+            receipts_outcome: [{ outcome: { status: { SuccessValue: "" } } }],
+          },
+        },
+      });
+    } else {
+      expect(request.method).toBe("query");
+      await route.fulfill({
+        json: {
+          error: { message: "Read unavailable in this recovery fixture" },
+        },
+      });
+    }
+  });
+  await page.goto("/");
+  await expect(
+    page.getByText("Submitted transaction needs verification", { exact: true }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Check pending receipt" }).click();
+  await expect(page.getByRole("status")).toContainText(
+    "Saved transaction confirmed",
+  );
+  expect(receiptChecks).toBe(1);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("belief-pending")),
+  ).toBeNull();
 });

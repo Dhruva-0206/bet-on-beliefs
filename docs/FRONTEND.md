@@ -1,131 +1,77 @@
-# Wallet frontend
+# Frontend and wallet instructions
+
+The application defaults to the deployed `bob-dhruva-market.testnet`. Browse the
+proposal and treasury without a wallet. Advanced settings can load another
+`.testnet` market; no example proposal or balance is shown as chain data.
+
+## Connect and prepare
+
+1. Open https://dhruva-0206.github.io/bet-on-beliefs/ after release verification
+   in HANDOFF. The Codespace port remains a private development preview.
+2. Connect Meteor and choose a separate testnet account. Confirm the visible
+   account and testnet badge. Never import or share keys through this app.
+3. Use **Get test tokens and set up**. **Get 100 BELIEF** or **Get 100 tUSD**
+   attaches 0.01 testnet NEAR for token storage and calls the finite faucet.
+   Storage excess is refunded, including when already registered. Gas also costs
+   testnet NEAR; these faucets do not supply native NEAR.
+4. Market registration is separate. It retains 0.01 NEAR and allows vault use.
+   Deposit wallet tokens to your vault with a 1 yoctoNEAR transfer-call deposit.
+5. An open proposal requires its own claim registration, retaining 0.01 NEAR.
+   Then split deposited tokens and trade the chosen world with a minimum output,
+   or use existing conditional claims. The opposite side's claim remains yours.
+6. Creating a proposal uses both liquidity stakes from the vault and retains
+   0.1 NEAR. A payment recipient must already be registered in the selected token.
+   Finalization, withdrawal, merge and redemption retain 0.01 NEAR where required.
+
+## Confirmation and recovery
+
+Review the receiver, method and deposit in Meteor. The UI distinguishes approval,
+submission, pending confirmation, confirmed final receipts, cancellation and
+failure. Submission alone never means success. After confirmation, inspect actual
+balances; an FT transfer-call may return unused tokens rather than fund a vault.
+
+The UI blocks duplicate clicks while an action is active. Unverified submitted
+hashes are saved with their public sender in session storage. **Check pending
+receipt** is read-only and does not resend the action. RPC failure or timeout is
+not proof that a submitted transaction failed. Check its explorer link before
+retrying. If Meteor returns no hash, inspect wallet activity before any retry.
+Popup-blocking and insufficient-balance messages include recovery instructions.
+Refreshing unavailable/stale chain data is also read-only; actions pause while
+chain data is unavailable or stale.
+
+Outcome is separate from execution. Execution failure restores treasury funds
+but does not change the selected world. The deployed proposal view does not
+expose recorded averages, so the app labels that gap instead of manufacturing
+an average from a current spot price. Settled proposals emphasize receipt
+inspection and redemption; they do not show inactive trading controls.
+
+## Development
 
 ```sh
 npm ci --prefix web
-npm run build --prefix web
 npm run test --prefix web
-# Browser QA on Linux (requires system libraries and a browser download)
+npm run build --prefix web
+npm run preview --prefix web
 cd web
 npx playwright install --with-deps chromium
 npm run test:browser
 BOB_DEV_BROWSER=1 npm run test:browser
+cd ..
+VITE_MARKET_CONTRACT=bob-dhruva-market.testnet npm run build:pages --prefix web
+npm run test:pages --prefix web
 ```
 
-Node is pinned in `.nvmrc`; direct npm dependencies have exact versions and the
-resolved tree is in `web/package-lock.json`. Set `VITE_MARKET_CONTRACT` in
-`web/.env.local`, or enter a verified deployed `.testnet` market account in the
-app. Run `npm run dev --prefix web` for the local application. No hosting is
-configured. Empty configuration shows no fixture proposals or balances.
+The preview binds 0.0.0.0:5173 with strict port selection. Keep Codespace port
+visibility private. The Pages build uses `/bet-on-beliefs/` and a separate ignored
+output directory. Node and dependencies are pinned in the manifests/lockfile.
+`web/src/bootstrap.ts` installs browser Buffer/process before importing the app.
+The guarded SDK transform preserves Meteor's query-string 10 compatibility and
+removes its generated-key debug log in dev and production. Do not remove these
+when changing UI copy. [Dependency review](DEPENDENCY_REVIEW.md).
 
-Read-only browsing calls FASTNEAR testnet RPC (`https://test.rpc.fastnear.com`).
-Wallet Selector 10.1.4 now uses **Meteor Wallet** 10.1.4, replacing the retired
-MyNearWallet app connector reported by the human. Meteor's official integration
-example explicitly configures testnet:
-https://github.com/Meteor-Wallet/meteor-public
-https://github.com/near/wallet-selector/tree/main/packages/meteor-wallet
-The pinned Meteor SDK 1.0.24 supports both injected extension communication and
-`https://wallet.meteorwallet.app/connect/testnet/login` popup communication.
-Browser QA exercises the production Connect button and verifies the testnet
-popup URL, without claiming a real signed transaction. The upstream open report
-https://github.com/Meteor-Wallet/meteor-public/issues/40 means actual human
-connection/signing required a human gate, now passed for both faucets by `dhruva.testnet` (see `deployments/human-wallet-validation.json`). Meteor's web UI returns a Cloudflare
-403 from this Codespace, so its current account-creation labels could not be
-verified here; do not mistake that for a successful live wallet session.
-
-## Human testnet wallet check
-
-1. Open the private preview:
-   https://laughing-space-invention-wr4qxxxxvjpqh56gw-5173.app.github.dev
-   Sign into GitHub if requested, then hard-refresh to load the Meteor build.
-2. Enter `bob-dhruva-market.testnet` and click **Load on-chain data**.
-3. Click **Connect wallet** and choose **Meteor Wallet**. Allow its popup if
-   needed. The connector requests **testnet**, even if your existing Meteor
-   account is mainnet.
-4. In Meteor, use its network selection/settings to select **Testnet**. Use its
-   account menu's create-new-account flow for a separate testnet account. If the
-   connection screen offers account creation, use that testnet flow. Labels may
-   vary by extension release. Do not migrate/import your mainnet account or
-   approve a mainnet request. If Testnet or new-account creation is unavailable,
-   stop and report the visible message rather than guessing or importing keys.
-5. Complete wallet-owned account setup privately. Never send recovery words or
-   keys to the app or assistant. Confirm Testnet and the new public account ID
-   before authorizing the market connection. The account needs testnet NEAR for
-   storage/gas; BELIEF/tUSD faucets do not supply native NEAR. If unfunded, report
-   the public ID so funding options can be checked without migrating accounts.
-6. In **Fund your conviction**, click **Register FT & faucet** under BELIEF.
-   Inspect receiver `bob-dhruva-belief.testnet`, calls `storage_deposit` plus
-   `faucet`, and deposit **0.01 testnet NEAR** plus gas. Approve in Meteor.
-7. Return and allow the 15-second balance refresh. BELIEF wallet balance should
-   increase by 100; vault stays unchanged. Repeat for tUSD, checking receiver
-   `bob-dhruva-tusd.testnet`, to increase its wallet balance by 100.
-8. Provide only your public account ID, transaction hash/explorer link, and
-   displayed balances. Verify FINAL execution, every receipt, and actual FT
-   balance changes before marking human signing complete. Public hosting still
-   requires explicit approval after this gate.
-
-Preview: `npm run preview --prefix web` now binds `0.0.0.0:5173` with
-`--strictPort`, so a conflict fails instead of silently changing ports. Keep
-forwarding private, with HTTP to the local server and HTTPS at the external URL.
-
-Faucets register FT storage first. Market registration, proposal claim
-registration and native operation fees are distinct. Vault `stake` deposits can
-be split or used for proposer liquidity. A split-and-trade transaction sends
-both calls to the market in one receipt. The opposite world's claims remain
-with the user. All JSON token amounts are decimal strings, constructed with
-BigInt and at most 18 decimal places. Pool quotes include the 30 bps fee and are
-estimates; only the signed minimum output is authoritative.
-
-The app displays four conditional balances, separate outcome/execution states,
-collateral, reservations, pending outgoing obligations, countdowns, fees and
-explorer transaction links. A failed execution does not relabel the winning
-market world. Wallet redirect errors are surfaced. Chain read failures disable
-operations. Browser tests cover empty and error states plus testnet wallet
-initialization; they do not claim a signed-wallet end-to-end test has passed.
-
-Dependency remediation audit (2026-11-13): **15 low, zero moderate/high/critical**.
-The scoped Meteor override to query-string 10.0.0 removes decode-uri-component.
-A guarded dev/build transform adapts the SDK's named import to the new default
-API; both faucet signing boundaries and popup parameters pass dev/production QA.
-The nanoid 5.1.16 override remains. Full audit exits 1 for residual elliptic-chain
-low findings; the moderate-or-higher audit gate passes. See
-[review and remediation](DEPENDENCY_REVIEW.md). Repeat human faucet signing after
-hard-refresh to extend the preserved pre-update human evidence; synthetic tests
-do not replace that check. Hosting remains private.
-
-The faucet failure was reproduced with a browser debugger:
-`transact → @near-js/transactions functionCall → stringifyJsonOrBytes → Buffer.from`.
-A buffer import alias handles imported modules but cannot initialize a free
-`Buffer` global. Meteor SDK `requestSignTransactions` also uses free Buffer for
-base64 transaction encoding. `src/bootstrap.ts` installs browser `buffer` and
-`process` implementations, then dynamically imports the app, guaranteeing those
-globals exist before wallet/transaction dependencies evaluate. A static main
-import would execute dependencies before the assignments. Vite retains its
-`globalThis` alias. The key-log mitigation also runs during dev dependency
-optimization, preserving CommonJS interop instead of excluding the SDK.
-
-The faucet browser regression uses a fake Meteor extension and intercepted RPC;
-it clicks both real faucet buttons, decodes the unsigned transactions delivered
-to Meteor, verifies receivers/arguments/deposits/gas/testnet, then cancels at the
-signing boundary. It rejects broadcasting and checks for key logging/runtime
-errors. Both dev and production run it on desktop/mobile in CI. It does not
-validate real human signing.
-
-SDK 1.0.24 contains `console.log(accessKey)` during
-sign-in: a narrowly scoped build transform removes that exact statement and
-fails if the expected source changes. No generated app key should be logged.
-Vite still reports dependency eval/util and large-chunk warnings.
-
-
-Live read-only QA (with the production preview running on port 5173):
-
-```sh
-cd web
-node scripts/verify-live.mjs bob-dhruva-market.testnet
-```
-
-This checks the actual deployed market on desktop/mobile, without fixtures or
-wallet signing. It writes local screenshots and a report under ignored
-`web/test-results/`. The Codespace port remains private; this is not a hosted
-public application. Human Meteor faucet signing has separately passed; this read-only script itself never signs.
-
-Completed human check: both Meteor transactions are FINAL with four successful receipts each, including faucet transfer events for 100 tokens. The on-chain wallet balances and zero vaults match the human-reported UI. Market registration/trading were not part of this human check. See [dependency review](DEPENDENCY_REVIEW.md) before considering public hosting.
+Read-only live QA: `cd web` then
+`node scripts/verify-live.mjs bob-dhruva-market.testnet`. Screenshots/reports are
+ignored under test-results. It never signs and does not replace real wallet QA.
+Private-origin Meteor faucet receipts, including the post-dependency-fix repeat,
+are under deployments/. Public-origin signing remains a separate acceptance
+step until its own final receipt is recorded. [Release handoff](HANDOFF.md).
