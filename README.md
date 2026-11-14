@@ -4,7 +4,7 @@ A memecoin whose treasury moves only when a market predicts the move will raise 
 
 The rule compares BELIEF prices in conditional PASS and FAIL markets. It is not a guarantee of future price appreciation or public benefit.
 
-[Live app](https://dhruva-0206.github.io/bet-on-beliefs/) · Demo video: &lt;X link&gt; · [Design](DESIGN.md) · [Verification](docs/EVIDENCE.md)
+[Live app](https://dhruva-0206.github.io/bet-on-beliefs/) · [Demo video](https://x.com/Dhruva_0206/status/2121660850096554181) · [Design](DESIGN.md) · [Verification](docs/EVIDENCE.md)
 
 ![Executed testnet payment proposal in Bet on Beliefs](docs/img/app.png)
 
